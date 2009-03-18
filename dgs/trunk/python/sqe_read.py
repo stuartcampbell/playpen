@@ -1,4 +1,4 @@
-from numpy import array, zeros, nan
+from numpy import array, zeros
 class SNS_dgs():
     def __init__(self):
         self.name=''
@@ -26,6 +26,7 @@ class SNS_dgs():
                 tmp=lines[idxstart].split()
                 I[idx2,idx]=eval(tmp[0])
                 err[idx2,idx]=eval(tmp[1])
+                idxstart=idxstart+1
         self.Q=Qvals
         self.E=Evals
         self.I=I
