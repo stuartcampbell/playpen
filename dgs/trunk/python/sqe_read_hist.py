@@ -1,4 +1,4 @@
-from numpy import array, zeros
+from numpy import array, zeros, nan
 from histogram import histogram
 class SNS_dgs():
     def __init__(self):
@@ -34,7 +34,7 @@ class SNS_dgs():
         self.err=err
         self.name=filename
     def sqe_hist(self,histname):
-        h=(histname,[('Q',self.Q),('E',self.E),self.I.transpose(),(self.err*self.err).transpose()]
+        h=histogram(histname,[('Q',self.Q),('E',self.E)],self.I.transpose(),(self.err*self.err).transpose())
         return h
 
       
