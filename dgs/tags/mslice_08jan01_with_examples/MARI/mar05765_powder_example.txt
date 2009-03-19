@@ -1,0 +1,38 @@
+SPECTROMETER   
+efixed(meV)     = 50                 direct-geometry
+DataFile(.spe)  = mar05765.spe
+DataDir         = C:\mprogs\mslice\MARI\
+DetFile(.phx)   = powder_wide.phx
+DetectorDir     = c:\mprogs\mslice\mari\
+ParamFile(.msp) = mar05765_powder_example.msp
+ParameterDir    = C:\mprogs\mslice\MARI\
+IntensityLabel  = k_i/k_f d^2 \sigma /d\Omega dE (mbarns meV^{-1} sr^{-1} f.u.^{-1})
+TitleLabel      = skutterdite @T=20 K
+ 
+SAMPLE          = powder
+VIEWING AXES             Label     
+u1      =      Det Group NumberDet
+u2      =      Energy    Energy
+ 
+DISPLAY   
+horizontal range* Det     =             to            
+vertical range* Energy    = 0           to  40        
+Intensity range           = 0           to  3          ColorMap   black->red
+Smoothing level           = 3          Shading    =  flat      
+ 
+CUT  along axis     Energy
+from                      = 20          to  40         step       0.4
+thickness range  Det      = 60          to  80
+Intensity       range     = 0           to  2.5
+Symbol          = white circle o, no line
+OutputType      = none      
+OutputFile      = 
+OutputDir       = c:\mprogs\mslice\mari\
+ 
+DETECTOR TRAJECTORIES
+x          = |Q|             from             to            
+y          = Energy          from             to            
+z          = none            from             to           
+Contours   = none           
+from                 to           step1 =             step2 =             
+Command    = 
