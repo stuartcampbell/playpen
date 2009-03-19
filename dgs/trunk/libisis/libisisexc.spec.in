@@ -1,0 +1,74 @@
+# @configure_input@
+# $Id: libisisexc.spec.in 1007 2007-01-26 12:14:24Z Freddie Akeroyd $
+# Template for LIBISISEXC RPM SPEC file
+# Copyright (C) 2004 Freddie Akeroyd
+#
+Summary: Libraries and utilities for using LIBISISEXC
+Name: @PACKAGE_TARNAME@
+Version: @PACKAGE_VERSION@
+# Release is the number of times this version of the software was 
+# built into an RPM file; it should be incremented each RPM build and
+# then reset to 1 when a new version of the software is released
+Release: 1
+License: ISIS
+# Group: there is more than one choice for this - maybe we need to split
+# into separate packages (libraries + apps)
+Group: Development/Libraries
+#Group: Development/Tools
+Source: http://download.libisis.org/kits/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+URL: http://www.libisis.org/
+Distribution: @DISTRIBUTION@
+#Icon: libisisexc.xpm
+Vendor: ISIS
+Packager: LIBISISEXC Developers <libisisexc-developers@libisis.org>
+# Prefix allows our package to be relocatable i.e. installable in 
+# other than just the /usr/local directory
+Prefix: /usr/local
+# BuildRoot is the root for software installation
+# this value will not usually be used, but something must
+# be specified here to allow   rpm --buildroot   to be used later
+# (it will get used for a   rpmbuild --recompile  of the the src.rpm)
+BuildRoot: /tmp/@PACKAGE_TARNAME@-@PACKAGE_VERSION@
+%description
+LIBISISEXC
+
+%prep
+%setup
+%build
+# RPM_BUILD_ROOT - where to install software
+if ! test -z "$RPM_BUILD_ROOT"; then
+    ./configure --prefix=$RPM_BUILD_ROOT/usr/local $LIBISIS_CONFIG_OPTIONS
+else
+    ./configure $LIBISIS_CONFIG_OPTIONS
+fi
+make
+%install
+# may want to consider   make DESTDIR=$RPM_BUILD_ROOT install    sometime
+# as automake supports it; configure --prefix is OK for now though
+make install
+%files
+%doc README NEWS ChangeLog AUTHORS COPYING INSTALL
+# %docdir /usr/local/doc
+#/usr/local/lib
+#/usr/local/bin
+/usr/local/libisis
+
+%clean
+# the rm line can be dangerous - build_root might be / !
+# leave commented out for moment, but we need to implement
+# some cleaning mechanism if we use alternative build roots
+###rm -fr $RPM_BUILD_ROOT
+%post
+if [ "$RPM_INSTALL_PREFIX" != "" ]; then
+    INSTALL_PREFIX=$RPM_INSTALL_PREFIX
+else
+    INSTALL_PREFIX=/usr/local
+fi
+if test `whoami` = root; then ldconfig; fi
+%postun
+if test `whoami` = root; then ldconfig; fi
+# %changelog date format as per  `date +"%a %d %b %Y"`
+# first line should be   date  user  email
+%changelog
+* Thu Jul 22 2004 Freddie Akeroyd <F.A.Akeroyd@rl.ac.uk>
+- Initial RPM kit version

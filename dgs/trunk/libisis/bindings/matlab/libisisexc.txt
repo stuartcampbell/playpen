@@ -1,0 +1,632 @@
+#
+# $Id: libisisexc.txt 1421 2008-07-11 16:08:00Z Dickon Champion $
+#
+# This file contains a list of exported functions and the number of input (rhs) and output (lhs)
+# arguments that they accept. This file is used to form the matlab -> libisis interface and
+# consists of 4 columns containing the class, the method, nlhs and nrhs e.g if the invokation is
+#
+#    [ res ] = libisisexc('IXTtestclass', 'plus', IXTtestclass, a, b)
+#
+#  here nlhs = 1 (res) and nrhs = 3 (IXTtestclass, a, b) so the line would be
+#
+#    IXTtestclass		plus		1		3
+#
+#
+# The file is automatically processed by "libisisexc.bat" to generate "libisisexc.h"
+#
+# The order of lines in the file is not important, so group functions by class
+# for clarity
+
+# IXTCLASS				METHOD			NLHS			NRHS
+
+#
+# IXTbase
+#
+IXTbase				create		1		2
+IXTbase				display		0		1
+IXTbase				check		1		1
+IXTbase				read		1		3
+IXTbase				write		1		3
+#
+# IXToptions
+#
+IXToptions				create		1		2
+IXToptions				display		0		1
+IXToptions				check		1		1
+IXToptions				read		1		3
+IXToptions				write		1		3
+# IXTtestclass
+#
+IXTtestclass		plus			1		4
+IXTtestclass		display			0		1
+IXTtestclass		create			1		2
+IXTtestclass		check			1		1
+IXTtestclass		read			1		3
+IXTtestclass		write			1		3
+IXTtestclass		testfunc		-1		-1
+IXTtestclass		testfaa			-1		-1
+#
+# IXTdataset_1d
+#
+IXTdataset_1d		create			1		2
+IXTdataset_1d		createxye		1		4
+IXTdataset_1d		display			0		1
+IXTdataset_1d		plus			1		3
+IXTdataset_1d		minus			1		3
+IXTdataset_1d		times			1		3
+IXTdataset_1d		divide			1		3
+IXTdataset_1d		power			1		3
+IXTdataset_1d		exp				1		2
+IXTdataset_1d		log				1		2
+IXTdataset_1d		log10			1		2
+IXTdataset_1d		sin				1		2
+IXTdataset_1d		cos				1		2
+IXTdataset_1d		tan				1		2
+IXTdataset_1d		sinh			1		2
+IXTdataset_1d		cosh			1		2
+IXTdataset_1d		tanh			1		2
+IXTdataset_1d		integrate		1		4
+IXTdataset_1d		rebunch			1		3
+IXTdataset_1d		rebin			1		3
+IXTdataset_1d		regroup			1		3
+IXTdataset_1d		deriv1			1		2
+IXTdataset_1d		deriv2			1		2
+IXTdataset_1d		shift			1		3
+IXTdataset_1d		check			1		1
+IXTdataset_1d		read			1		3
+IXTdataset_1d		write			1		3
+IXTdataset_1d		unspike			1		6
+IXTdataset_1d		array_plus		1		3
+IXTdataset_1d		array_minus		1		3
+IXTdataset_1d		array_times		1		3
+IXTdataset_1d		array_divide	1		3
+IXTdataset_1d		array_power		1		3
+IXTdataset_1d		make_label		2		1
+#
+# IXTdataset_2d
+#
+IXTdataset_2d		create			1		2
+IXTdataset_2d		createxyze		1		5
+IXTdataset_2d		display			0		1
+IXTdataset_2d		check			1		1
+IXTdataset_2d		plus			1		3
+IXTdataset_2d		minus			1		3
+IXTdataset_2d		times			1		3
+IXTdataset_2d		divide			1		3
+IXTdataset_2d		power			1		3
+IXTdataset_2d		exp				1		2
+IXTdataset_2d		log				1		2
+IXTdataset_2d		log10			1		2
+IXTdataset_2d		sin				1		2
+IXTdataset_2d		cos				1		2
+IXTdataset_2d		tan				1		2
+IXTdataset_2d		sinh			1		2
+IXTdataset_2d		cosh			1		2
+IXTdataset_2d		tanh			1		2
+IXTdataset_2d		integrate_x		1		4
+IXTdataset_2d		integrate_y		1		4
+IXTdataset_2d		integrate_xy	1		6
+IXTdataset_2d		rebin_x			1		3
+IXTdataset_2d		rebin_y			1		3
+IXTdataset_2d		rebin_xy		1		4
+IXTdataset_2d		regroup_x		1		3
+IXTdataset_2d		regroup_y		1		3
+IXTdataset_2d		regroup_xy		1		4
+IXTdataset_2d		rebunch_x		1		3
+IXTdataset_2d		rebunch_y		1		3
+IXTdataset_2d		rebunch_xy		1		4
+IXTdataset_2d		shift			1		-1
+IXTdataset_2d		read			1		3
+IXTdataset_2d		write			1		3
+IXTdataset_2d		expand_arrayd1d		1		2
+IXTdataset_2d		expand_arrayd2d		1		2
+IXTdataset_2d		contract_arrayd2d	1		2
+IXTdataset_2d		expand_listd1d		1		3
+IXTdataset_2d		expand_listd2d		1		3
+IXTdataset_2d		deriv1x				1		2
+IXTdataset_2d		deriv2x				1		2
+IXTdataset_2d		deriv1y				1		2
+IXTdataset_2d		deriv2y				1		2
+IXTdataset_2d		unspike				1		6
+IXTdataset_2d		array_plus			1		3
+IXTdataset_2d		array_minus			1		3
+IXTdataset_2d		array_times			1		3
+IXTdataset_2d		array_divide		1		3
+IXTdataset_2d		array_power			1		3
+IXTdataset_2d		dataset_1d_X_plus	1		3
+IXTdataset_2d		dataset_1d_X_minus	1		3
+IXTdataset_2d		dataset_1d_X_times	1		3
+IXTdataset_2d		dataset_1d_X_divide	1		3
+IXTdataset_2d		dataset_1d_X_power	1		3
+IXTdataset_2d		dataset_1d_Y_plus	1		3
+IXTdataset_2d		dataset_1d_Y_minus	1		3
+IXTdataset_2d		dataset_1d_Y_times	1		3
+IXTdataset_2d		dataset_1d_Y_divide	1		3
+IXTdataset_2d		dataset_1d_Y_power	1		3
+IXTdataset_2d		arraydataset_1d_plus	1		3
+IXTdataset_2d		arraydataset_1d_minus	1		3
+IXTdataset_2d		arraydataset_1d_times	1		3
+IXTdataset_2d		arraydataset_1d_divide	1		3
+IXTdataset_2d		arraydataset_1d_power	1		3
+IXTdataset_2d		array_X_plus	1		3
+IXTdataset_2d		array_X_minus	1		3
+IXTdataset_2d		array_X_times	1		3
+IXTdataset_2d		array_X_divide	1		3
+IXTdataset_2d		array_X_power	1		3
+IXTdataset_2d		array_Y_plus	1		3	
+IXTdataset_2d		array_Y_minus	1		3
+IXTdataset_2d		array_Y_times	1		3
+IXTdataset_2d		array_Y_divide	1		3
+IXTdataset_2d		array_Y_power	1		3
+IXTdataset_2d		make_label		3		1
+#
+# IXTdataset_3d
+#
+IXTdataset_3d		create		1		2
+IXTdataset_3d		check		1		1
+IXTdataset_3d		display		0		1
+IXTdataset_3d		read		1		3
+IXTdataset_3d		write		1		3
+#
+# IXTdataset_4d
+#
+IXTdataset_4d		create		1		2
+IXTdataset_4d		check		1		1
+IXTdataset_4d		display		0		1
+IXTdataset_4d		read		1		3
+IXTdataset_4d		write		1		3
+#
+#
+# IXTdatum_array
+#
+IXTdatum_array		create		1		2
+IXTdatum_array		display		0		1
+IXTdatum_array		plus		1		3
+IXTdatum_array		minus		1		3	
+IXTdatum_array		times		1		3
+IXTdatum_array		divide		1		3
+IXTdatum_array		power		1		3
+IXTdatum_array		exp			1		2
+IXTdatum_array		log			1		2
+IXTdatum_array		sin			1		2
+IXTdatum_array		cos			1		2
+IXTdatum_array		tan			1		2
+IXTdatum_array		sinh		1		2
+IXTdatum_array		cosh		1		2
+IXTdatum_array		tanh		1		2
+IXTdatum_array		check		1		1
+IXTdatum_array	read		1		3
+IXTdatum_array	write		1		3
+#
+# IXTdatum
+#
+IXTdatum			create		1		2
+IXTdatum			display		0		1
+IXTdatum			plus		1		3
+IXTdatum			minus		1		3
+IXTdatum			times		1		3
+IXTdatum			divide		1		3
+IXTdatum			power		1		3
+IXTdatum			exp			1		2
+IXTdatum			log			1		2
+IXTdatum			sin			1		2
+IXTdatum			cos			1		2
+IXTdatum			tan			1		2	
+IXTdatum			sinh		1		2
+IXTdatum			cosh		1		2
+IXTdatum			tanh		1		2
+IXTdatum			check		1		1
+IXTdatum	read		1		3
+IXTdatum	write		1		3
+#
+# IXTfermi_chopper
+#
+IXTfermi_chopper	create		1		2
+IXTfermi_chopper	display		0		1
+IXTfermi_chopper	transmission	1		-1
+IXTfermi_chopper	transmission_odd	1		-1
+IXTfermi_chopper	variance		1		-1
+IXTfermi_chopper	variance_odd	1		-1
+IXTfermi_chopper	check		1		1
+IXTfermi_chopper	read		1		3
+IXTfermi_chopper	write		1		3
+#
+# IXTgeometry
+#
+#IXTgeometry			projarea_vertices	2		5
+#IXTgeometry			solid_angle	1		2
+#IXTgeometry			volume		1		1
+IXTgeometry			create		1		2
+IXTgeometry			display		0		1
+IXTgeometry			check		1		1
+IXTgeometry			read		1		3
+IXTgeometry			write		1		3
+#
+# IXTorientation
+#
+IXTorientation			create	1		2
+IXTorientation			display	0		1
+IXTorientation			check	1		1
+IXTorientation	read		1		3
+IXTorientation	write		1		3
+#IXTorientation			get_rotvec	1		1
+#IXTorientation			setgen	1		3
+#IXTorientation			times	3		1
+#
+# IXTshape
+#
+IXTshape			create		1		2
+IXTshape			display		0		1
+IXTshape			check		1		1
+IXTshape	read		1		3
+IXTshape	write		1		3
+#IXTshape			solid_angle	1		2		
+#IXTshape			volume		1		1
+#
+# IXTtranslation
+#
+IXTtranslation		create		1		2
+IXTtranslation		display		0		1
+IXTtranslation		check		1		1
+IXTtranslation	read		1		3
+IXTtranslation	write		1		3
+#IXTtranslation		plus		1		3
+#IXTtranslation		minus		1		3
+#IXTtranslation		norm		1		1
+#IXTtranslation		dot			1		2
+#IXTtranslation		cross		1		3
+#
+# IXTraw_file
+#
+IXTraw_file			create		1		2
+IXTraw_file			open		1		1
+IXTraw_file			display		0		1
+IXTraw_file			check		1		1
+IXTraw_file			geti		1		2
+IXTraw_file			getr		1		2
+IXTraw_file			getc		1		2
+IXTraw_file			getspectrum	1		4
+IXTraw_file			getspectra	1		4
+IXTraw_file			sumspec     1		6
+IXTraw_file			get_generic 1		2
+IXTraw_file			head		0		1
+#
+# IXTfileio
+#
+IXTfileio					create	1		2
+IXTfileio					display 0		1
+IXTfileio					check	1		1
+IXTfileio					open	1		3
+IXTfileio					close	1		1
+#
+# IXTgroup
+#
+IXTgroup					create	1		2
+IXTgroup					display	0		1
+IXTgroup					check	1		1
+#
+# IXTgroups
+#
+IXTgroups					create	1		2
+IXTgroups					display	0		1
+IXTgroups					check	1		1
+#
+# IXTaxis
+IXTaxis					create	1		2
+IXTaxis					display	0		1
+IXTaxis					check	1		1
+IXTaxis					make_label_1d	2		3
+IXTaxis					make_label_2d	3		5
+IXTaxis					create_code	1		2
+IXTaxis					create_caption	1		2
+IXTaxis					create_caption_units	1		3
+IXTaxis					create_caption_units_code	1		4
+#
+# IXTrunfile
+#
+IXTrunfile					create	1		2
+IXTrunfile					display	0		1
+IXTrunfile					check	1		1
+IXTrunfile					units	1		3
+IXTrunfile					unitsrebin	1		4
+IXTrunfile					rebin_x_det	1		3
+IXTrunfile					rebin_x_mon	1		3
+IXTrunfile					rebin_x		1		3
+IXTrunfile					rebunch_x_det	1		3
+IXTrunfile					rebunch_x_mon	1		3
+IXTrunfile					rebunch_x		1		3
+IXTrunfile					regroup_x_det	1		3
+IXTrunfile					regroup_x_mon	1		3
+IXTrunfile					regroup_x		1		3
+IXTrunfile					integrate_x_det	1		3
+IXTrunfile					integrate_x_mon	1		3
+IXTrunfile					integrate_x		1		3
+IXTrunfile					shift_x			1		3
+IXTrunfile					background	1		4
+IXTrunfile					read	1		3
+IXTrunfile					write	1		3
+IXTrunfile					populate_dso	1		14
+IXTrunfile					remap	1		3
+IXTrunfile					tubes_to_spectra	1		3
+IXTrunfile					getei	2		3
+IXTrunfile					populate_mon	1		8
+IXTrunfile					populate_det	1		11
+IXTrunfile					solid	1		4
+IXTrunfile					mon_norm	1		5
+IXTrunfile					peak_norm	1		5
+IXTrunfile					charge_norm	1		3
+IXTrunfile					absolute_norm	1		3
+IXTrunfile					monovan		1		9
+IXTrunfile					corr	1		2
+IXTrunfile					getmondata	1		2
+IXTrunfile					getdetdata	1		2
+IXTrunfile					geteival	1		1
+IXTrunfile					plus		1		3
+IXTrunfile					minus		1		3
+IXTrunfile					times		1		3
+IXTrunfile					divide		1		3
+IXTrunfile					power		1		3
+IXTrunfile					exp				1		2
+IXTrunfile					log				1		2
+IXTrunfile					log10			1		2
+IXTrunfile					sin				1		2
+IXTrunfile					cos				1		2
+IXTrunfile					tan				1		2
+IXTrunfile					sinh			1		2
+IXTrunfile					cosh			1		2
+IXTrunfile					tanh			1		2
+IXTrunfile					deriv1x			1		2
+IXTrunfile					deriv2x			1		2
+IXTrunfile					diag		5		25
+IXTrunfile					moncorr		1		3
+#
+# IXTsource
+#
+IXTsource					create	1		2
+IXTsource					display	0		1
+IXTsource					check	1		1
+IXTsource					write	1		3
+IXTsource					read		1		3
+#
+# IXTmoderator
+#
+IXTmoderator					create	1		2
+IXTmoderator					display	0		1
+IXTmoderator					check	1		1
+IXTmoderator					read	1		3
+IXTmoderator					write	1		3
+#
+# IXTspectra
+#
+IXTspectra					create		1		2
+IXTspectra					display		0		1
+IXTspectra					check		1		1
+IXTspectra					write		1		3
+IXTspectra					read	1		3
+IXTspectra					filecreator 0	2
+#
+# IXTdata
+#
+IXTdata					create		1		2
+IXTdata					display		0		1
+IXTdata					check		1		1
+IXTdata					read		1		3
+IXTdata					write		1		3
+#
+# IXTdetector
+#
+IXTdetector					create	1		2
+IXTdetector					display	0		1
+IXTdetector					check	1		1
+IXTdetector					write	1		3
+IXTdetector					read		1		3
+IXTdetector					filecreator  1		5
+#
+# IXTbridge
+#
+IXTbridge					create	1		2
+IXTbridge					display	0		1
+IXTbridge					check	1		1
+IXTbridge	read		1		3
+IXTbridge	write		1		3
+#
+# IXTsw_bridge
+#
+IXTsw_bridge					create	1		2
+IXTsw_bridge					display	0		1
+IXTsw_bridge					check	1		1
+IXTsw_bridge	read		1		3
+IXTsw_bridge	write		1		3
+#
+# IXTws_bridge
+#
+IXTws_bridge					create	1		2
+IXTws_bridge					display	0		1
+IXTws_bridge					check	1		1
+IXTws_bridge	read		1		3
+IXTws_bridge	write		1		3
+#
+# IXTworkspace
+#
+IXTworkspace					create	1		2
+IXTworkspace					display	0		1
+IXTworkspace					check	1		1
+IXTworkspace	read		1		3
+IXTworkspace	write		1		3
+
+#
+# IXTeffdet_index	
+#
+IXTeffdet_index					create	1		2
+IXTeffdet_index					display	0		1
+IXTeffdet_index					check	1		1
+IXTeffdet_index	read		1		3
+IXTeffdet_index	write		1		3
+#
+# IXTpeaks
+#
+IXTpeaks						create	1		2
+IXTpeaks						display	0		1
+IXTpeaks						check	1		1
+IXTpeaks	read		1		3
+IXTpeaks	write		1		3
+#
+# IXTchopper_instrument
+#
+IXTchopper_instrument						create	1		2
+IXTchopper_instrument						display	0		1
+IXTchopper_instrument						check	1		1
+IXTchopper_instrument	read		1		3
+IXTchopper_instrument	write		1		3
+#
+# IXTaperture
+#
+IXTaperture						create	1		2
+IXTaperture						display	0		1
+IXTaperture						check	1		1
+IXTaperture						write	1		3
+IXTaperture					read		1		3
+#
+# IXTattenuator
+#
+IXTattenuator						create		1		2
+IXTattenuator						display		0		1
+IXTattenuator						check		1		1
+IXTattenuator						write       1		3
+IXTattenuator						read		1		3
+#
+# IXTsample
+#
+IXTsample						create	1		2
+IXTsample						display	0		1
+IXTsample						check	1		1
+IXTsample						read		1		3
+IXTsample						write		1		3
+
+#
+# IXTlattice
+#
+IXTlattice						create	1		2
+IXTlattice						display	0		1
+IXTlattice						check	1		1
+IXTlattice	read		1		3
+IXTlattice	write		1		3
+#
+# IXTmoments
+#
+IXTmoments						create	1		2
+IXTmoments						display	0		1
+IXTmoments						check	1		1
+IXTmoments	read		1		3
+IXTmoments	write		1		3
+#
+# IXTdet_solid
+#
+IXTdet_solid					create	1		2
+IXTdet_solid					display	0		1
+IXTdet_solid					check	1		1
+IXTdet_solid	read		1		3
+IXTdet_solid	write		1		3
+#
+# IXTdet_he3
+#
+IXTdet_he3					create	1		2
+IXTdet_he3					display	0		1
+IXTdet_he3					check	1		1
+IXTdet_he3	read		1		3
+IXTdet_he3	write		1		3
+#
+# IXTuser
+#
+IXTuser					create		1		2
+IXTuser					display		0		1
+IXTuser					check		1		1
+IXTuser					read		1		3
+IXTuser					write		1		3
+#
+IXTmap					create		1		2
+IXTmap					display		0		1
+IXTmap					check		1		1
+IXTmap					fileread	1		3
+IXTmap					write		1		3
+IXTmap					read		1		3
+#
+IXTmask					create		1		2
+IXTmask					display		0		1
+IXTmask					check		1		1
+IXTmask					fileread	1		3
+IXTmask					write		1		3
+IXTmask					read		1		3
+#
+IXTdata_source				create	1		2
+IXTdata_source				display	0		1
+IXTdata_source				check	1		1
+IXTdata_source				findpath	2		2
+IXTdata_source				findpaths	2		2
+IXTdata_source				additem		1		-1
+IXTdata_source				delitem		1		2
+IXTdata_source				replaceitem	1		-1
+IXTdata_source				read	1		3
+IXTdata_source				write	1		3
+#
+IXTpath				create	1		2
+IXTpath				display	0		1
+IXTpath				check	1		1
+IXTpath				addpath		1		-1
+IXTpath				addtoend	1		-1
+IXTpath				addtobeg	1		-1
+IXTpath				showpath	0		1
+IXTpath				delpath		1		2
+IXTpath				deldir		1		3
+IXTpath				read	1		3
+IXTpath				write	1		3
+#
+#
+IXThistory				create		1		2
+IXThistory				display		0		1
+IXThistory				check		1		1
+IXThistory				additem		1		2
+IXThistory				read		1		3
+IXThistory				write		1		3
+#
+# IXTinstrument
+#
+IXTinstrument				create	1		2
+IXTinstrument				display	0		1
+IXTinstrument				check	1		1
+IXTinstrument				read		1		3
+IXTinstrument				write		1		3
+#
+# IXTdiffraction_instrument
+#
+IXTdiffraction_instrument				create	1		2
+IXTdiffraction_instrument				display	0		1
+IXTdiffraction_instrument				check	1		1
+IXTdiffraction_instrument				read		1		3
+IXTdiffraction_instrument				write		1		3
+#
+# IXTstring_list
+#
+IXTstring_list			create	1		2
+IXTstring_list			display	0		1
+IXTstring_list			check	1		1
+IXTstring_list			read	1		3
+IXTstring_list			write	1		3
+IXTstring_list			insert	1		3
+IXTstring_list			append	1		2
+IXTstring_list			replace	1		3
+#
+# IXT is prefixed so that the name will mangle to find IXMutility_m.f90
+# this is a facility to call non class-specific routine in fortran
+# could be used as a black box route in for fortran only code......
+IXTutility				filetype 1		1
+IXTutility				translate_read 1	1
+IXTutility				translate_write	1	1
+IXTutility				test_regrid 2	10
+IXTutility				getspe 3 1
+IXTutility				putspe 1 4
+IXTutility				putslice 1 9
+IXTutility				putcut 1 7
+IXTutility				getcut 6  1
+IXTutility				getslice 8 1
+#

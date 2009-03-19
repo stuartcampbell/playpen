@@ -1,0 +1,2128 @@
+<html xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>GTK Test Script</title>
+      <meta name="generator" content="MATLAB 7.2">
+      <meta name="date" content="2006-10-05">
+      <meta name="m-file" content="gtk_test_script"><style>
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows.  On Gecko-based browsers, the shrink-to-fit doesn't work. */ 
+p,h1,h2,div.content div {
+  /* for MATLAB's browser */
+  width: 600px;
+  /* for Mozilla, but the "width" tag overrides it anyway */
+  max-width: 600px;
+  /* for IE */
+  width:expression(document.body.clientWidth > 620 ? "600px": "auto" );
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head>
+   <body>
+      <div class="content">
+         <h1>GTK Test Script</h1>
+         <introduction></introduction>
+         <h2>Contents</h2>
+         <div>
+            <ul>
+               <li><a href="#1">Get Variables</a></li>
+               <li><a href="#2">1d Plotting Functions</a></li>
+               <li><a href="#3">2d Plotting Functions</a></li>
+               <li><a href="#4">Window Keeping Tests</a></li>
+               <li><a href="#5">Limit Setting Tests</a></li>
+               <li><a href="#6">Additional Options Tests</a></li>
+               <li><a href="#7">Extra Functions Test</a></li>
+               <li><a href="#8">Get Data</a></li>
+               <li><a href="#9">Test new functions</a></li>
+            </ul>
+         </div>
+         <h2>Get Variables<a name="1"></a></h2><pre class="codeinput"><span class="keyword">global</span> lite_tag;
+<span class="keyword">global</span> full_tag;
+<span class="keyword">global</span> extra_tag;
+<span class="keyword">global</span> default_structure_tag;
+<span class="keyword">global</span> stop_tag;
+<span class="keyword">global</span> publish_tag;
+
+addpath <span class="string">../../bindings/matlab/classes/</span>
+addpath <span class="string">../../applications/matlab/homer/</span>
+addpath <span class="string">../../applications/matlab/mgeniefuncs/</span>
+addpath <span class="string">../../bindings/matlab/graphics/gtk_application</span>
+gtk_init
+rawfile1=IXTisis_raw_file(<span class="string">'../HET15958.RAW'</span>);
+rawfile2=IXTisis_raw_file(<span class="string">'../HET16538.RAW'</span>);
+nsp=geti(rawfile1,<span class="string">'NSP1'</span>);
+w=getspectrum(rawfile1,25);
+w2=getspectrum(rawfile2,233);
+wd=getspectra(rawfile1,[1:nsp]);
+wd2=getspectra(rawfile2,[1:nsp]);
+rawfile3=IXTisis_raw_file(<span class="string">'../HET16774.RAW'</span>);
+array_builder;
+
+<span class="keyword">if</span> lite_tag
+    wd = rebin_x(wd,[0,200,20000]);
+    wd2 = rebin_x(wd2,[0,200,20000]);
+<span class="keyword">end</span>
+
+ww2=ww;
+wdd=[wd,wd2];
+
+display(<span class="string">'data loaded successfully'</span>)
+</pre><pre class="codeoutput">%-------------------------------------------------------------------------
+Graphical Toolkit Started Successfully
+For graphical toolkit function index use gtkhelp command
+-   Example: gtkhelp
+Any comments or requirements should be mailed to D.Whittaker@rl.ac.uk
+%--------------------------------------------------------------------------
+data loaded successfully
+</pre><h2>1d Plotting Functions<a name="2"></a></h2><pre class="codeinput"><span class="keyword">if</span> stop_tag  == true
+    open <span class="string">gtk_test</span>
+    keyboard
+<span class="keyword">end</span>
+
+
+<span class="keyword">if</span> ~ extra_tag
+
+    [fig, axes, plot] = dl(w);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dl(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dl(ww);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+
+    [fig, axes, plot] = dl(ww,100,200);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+
+    [fig, axes, plot] = dl(w,100,400);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+
+    [fig, axes, plot] = dl(w,100,400,0,10);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = dl(w2);
+
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = dl(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+
+    [fig, axes, plot] = dl(w,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'fcolor'</span>,<span class="string">'blue'</span>,<span class="string">'funits'</span>,<span class="string">'point'</span>,<span class="string">'name'</span>,<span class="string">'testplot'</span>,<span class="string">'tag'</span>,<span class="string">'one'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>,<span class="string">'xgrid'</span>,<span class="string">'on'</span>,<span class="string">'ygrid'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+        <span class="string">'title'</span>,<span class="string">'test_case_1'</span>,<span class="string">'xlabel'</span>,<span class="string">'testdata'</span>,<span class="string">'ylabel'</span>,<span class="string">'ydata'</span>,<span class="string">'afontcolor'</span>,<span class="string">'blue'</span>,<span class="keyword">...</span>
+        <span class="string">'afontname'</span>,<span class="string">'arial'</span>,<span class="string">'afontweight'</span>,<span class="string">'bold'</span>,<span class="string">'xlim'</span>,[100,400],<span class="string">'ylim'</span>,[0,10], <span class="keyword">...</span>
+        <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="string">'linewidth'</span>,5);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span> default_structure_tag
+        dl(w,default_structure);
+    <span class="keyword">end</span>
+
+
+    kf;
+
+    [fig, axes, plot] = de(w);
+
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = de(w);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(ww);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(ww,100,200);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(w,100,400);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(w,100,400,0,10);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = de(w2);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = de(w,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'fcolor'</span>,<span class="string">'blue'</span>,<span class="string">'funits'</span>,<span class="string">'point'</span>,<span class="string">'name'</span>,<span class="string">'testplot'</span>,<span class="string">'tag'</span>,<span class="string">'one'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>,<span class="string">'xgrid'</span>,<span class="string">'on'</span>,<span class="string">'ygrid'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+        <span class="string">'title'</span>,<span class="string">'test_case_1'</span>,<span class="string">'xlabel'</span>,<span class="string">'testdata'</span>,<span class="string">'ylabel'</span>,<span class="string">'ydata'</span>,<span class="string">'afontcolor'</span>,<span class="string">'blue'</span>,<span class="keyword">...</span>
+        <span class="string">'afontname'</span>,<span class="string">'arial'</span>,<span class="string">'afontweight'</span>,<span class="string">'bold'</span>,<span class="string">'xlim'</span>,[100,400],<span class="string">'ylim'</span>,[0,10], <span class="keyword">...</span>
+        <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="string">'linewidth'</span>,5);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span> default_structure_tag
+       de(w,default_structure);
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1);
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(ww);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(ww,100,200);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(w,100,400);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(w,100,400,0,10);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = dh(w2);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = dh(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(w,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'fcolor'</span>,<span class="string">'blue'</span>,<span class="string">'funits'</span>,<span class="string">'point'</span>,<span class="string">'name'</span>,<span class="string">'testplot'</span>,<span class="string">'tag'</span>,<span class="string">'one'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>,<span class="string">'xgrid'</span>,<span class="string">'on'</span>,<span class="string">'ygrid'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+        <span class="string">'title'</span>,<span class="string">'test_case_1'</span>,<span class="string">'xlabel'</span>,<span class="string">'testdata'</span>,<span class="string">'ylabel'</span>,<span class="string">'ydata'</span>,<span class="string">'afontcolor'</span>,<span class="string">'blue'</span>,<span class="keyword">...</span>
+        <span class="string">'afontname'</span>,<span class="string">'arial'</span>,<span class="string">'afontweight'</span>,<span class="string">'bold'</span>,<span class="string">'xlim'</span>,[100,400],<span class="string">'ylim'</span>,[0,10], <span class="keyword">...</span>
+        <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="string">'linewidth'</span>,5);
+    <span class="keyword">if</span> fig~=5
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+
+    kf;
+
+    [fig, axes, plot] = dm(w);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1);
+
+    [fig, axes, plot] = dm(w);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dm(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dm(ww);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dm(ww,100,200);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dm(w,100,400);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dm(w,100,400,0,10);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = dm(w2);
+    <span class="keyword">if</span> fig~=6
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = dm(w,<span class="string">'color'</span>,<span class="string">'red'</span>);
+    <span class="keyword">if</span> fig~=6
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dm(w,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'fcolor'</span>,<span class="string">'blue'</span>,<span class="string">'funits'</span>,<span class="string">'point'</span>,<span class="string">'name'</span>,<span class="string">'testplot'</span>,<span class="string">'tag'</span>,<span class="string">'one'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>,<span class="string">'xgrid'</span>,<span class="string">'on'</span>,<span class="string">'ygrid'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+        <span class="string">'title'</span>,<span class="string">'test_case_1'</span>,<span class="string">'xlabel'</span>,<span class="string">'testdata'</span>,<span class="string">'ylabel'</span>,<span class="string">'ydata'</span>,<span class="string">'afontcolor'</span>,<span class="string">'blue'</span>,<span class="keyword">...</span>
+        <span class="string">'afontname'</span>,<span class="string">'arial'</span>,<span class="string">'afontweight'</span>,<span class="string">'bold'</span>,<span class="string">'xlim'</span>,[100,400],<span class="string">'ylim'</span>,[0,10], <span class="keyword">...</span>
+        <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="string">'linewidth'</span>,5);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = de(w);
+    <span class="keyword">if</span> fig~=6
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    kf
+    [fig, axes, plot] = dm(w);
+    <span class="keyword">if</span> fig~=7
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close <span class="string">all</span>
+
+    display(<span class="string">'1d plotting routines check complete'</span>)
+</pre><pre class="codeoutput">Error: At least one END is missing: the statement may begin here.</pre><h2>2d Plotting Functions<a name="3"></a></h2><pre class="codeinput">    <span class="keyword">if</span> stop_tag  == true
+        open <span class="string">gtk_test</span>
+        keyboard
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd,100,400);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd,100,400,0,10);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd,100,400,0,10,0,0.1);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = ds(wd2);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = ds(wd);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd,<span class="string">'fcolor'</span>,<span class="string">'blue'</span>,<span class="string">'tunits'</span>,<span class="string">'point'</span>,<span class="string">'name'</span>,<span class="string">'testplot'</span>,<span class="string">'tag'</span>,<span class="string">'one'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>,<span class="string">'xgrid'</span>,<span class="string">'on'</span>,<span class="string">'ygrid'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+        <span class="string">'title'</span>,<span class="string">'test_case_1'</span>,<span class="string">'xlabel'</span>,<span class="string">'testdata'</span>,<span class="string">'ylabel'</span>,<span class="string">'ydata'</span>,<span class="string">'afontcolor'</span>,<span class="string">'blue'</span>,<span class="keyword">...</span>
+        <span class="string">'afontname'</span>,<span class="string">'arial'</span>,<span class="string">'afontweight'</span>,<span class="string">'bold'</span>,<span class="string">'xlim'</span>,[100,400],<span class="string">'ylim'</span>,[0,10], <span class="keyword">...</span>
+        <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="string">'linewidth'</span>,5);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1);
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wdd);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wdd,100,200);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wd,100,400);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wd,100,400,0,10);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wd,100,400,0,10,0,0.1);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    kf;
+
+    [fig, axes, plot] = da(wd2);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close(1);
+
+    [fig, axes, plot] = da(wd);
+
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wd,<span class="string">'fcolor'</span>,<span class="string">'blue'</span>,<span class="string">'tunits'</span>,<span class="string">'point'</span>,<span class="string">'name'</span>,<span class="string">'testplot'</span>,<span class="string">'tag'</span>,<span class="string">'one'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>,<span class="string">'xgrid'</span>,<span class="string">'on'</span>,<span class="string">'ygrid'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+        <span class="string">'title'</span>,<span class="string">'test_case_1'</span>,<span class="string">'xlabel'</span>,<span class="string">'testdata'</span>,<span class="string">'ylabel'</span>,<span class="string">'ydata'</span>,<span class="string">'afontcolor'</span>,<span class="string">'blue'</span>,<span class="keyword">...</span>
+        <span class="string">'afontname'</span>,<span class="string">'arial'</span>,<span class="string">'afontweight'</span>,<span class="string">'bold'</span>,<span class="string">'xlim'</span>,[100,400],<span class="string">'ylim'</span>,[0,10], <span class="keyword">...</span>
+        <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="string">'linewidth'</span>,5);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+
+    kf;
+
+    close(1);
+
+    kf;
+
+    close(2);
+
+    kf;
+
+    close <span class="string">all</span>
+
+    display(<span class="string">'2d plotting routines check complete'</span>)
+</pre><h2>Window Keeping Tests<a name="4"></a></h2><pre class="codeinput">    <span class="keyword">if</span> stop_tag  == true
+        open <span class="string">gtk_test</span>
+        keyboard
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dl(w);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = mp(ww);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    display(<span class="string">'line 500 reached'</span>)
+
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = de(w);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = mp(ww2);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1);
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(2);
+
+    [fig, axes, plot] = dl(w);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = mp(ww);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close <span class="string">all</span>
+
+    display(<span class="string">'round 1 of keep figure check complete'</span>)
+
+    <span class="comment">%-------------round 2----------</span>
+    [fig, axes, plot] = mp(ww);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    [fig, axes, plot] = ds(wd);
+
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    [fig, axes, plot] = dl(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(2)
+    [fig, axes, plot] = de(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1)
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1)
+    close
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close <span class="string">all</span>
+
+    display(<span class="string">'round 2 of keep figure check complete'</span>)
+
+    <span class="comment">%------------round 3 with keep figure-----</span>
+    [fig, axes, plot] = mp(ww);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd);
+    <span class="keyword">if</span> fig~=2
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = da(wd);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    kf(1);
+
+    [fig, axes, plot] = mp(ww2);
+
+    <span class="keyword">if</span> fig~=4
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    [fig, axes, plot] = dl(w);
+    <span class="keyword">if</span> fig~=5
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    kf
+    close(3)
+
+    [fig, axes, plot] = de(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1)
+    close(3)
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=1
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    kf
+
+    [fig, axes, plot] = dl(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(2);
+
+    [fig, axes, plot] = dl(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+    close(1)
+
+    [fig, axes, plot] = dh(w);
+    <span class="keyword">if</span> fig~=3
+        warning(<span class="string">'test failed: graph appears in wrong figure'</span>)
+    <span class="keyword">end</span>
+
+    close <span class="string">all</span>
+    display(<span class="string">'round 3 of keep figure check complete'</span>)
+</pre><h2>Limit Setting Tests<a name="5"></a></h2><pre class="codeinput">    <span class="keyword">if</span> stop_tag  == true
+        open <span class="string">gtk_test</span>
+        keyboard
+    <span class="keyword">end</span>
+
+    [fig, axes, plot] = ds(wd);
+    lx(100,500)
+    lx
+    lz
+    ly(100,1000)
+    ly
+    lz(0,0.1)
+    lz
+    lx
+    ly
+    lx(1,1000)
+    ly(500,1000)
+    lx
+    ly
+    lx(500,1000)
+    lz
+    lc(0,0.1)
+    lz(0,8000)
+    lc
+    rg
+
+    lx(0,20000)
+    ly(0,2500)
+    lz(0,9000)
+    lx
+    ly
+    lz
+    lx(-5,30000)
+    ly(-5,4000)
+    lz(-5,20000)
+    lx
+    ly
+    lz
+    lc
+    rg
+    display(<span class="string">'round 1 of limits check complete'</span>)
+
+    <span class="comment">% ----------- round 2------------</span>
+    [fig, axes, plot] = da(wd);
+    lx(100,500)
+    lx
+    lc
+    ly(100,1000)
+    ly
+    lz(0,0.1)
+    lc
+    lx
+    ly
+    lx(1,1000)
+    ly(500,1000)
+    lx
+    ly
+    lx(500,1000)
+    lc
+    lc(0,0.1)
+    lz(0,8000)
+    lc
+    rg
+
+    lx(0,20000)
+    ly(0,2500)
+    lz(0,9000)
+    lx
+    ly
+    lc
+    lx(-5,30000)
+    ly(-5,4000)
+    lz(-5,20000)
+    lx
+    ly
+    lc
+    lc
+    rg
+    display(<span class="string">'round 2 of limits check complete'</span>)
+
+    <span class="comment">%-----------------round 3----------------------</span>
+
+    ly
+    lx(1,1000)
+    ly(500,1000)
+    lx
+    ly
+    lx(500,1000)
+    lz
+    lc(0,0.1)
+    lz(0,8000)
+    lc
+
+    lx(0,20000)
+    ly(0,2500)
+    lz(0,9000)
+    lx
+    ly
+    lz
+    lx(-5,30000)
+    ly(-5,4000)
+    lz(-5,20000)
+    lx
+    ly
+    lz
+    lc
+    display(<span class="string">'round 3 of limits check complete'</span>)
+
+    <span class="comment">% ---------------line data--------------</span>
+    [fig, axes, plot] = dl(w);
+    lx(100,500)
+    lx
+    ly
+    lx(1,1000)
+    ly
+    ly(0,40)
+    ly
+    ly(0,15)
+    lx
+    lx(1,2000)
+    rg
+
+    lx(-5,25000)
+    ly(-5,100)
+    rg
+
+close <span class="string">all</span>
+
+    display(<span class="string">'limits on line data check complete'</span>)
+</pre><h2>Additional Options Tests<a name="6"></a></h2><pre class="codeinput">    <span class="keyword">if</span> stop_tag  == true
+        open <span class="string">gtk_test</span>
+        keyboard
+    <span class="keyword">end</span>
+
+    acolor(<span class="string">'red'</span>);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    acolor(<span class="string">'green'</span>);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1);
+    acolor(<span class="string">'yellow'</span>);
+    ph(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+
+    close <span class="string">all</span>
+
+
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1)
+    rd;
+    [fig, axes, plot] = dl(w);
+    ra;
+    [fig, axes, plot] = dl(w);
+    close <span class="string">all</span>
+
+    display(<span class="string">'acolor check complete'</span>)
+
+    <span class="comment">%-------------amark--------------</span>
+    amark(<span class="string">'+'</span>);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    amark(<span class="string">'*'</span>);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1);
+    amark(<span class="string">'+'</span>,2.4);
+    ph(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    close, close, close,
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1)
+
+    display(<span class="string">'line 850 reached'</span>)
+    rd;
+    [fig, axes, plot] = dl(w);
+    ra;
+    [fig, axes, plot] = dl(w);
+    close <span class="string">all</span>
+
+    display(<span class="string">'amark check complete'</span>)
+
+    <span class="comment">%---------------aline-----------------</span>
+    aline(<span class="string">'--'</span>);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    aline(<span class="string">'-'</span>,2.5);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1);
+    aline(<span class="string">':'</span>,2.0);
+    ph(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    close, close, close,
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1)
+    rd;
+    [fig, axes, plot] = dl(w);
+    ra;
+    [fig, axes, plot] = dl(w);
+    close <span class="string">all</span>
+
+    display(<span class="string">'aline check complete'</span>)
+
+    <span class="comment">%-------------------log, lin-------------------</span>
+    [fig, axes, plot] = dl(w);
+
+    logx
+    logy
+    linx
+    liny
+    linx
+    liny
+    logx
+    logy
+    logx
+    logy
+    llb
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    logx
+    logy
+    linx
+    liny
+    logx
+    [fig, axes, plot] = ds(wd);
+    logx
+    logy
+    logz
+    llb
+    linx
+    liny
+    [fig, axes, plot] = da(wd2);
+    logx
+    logy
+    linx
+    liny
+
+    close, close, close, close
+
+    display(<span class="string">'linear / log check complete'</span>)
+
+    <span class="comment">%---------------check the dxy props-------------</span>
+    [fig, axes, plot] = dl(w);
+    display(<span class="string">'begin dxy test - please click on the figures (press return if multiple clicking has been allowed)'</span>);
+
+    [x,y]=dxy(<span class="string">'testing'</span>);
+    [fig, axes, plot] = ds(wd);
+    [x,y]=dxy;
+    [fig, axes, plot] = da(wd);
+    [x,y]=dxy(<span class="string">'test'</span>);
+
+    display(<span class="string">'dxy check complete'</span>)
+
+    close <span class="string">all</span>
+
+<span class="keyword">end</span>
+</pre><h2>Extra Functions Test<a name="7"></a></h2>
+         <h2>Get Data<a name="8"></a></h2><pre class="codeinput">    <span class="keyword">if</span> stop_tag  == true
+        open <span class="string">gtk_test</span>
+        keyboard
+    <span class="keyword">end</span>
+
+rawfile1=IXTisis_raw_file(<span class="string">'../HET15958.RAW'</span>);
+rawfile2=IXTisis_raw_file(<span class="string">'../HET16538.RAW'</span>);
+rawfile3 = IXTisis_raw_file(<span class="string">'../MAP06220.RAW'</span>);
+nsp=geti(rawfile1,<span class="string">'NSP1'</span>);
+d2a=getspectra(rawfile1,[1:300]);
+d2b=getspectra(rawfile2,[1:nsp]);
+d2c=getspectra(rawfile3,[500:1000]);
+w1=getspectrum(rawfile1,25);
+w2=getspectrum(rawfile2,233);
+w = w1;
+<span class="keyword">if</span> lite_tag
+    wd=rebin_x(d2a,[3000,300,13000]);
+    wd2=rebin_x(d2c,[0,300,10000]);
+<span class="keyword">end</span>
+wdd=[wd, wd2];
+array_builder
+display(<span class="string">'loaded extra data'</span>);
+</pre><h2>Test new functions<a name="9"></a></h2><pre class="codeinput">    <span class="keyword">if</span> stop_tag  == true
+        open <span class="string">gtk_test</span>
+        keyboard
+    <span class="keyword">end</span>
+
+ds(wdd);
+
+gtk_limits_check;
+
+ds(wdd,<span class="string">'separation'</span>,<span class="string">'on'</span>,<span class="string">'acolor'</span>,<span class="string">'green'</span>);
+
+gtk_limits_check;
+
+da(wdd);
+
+da(wdd,0,1000);
+
+gtk_limits_check;
+
+ds(wdd,0,1000);
+
+mp(wd,0,20000,0,30);
+
+dl(ww);
+
+ds(ww);
+
+da(ww);
+
+acolor(<span class="string">'red'</span>,<span class="string">'green'</span>,<span class="string">'blue'</span>);
+
+gtk_limits_check;
+
+mp(ww);
+
+ds(ww);
+dl(ww);
+
+
+de(ww);
+
+pl(ww);
+
+ph(ww);
+
+
+acolor(<span class="string">'yellow'</span>,<span class="string">'red'</span>,<span class="string">'blue'</span>);
+
+dh(ww);
+dl(w);
+ph(w);
+
+display(<span class="string">'test completed'</span>)
+
+clear <span class="string">all</span>
+close <span class="string">all</span>
+pack
+
+<span class="comment">% eroneous data</span>
+<span class="comment">%dl(w,100,400,0,10,20,40)</span>
+<span class="comment">%ds(wd,100,400,0,10,20,40,10,30)</span>
+<span class="comment">%ds(wd,'separation','testing')</span>
+<span class="comment">%ds(wdd,'separation','testing')</span>
+</pre><p class="footer"><br>
+            Published with MATLAB&reg; 7.2<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+%% GTK Test Script
+%% Get Variables
+global lite_tag;
+global full_tag;
+global extra_tag;
+global default_structure_tag;
+global stop_tag; 
+global publish_tag; 
+
+addpath ../../bindings/matlab/classes/
+addpath ../../applications/matlab/homer/
+addpath ../../applications/matlab/mgeniefuncs/
+addpath ../../bindings/matlab/graphics/gtk_application
+gtk_init
+rawfile1=IXTisis_raw_file('../HET15958.RAW');
+rawfile2=IXTisis_raw_file('../HET16538.RAW');
+nsp=geti(rawfile1,'NSP1');
+w=getspectrum(rawfile1,25);
+w2=getspectrum(rawfile2,233);
+wd=getspectra(rawfile1,[1:nsp]);
+wd2=getspectra(rawfile2,[1:nsp]);
+rawfile3=IXTisis_raw_file('../HET16774.RAW');
+array_builder;
+
+if lite_tag
+    wd = rebin_x(wd,[0,200,20000]);
+    wd2 = rebin_x(wd2,[0,200,20000]);
+end
+
+ww2=ww;
+wdd=[wd,wd2];
+
+display('data loaded successfully')
+
+
+%% 1d Plotting Functions
+
+if stop_tag  == true
+    open gtk_test
+    keyboard
+end
+
+
+if ~ extra_tag
+
+    [fig, axes, plot] = dl(w);
+
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dl(w,'color','red');
+
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dl(ww);
+
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+
+    [fig, axes, plot] = dl(ww,100,200);
+
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+
+    [fig, axes, plot] = dl(w,100,400);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+
+    [fig, axes, plot] = dl(w,100,400,0,10);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    kf;
+
+    [fig, axes, plot] = dl(w2);
+
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close(1);
+
+    [fig, axes, plot] = dl(w,'color','red');
+
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+
+    [fig, axes, plot] = dl(w,'color','red','fcolor','blue','funits','point','name','testplot','tag','one','acolor','green','xgrid','on','ygrid','on',...
+        'title','test_case_1','xlabel','testdata','ylabel','ydata','afontcolor','blue',...
+        'afontname','arial','afontweight','bold','xlim',[100,400],'ylim',[0,10], ...
+        'linestyle','REPLACE_WITH_DASH_DASH','marker','o','linewidth',5);
+
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    if default_structure_tag
+        dl(w,default_structure);
+    end
+
+
+    kf;
+
+    [fig, axes, plot] = de(w);
+
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close(1);
+
+    [fig, axes, plot] = de(w);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(w,'color','red');
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(ww);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(ww,100,200);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(w,100,400);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(w,100,400,0,10);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = de(w2);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end
+    
+    close(1);
+
+    [fig, axes, plot] = de(w,'color','red','fcolor','blue','funits','point','name','testplot','tag','one','acolor','green','xgrid','on','ygrid','on',...
+        'title','test_case_1','xlabel','testdata','ylabel','ydata','afontcolor','blue',...
+        'afontname','arial','afontweight','bold','xlim',[100,400],'ylim',[0,10], ...
+        'linestyle','REPLACE_WITH_DASH_DASH','marker','o','linewidth',5);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(w);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end
+
+    if default_structure_tag
+       de(w,default_structure);
+    end
+
+    kf;
+ 
+    [fig, axes, plot] = dh(w);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1);
+
+    [fig, axes, plot] = dh(w);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dh(w,'color','red');
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dh(ww);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dh(ww,100,200);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dh(w,100,400);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dh(w,100,400,0,10);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = dh(w2);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close(1);
+ 
+    [fig, axes, plot] = dh(w,'color','red');
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dh(w,'color','red','fcolor','blue','funits','point','name','testplot','tag','one','acolor','green','xgrid','on','ygrid','on',...
+        'title','test_case_1','xlabel','testdata','ylabel','ydata','afontcolor','blue',...
+        'afontname','arial','afontweight','bold','xlim',[100,400],'ylim',[0,10], ...
+        'linestyle','REPLACE_WITH_DASH_DASH','marker','o','linewidth',5);
+    if fig~=5
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+
+    kf;
+
+    [fig, axes, plot] = dm(w);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1);
+
+    [fig, axes, plot] = dm(w);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dm(w,'color','red');
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dm(ww);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dm(ww,100,200);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dm(w,100,400);
+    
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dm(w,100,400,0,10);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = dm(w2);
+    if fig~=6
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close(1);
+
+    [fig, axes, plot] = dm(w,'color','red');
+    if fig~=6
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = dm(w,'color','red','fcolor','blue','funits','point','name','testplot','tag','one','acolor','green','xgrid','on','ygrid','on',...
+        'title','test_case_1','xlabel','testdata','ylabel','ydata','afontcolor','blue',...
+        'afontname','arial','afontweight','bold','xlim',[100,400],'ylim',[0,10], ...
+        'linestyle','REPLACE_WITH_DASH_DASH','marker','o','linewidth',5);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = de(w);
+    if fig~=6
+        warning('test failed: graph appears in wrong figure')
+    end 
+    kf
+    [fig, axes, plot] = dm(w);
+    if fig~=7
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    close all
+
+    display('1d plotting routines check complete')
+
+%% 2d Plotting Functions
+  
+
+    if stop_tag  == true
+        open gtk_test
+        keyboard
+    end
+
+    [fig, axes, plot] = ds(wd);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = ds(wd,100,400);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = ds(wd,100,400,0,10);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = ds(wd,100,400,0,10,0,0.1);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = ds(wd2);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close(1);
+
+    [fig, axes, plot] = ds(wd);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = ds(wd,'fcolor','blue','tunits','point','name','testplot','tag','one','acolor','green','xgrid','on','ygrid','on',...
+        'title','test_case_1','xlabel','testdata','ylabel','ydata','afontcolor','blue',...
+        'afontname','arial','afontweight','bold','xlim',[100,400],'ylim',[0,10], ...
+        'linestyle','REPLACE_WITH_DASH_DASH','marker','o','linewidth',5);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = da(wd);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1);
+    [fig, axes, plot] = da(wd);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wdd);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wdd,100,200);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wd,100,400);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wd,100,400,0,10);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wd,100,400,0,10,0,0.1);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    kf;
+
+    [fig, axes, plot] = da(wd2);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close(1);
+
+    [fig, axes, plot] = da(wd);
+   
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wd,'fcolor','blue','tunits','point','name','testplot','tag','one','acolor','green','xgrid','on','ygrid','on',...
+        'title','test_case_1','xlabel','testdata','ylabel','ydata','afontcolor','blue',...
+        'afontname','arial','afontweight','bold','xlim',[100,400],'ylim',[0,10], ...
+        'linestyle','REPLACE_WITH_DASH_DASH','marker','o','linewidth',5);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+
+    kf;
+
+    close(1);
+
+    kf;
+
+    close(2);
+
+    kf;
+
+    close all
+
+    display('2d plotting routines check complete')
+%% Window Keeping Tests
+ 
+    if stop_tag  == true
+        open gtk_test
+        keyboard
+    end
+
+    [fig, axes, plot] = ds(wd); 
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    [fig, axes, plot] = dl(w);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    [fig, axes, plot] = mp(ww);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    display('line 500 reached')
+    
+    [fig, axes, plot] = da(wd);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = de(w);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = mp(ww2);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1);
+
+    [fig, axes, plot] = dh(w);
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(2);
+
+    [fig, axes, plot] = dl(w);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = mp(ww);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    [fig, axes, plot] = da(wd);
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close all
+
+    display('round 1 of keep figure check complete')
+    
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-round 2REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+    [fig, axes, plot] = mp(ww); 
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    [fig, axes, plot] = ds(wd); 
+        
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+    [fig, axes, plot] = dl(w);  
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(2)
+    [fig, axes, plot] = de(w); 
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1) 
+    [fig, axes, plot] = da(wd);
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1)
+    close
+    
+    [fig, axes, plot] = dh(w);   
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    [fig, axes, plot] = da(wd); 
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+
+    close all
+    
+    display('round 2 of keep figure check complete')
+    
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHround 3 with keep figureREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+    [fig, axes, plot] = mp(ww); 
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    [fig, axes, plot] = ds(wd); 
+    if fig~=2
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    [fig, axes, plot] = da(wd); 
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    kf(1);
+    
+    [fig, axes, plot] = mp(ww2); 
+       
+    if fig~=4
+        warning('test failed: graph appears in wrong figure')
+    end 
+    [fig, axes, plot] = dl(w);   
+    if fig~=5
+        warning('test failed: graph appears in wrong figure')
+    end 
+    kf
+    close(3)
+    
+    [fig, axes, plot] = de(w); 
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    [fig, axes, plot] = dh(w);
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1)    
+    close(3)
+    
+    [fig, axes, plot] = dh(w);  
+    if fig~=1
+        warning('test failed: graph appears in wrong figure')
+    end 
+    kf
+    
+    [fig, axes, plot] = dl(w); 
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(2);
+    
+    [fig, axes, plot] = dl(w);  
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    close(1)
+    
+    [fig, axes, plot] = dh(w);   
+    if fig~=3
+        warning('test failed: graph appears in wrong figure')
+    end 
+    
+    close all
+    display('round 3 of keep figure check complete')
+
+%% Limit Setting Tests
+
+
+    if stop_tag  == true
+        open gtk_test
+        keyboard
+    end
+    
+    [fig, axes, plot] = ds(wd);
+    lx(100,500)
+    lx
+    lz
+    ly(100,1000)
+    ly
+    lz(0,0.1)
+    lz
+    lx
+    ly
+    lx(1,1000)
+    ly(500,1000)
+    lx
+    ly
+    lx(500,1000)
+    lz
+    lc(0,0.1)
+    lz(0,8000)
+    lc
+    rg
+
+    lx(0,20000)
+    ly(0,2500)
+    lz(0,9000)
+    lx
+    ly
+    lz
+    lx(-5,30000)
+    ly(-5,4000)
+    lz(-5,20000)
+    lx
+    ly
+    lz
+    lc
+    rg
+    display('round 1 of limits check complete')
+    
+    % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH- round 2REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+    [fig, axes, plot] = da(wd);
+    lx(100,500)
+    lx
+    lc
+    ly(100,1000)
+    ly
+    lz(0,0.1)
+    lc
+    lx
+    ly
+    lx(1,1000)
+    ly(500,1000)
+    lx
+    ly
+    lx(500,1000)
+    lc
+    lc(0,0.1)
+    lz(0,8000)
+    lc
+    rg
+
+    lx(0,20000)
+    ly(0,2500)
+    lz(0,9000)
+    lx
+    ly
+    lc
+    lx(-5,30000)
+    ly(-5,4000)
+    lz(-5,20000)
+    lx
+    ly
+    lc
+    lc
+    rg
+    display('round 2 of limits check complete')
+    
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-round 3REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+
+    ly
+    lx(1,1000)
+    ly(500,1000)
+    lx
+    ly
+    lx(500,1000)
+    lz
+    lc(0,0.1)
+    lz(0,8000)
+    lc
+
+    lx(0,20000)
+    ly(0,2500)
+    lz(0,9000)
+    lx
+    ly
+    lz
+    lx(-5,30000)
+    ly(-5,4000)
+    lz(-5,20000)
+    lx
+    ly
+    lz
+    lc
+    display('round 3 of limits check complete')
+   
+    % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-line dataREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+    [fig, axes, plot] = dl(w);
+    lx(100,500)
+    lx
+    ly
+    lx(1,1000)
+    ly
+    ly(0,40)
+    ly
+    ly(0,15)
+    lx
+    lx(1,2000)
+    rg
+
+    lx(-5,25000)
+    ly(-5,100)
+    rg
+    
+close all
+
+    display('limits on line data check complete')
+    
+%% Additional Options Tests
+
+    if stop_tag  == true
+        open gtk_test
+        keyboard
+    end
+
+    acolor('red');
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    acolor('green');
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1);
+    acolor('yellow');
+    ph(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    
+    close all
+    
+    
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1)
+    rd;
+    [fig, axes, plot] = dl(w);
+    ra;
+    [fig, axes, plot] = dl(w);
+    close all
+
+    display('acolor check complete')
+    
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-amarkREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+    amark('+');
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    amark('*');
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1);
+    amark('+',2.4);
+    ph(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    close, close, close,
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1)
+    
+    display('line 850 reached')
+    rd;
+    [fig, axes, plot] = dl(w);
+    ra;
+    [fig, axes, plot] = dl(w);
+    close all
+
+    display('amark check complete')
+    
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-alineREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+    aline('REPLACE_WITH_DASH_DASH');
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    aline('-',2.5);
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1);
+    aline(':',2.0);
+    ph(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    close, close, close,
+    [fig, axes, plot] = dl(w);
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    [fig, axes, plot] = dm(w);
+    [fig, axes, plot] = mp(ww);
+    [fig, axes, plot] = ds(wd);
+    [fig, axes, plot] = da(wd);
+    figure(1)
+    rd;
+    [fig, axes, plot] = dl(w);
+    ra;
+    [fig, axes, plot] = dl(w);
+    close all
+
+    display('aline check complete')
+    
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-log, linREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+    [fig, axes, plot] = dl(w);
+    
+    logx
+    logy
+    linx
+    liny
+    linx
+    liny
+    logx
+    logy
+    logx
+    logy
+    llb
+    [fig, axes, plot] = de(w);
+    [fig, axes, plot] = dh(w);
+    logx
+    logy
+    linx
+    liny
+    logx
+    [fig, axes, plot] = ds(wd);
+    logx
+    logy
+    logz
+    llb
+    linx
+    liny
+    [fig, axes, plot] = da(wd2);
+    logx
+    logy
+    linx
+    liny
+
+    close, close, close, close
+
+    display('linear / log check complete')
+
+    %REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-check the dxy propsREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+    [fig, axes, plot] = dl(w);
+    display('begin dxy test - please click on the figures (press return if multiple clicking has been allowed)');
+
+    [x,y]=dxy('testing');
+    [fig, axes, plot] = ds(wd);
+    [x,y]=dxy;
+    [fig, axes, plot] = da(wd);
+    [x,y]=dxy('test');
+
+    display('dxy check complete')
+    
+    close all
+
+end
+
+
+%% Extra Functions Test
+
+%% Get Data
+
+    if stop_tag  == true
+        open gtk_test
+        keyboard
+    end
+
+rawfile1=IXTisis_raw_file('../HET15958.RAW');
+rawfile2=IXTisis_raw_file('../HET16538.RAW');
+rawfile3 = IXTisis_raw_file('../MAP06220.RAW');
+nsp=geti(rawfile1,'NSP1');
+d2a=getspectra(rawfile1,[1:300]);
+d2b=getspectra(rawfile2,[1:nsp]);
+d2c=getspectra(rawfile3,[500:1000]);
+w1=getspectrum(rawfile1,25);
+w2=getspectrum(rawfile2,233);
+w = w1;
+if lite_tag
+    wd=rebin_x(d2a,[3000,300,13000]);
+    wd2=rebin_x(d2c,[0,300,10000]);
+end
+wdd=[wd, wd2];
+array_builder
+display('loaded extra data');
+
+%% Test new functions
+
+    if stop_tag  == true
+        open gtk_test
+        keyboard
+    end
+
+ds(wdd);
+
+gtk_limits_check;
+
+ds(wdd,'separation','on','acolor','green');
+
+gtk_limits_check;
+
+da(wdd);
+
+da(wdd,0,1000);
+
+gtk_limits_check;
+
+ds(wdd,0,1000);
+
+mp(wd,0,20000,0,30);
+
+dl(ww);
+
+ds(ww);
+
+da(ww);
+
+acolor('red','green','blue');
+
+gtk_limits_check;
+
+mp(ww);
+
+ds(ww);
+dl(ww);
+
+
+de(ww);
+
+pl(ww);
+
+ph(ww);
+
+
+acolor('yellow','red','blue');
+
+dh(ww);
+dl(w);
+ph(w);
+
+display('test completed')
+
+clear all
+close all
+pack
+
+% eroneous data
+%dl(w,100,400,0,10,20,40)
+%ds(wd,100,400,0,10,20,40,10,30)
+%ds(wd,'separation','testing')
+%ds(wdd,'separation','testing')
+
+
+##### SOURCE END #####
+-->
+   </body>
+</html>

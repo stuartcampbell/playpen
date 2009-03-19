@@ -1,0 +1,55 @@
+inst='MAP';
+    map_file='4to1.map';
+    mon_mapfile='';    
+    hardmask='4to1_022.msk';
+    datadir='C:\maps_files';
+    mapdir='C:\maps_files';
+    maskdir='C:\maps_files';
+    spefilename='';
+    spedir='C:\maps_files';
+    paramdir='C:\maps_files';
+    scalefactor=1.7016e8;
+    %% Input files
+    run_num_mono='';
+    white_file_mono='';
+    white_file='';
+    run_num='';
+    sum_files=0;
+    %% white beam settings
+    wb_int=[20,300];
+    wb_units='$e   ';
+    %% Monchromatic parameters
+    mono.d_units='$w';
+    d_units='$w';
+    mv_units='$w';
+    mv_mapfile='mid_tubes.map';
+    mv_mask=1;
+    mv_sum_files=0;
+    energy_method='ei';
+    ei_init=50;
+    norm_method=1;
+    choppertype='sloppy';
+    %% background integration limits
+    background_default=[12000,18000];
+    background=[];
+    range=[1000,2000];
+    %% Diag parameters
+    VLOW=0.1;
+    VHIGH=1.5;
+    FACTOR=2.0;
+    STAB=10.0;
+    ZERO_BKGD=false;
+    %% mono van parameters
+    mono_van_int_lim=[-1 1];
+    mono_van_units='$w';
+    vmass=30.1;
+    vrmm=50.9415;
+    mono_van_mask='';
+
+    %% run file --> spe file parameters
+    do_absolute=0;
+
+    run_mask='';
+    spe_rebin_lims=[];
+    samp_mass=1;
+    samp_rmm=1;

@@ -1,0 +1,3 @@
+Static libraries do not work on OSX so you should configure with
+
+    ./configure --disable-static

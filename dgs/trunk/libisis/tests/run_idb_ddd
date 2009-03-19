@@ -1,0 +1,5 @@
+#!/bin/sh
+command="ddd -gdb -debugger ./run_idb $*"
+#command="ddd -ladebug -debugger ./run_idb $*"
+echo $command
+$command

@@ -1,0 +1,13 @@
+DLL Conflicts on using Release Build 
+------------------------------------
+
+MATLAB ships with its own copies of the COMPAQ fortran "Release" DLLs - this means that the "Debug" project 
+will build and run OK, but the "Release" one will fail to produce a usable libisisexc.dll as it will have linked
+against DLL versions more recent than MATLAB provides. To get round this problem, you just need to rename the
+versions shipped with MATLAB so that it will pick up the system installed ones provided by the COMPAQ Visual
+FORTRAN environment (installed in \windows\system32 or \winnt\system32) instead   
+
+- Go into the MATLAB DLL directory (somewhere like c:\matlab6p5p1\win32\bin) 
+- rename both  DFORRT.DLL  and  DFORMD.DLL  to some other names
+
+$Id: README 55 2004-06-10 10:16:14Z faa59 $

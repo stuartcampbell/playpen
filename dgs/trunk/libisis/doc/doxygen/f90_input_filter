@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/intel/fc/9.1.041/bin/ifort -I../../libcore -I../../libclasses -cpp -E "$1" | sed -e '/^#.*/d' | sed -e 's/\([^ \t]\)[ \t]*$/\1/' | sed -e 's/^[ \t]*\([&]\)/\1/' | sed -e '/^[ \t]*$/d' | ./join_f90_continuations

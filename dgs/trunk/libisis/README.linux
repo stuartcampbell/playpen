@@ -1,0 +1,78 @@
+Initial Setup
+-------------
+
+You first need to type:
+
+    sh autogen.sh
+
+to generate the initial configure and *.in files. You only need to 
+type this again if you upgrade you system's versions of 
+libtool/automake/autoconf and wish to use these newer version for the build
+
+After doing this type:
+
+    ./configure
+
+For a full list of options that can be passed to configure type:
+
+    ./configure --help
+
+(typical configure options include the choice of compiler, enabling or
+ disabling creation of bindings and the location of system libraries)
+
+General Building
+----------------
+
+Just typing
+
+    make
+
+should be enough to build the libraries and executables from source. 
+Make will automatically re-run configure if it needs to.
+The test programs can then be run with
+
+    make check
+
+and everything installed onto the local system with
+
+    make install
+
+Making a distribution kit
+-------------------------
+
+To generate a *.tar.gz distribution kit just type:
+
+    make distcheck
+
+If you need to pass arguments to "configure" during the distcheck process,
+you must add these to the DISTCHECK_CONFIGURE_FLAGS variable in Makefile.am
+
+To generate an RPM install kit see README.rpm
+
+If you have problems
+--------------------
+
+If  autogen.sh  reports errors, it may be that you need
+to install/upgrade your versions of autoconf, automake and libtool.
+Source for these can be obtained from:
+
+ftp://ftp.gnu.org/gnu/autoconf
+ftp://ftp.gnu.org/gnu/automake
+ftp://ftp.gnu.org/gnu/libtool
+
+ISISEXC Developer Mailing Lists
+-------------------------------
+
+CVS commit/log messages are automatically sent to the 
+isisexc-cvs@lists.isis.rl.ac.uk mailing list - if you wish to receive these, 
+subscribe to the list via the link
+
+  http://lists.isis.rl.ac.uk/mailman/listinfo/isisiexc-cvs
+
+Any general developer questions should be directed to 
+isisexc-developers@lists.isis.rl.ac.uk list - you can subscribe to this 
+via the link
+
+  http://lists.isis.rl.ac.uk/mailman/listinfo/isisexc-developers
+
+$Id: README.linux 211 2004-07-22 10:16:12Z faa59 $

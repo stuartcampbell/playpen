@@ -1,0 +1,50 @@
+    inst
+    map_file
+    mon_mapfile
+    hardmask
+    datadir
+    mapdir
+    maskdir
+    spefilename
+    spedir
+    paramdir
+    scalefactor
+    run_num_mono
+    white_file_mono
+    white_file
+    run_num
+    sum_files
+    wb_int
+    wb_units
+    d_units
+    mv_units
+    mv_mapfile
+    mv_mask
+    mv_sum_files
+    energy_method
+    ei_init
+    norm_method
+    choppertype
+    background_default
+    background
+    range
+    %% Diag parameters
+    VLOW
+    VHIGH
+    FACTOR
+    STAB
+    ZERO_BKGD
+    %% mono van parameters
+    mono_van_int_lim
+    mono_van_units
+    vmass
+    vrmm
+    mono_van_mask
+
+    %% run file --> spe file parameters
+    do_absolute
+
+    run_mask
+    spe_rebin_lims
+    samp_mass
+    samp_rmm
