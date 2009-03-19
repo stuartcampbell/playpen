@@ -1,0 +1,38 @@
+SPECTROMETER   
+efixed(meV)     = 1.8463             indirect-geometry
+DataFile(.spe)  = irs18670.spe
+DataDir         = C:\mprogs\mslice\IRIS\
+DetFile(.phx)   = irispg002.phx
+DetectorDir     = C:\mprogs\mslice\IRIS\
+ParamFile(.msp) = irs18670_powder_example.msp
+ParameterDir    = C:\mprogs\mslice\IRIS\
+IntensityLabel  = Corrected Intensity (arb. units)
+TitleLabel      = Hematite 1401.8\muAhrs 325 K
+ 
+SAMPLE          = powder
+VIEWING AXES             Label     
+u1      =      |Q|       |Q|
+u2      =      Energy    Energy
+ 
+DISPLAY   
+horizontal range* |Q|     =             to            
+vertical range* Energy    =             to            
+Intensity range           = 0.01        to  0.15       ColorMap   black->red
+Smoothing level           =            Shading    =  flat      
+ 
+CUT  along axis     Energy
+from                      = -0.9        to  1.1        step       0.01
+thickness range  |Q|      = 1.35        to  1.39
+Intensity       range     = 0.01        to  
+Symbol          = white circle o, no line
+OutputType      = none      
+OutputFile      = 
+OutputDir       = c:\mprogs\mslice\iris\
+ 
+DETECTOR TRAJECTORIES
+x          = |Q|             from             to            
+y          = Energy          from             to            
+z          = none            from             to           
+Contours   = none           
+from                 to           step1 =             step2 =             
+Command    = 

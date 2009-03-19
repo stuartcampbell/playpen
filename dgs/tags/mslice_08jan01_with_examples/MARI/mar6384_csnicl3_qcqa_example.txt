@@ -1,0 +1,49 @@
+SPECTROMETER   
+efixed(meV)     = 20                 direct-geometry
+DataFile(.spe)  = Mar06384.spe
+DataDir         = C:\mprogs\mslice\MARI\
+DetFile(.phx)   = MARI_CSTARTVERT_974_wide.phx
+DetectorDir     = C:\mprogs\mslice\MARI\
+ParamFile(.msp) = mar6384_csnicl3_qcqa_example.msp
+ParameterDir    = C:\mprogs\mslice\MARI\
+IntensityLabel  = k_i/k_f d^2 \sigma/d\Omega dE (arb. units)
+TitleLabel      = 5895.9.4\muAhrs (c\perp k_i) 6.2K
+ 
+SAMPLE          = single crystal
+Unit cell lattice parameters
+a(Å)    = 3.570     b(Å)    = 3.570     c(Å)    = 5.923     
+aa(deg) = 90.0      bb(deg) = 90.0      cc(deg) = 90.0      
+Crystal orientation
+ux      = 0         uy      = 0         uz      = 1         
+vx      = 1         vy      = 0         vz      = 0         
+Psi(deg)= -90       angle between ki and u
+Detectors       = conventional (non-PSD)
+ 
+ORTHOGONAL
+VIEWING AXES   a*        b*        c*        Energy    Label
+u1      =      0         0         1         0         Q_c
+u2      =      1         0         0         0         Q_a
+ 
+DISPLAY   
+horizontal range* Q_c     =             to            
+vertical range* Q_a       =             to            
+Intensity range           = 0           to  1          ColorMap   black->red
+Smoothing level           = 1          Shading    =  flat      
+ 
+CUT  along axis     [ 0, 0, Q_c ]
+from                      = 0           to  2          step       0.025
+thickness range  Q_a      = 0.1         to  0.2
+Intensity       range     = 0           to  
+Symbol          = white circle o, solid -
+OutputType      = none      
+OutputFile      = 
+OutputDir       = c:\mprogs\mslice\mari\
+ 
+DETECTOR TRAJECTORIES
+x          = [ 0, 0, Q_c ]   from             to            
+y          = [ Q_a, 0, 0 ]   from             to            
+z          = Det Group Number from 1           to 94        
+Contours   = none           
+from                 to           step1 =             step2 =             
+(hkl)points= on    (hkl)labels= on   
+Command    = 
