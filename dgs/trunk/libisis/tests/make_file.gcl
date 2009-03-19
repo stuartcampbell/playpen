@@ -1,0 +1,22 @@
+PROCEDURE MAKE_FILE
+LOCAL wtmp r_file i_file o_file nsp_start nsp_end w
+r_file=INQUIRE("Raw file (default=c:\\libisisexc\\tests\\MAP06215.RAW):")
+i_file=INQUIRE("Empty nexus input file (default=c:\\libisisexc\\tests\\template_file.nxs):")
+o_file=INQUIRE("Output nexus file name (default=c:\\new.nxs):")
+nsp_start=INQUIRE("First spectra to read (default=1):")
+nsp_end=INQUIRE("Last spectra to read (default=10):")
+IF r_file = ""; r_file="c:\\libisisexc\\tests\\MAP06215.RAW"; ENDIF
+IF i_file = ""; i_file="c:\\libisisexc\\tests\\template_file.nxs"; ENDIF
+IF o_file = ""; o_file="c:\\new.nxs"; ENDIF
+IF nsp_start = ""; nsp_start=1; ENDIF
+IF nsp_end = ""; nsp_end=10; ENDIF
+w=get(1,i_file)
+set/file/input r_file
+wtmp <~ get((nsp_start):(nsp_end))
+w.title = wtmp.title
+w.detector_data_1.signal = wtmp.y
+w.detector_data_1.x = wtmp.x
+w.detector_data_1.y = dimensions(nsp_end - nsp_start + 1)
+fill w.detector_data_1.y nsp_start*1.0 1.0
+put/nexus/new w file=o_file
+ENDPROCEDURE

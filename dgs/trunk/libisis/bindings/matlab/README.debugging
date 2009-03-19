@@ -1,0 +1,29 @@
+First change to the matlab "classes" directory
+
+start matlab with
+
+    matlab -memmgr debug -Dgdb
+
+and at the (gdb) prompt you should type
+
+(gdb) source ../paths.gdb
+
+This will set up paths to the source etc. (this only works if you are in the classes directory as the paths in paths.gdb are relative)
+
+To set breakpoints type e.g.
+
+(gdb) break mexFunction
+
+or
+
+(gdb) break ixbdomatlabcall_
+
+answer "yes" to question of making breakpoint pending on future shared library
+
+To start debugging, type either
+
+(gdb) r -nodisplay -nojvm -nosplash
+
+or (to save typing)
+
+(gdb) source ../run.gdb

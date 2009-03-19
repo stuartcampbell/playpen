@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject ProjectType="typeStaticLibrary" ProjectCreator="Intel Fortran" Keyword="Static Library - Converted from CVF" Version="9.10" ProjectIdGuid="{B7B97D7E-7E9B-4508-A322-6C686E6B4B1D}">
+	<Platforms>
+		<Platform Name="Win32"/></Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" ConfigurationType="typeStaticLibrary" Command="$(TargetPath)">
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TypeLibraryName="$(IntDir)/$(InputName).tlb"/>
+				<Tool Name="VFPreBuildEventTool" CommandLine="config.bat"/>
+				<Tool Name="VFFortranCompilerTool" AdditionalOptions="/keep " SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" Preprocess="preprocessYes" PreprocessorDefinitions="LIBISIS_DEBUG" WarnArgMismatch="true" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL" CompileOnly="true"/>
+				<Tool Name="VFPostBuildEventTool" CommandLine="copy &quot;$(IntDir)&quot;\*.mod ..\bin\debug
+del ..\bin\debug\libisisxd.lib"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFLinkerTool" MustRebuild="true" OutputFile="$(OutDir)/$(ProjectName)" SuppressStartupBanner="true"/>
+				<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="_DEBUG" Culture="rcEnglishBritain" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFLibrarianTool" OutputFile="$(OutDir)/$(ProjectName).lib" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|Win32" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" ConfigurationType="typeStaticLibrary" Command="$(TargetPath)">
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TypeLibraryName="$(IntDir)/$(InputName).tlb"/>
+				<Tool Name="VFPreBuildEventTool" CommandLine="config.bat"/>
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Preprocess="preprocessYes" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDLL" CompileOnly="true"/>
+				<Tool Name="VFPostBuildEventTool" CommandLine="copy &quot;$(IntDir)&quot;\*.mod ..\bin\release
+del ..\bin\release\libisisx.lib"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishBritain" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFLibrarianTool" MustRebuild="true" OutputFile="$(OutDir)/$(ProjectName).lib" SuppressStartupBanner="true"/></Configuration></Configurations>
+	<Files>
+		<Filter Name="Source Files" Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;f90;for;f;fpp">
+		<File RelativePath="IXMarraymanips.f90"/>
+		<File RelativePath="IXMderivative.f90"/>
+		<File RelativePath="IXMefficiency.f90"/>
+		<File RelativePath="IXMerrorcodes.f90"/>
+		<File RelativePath="IXMindex.f90"/>
+		<File RelativePath="IXMintegrate.f90"/>
+		<File RelativePath="IXMio.f90"/>
+		<File RelativePath="IXMisotime.f90"/>
+		<File RelativePath="IXMlibcore.f90"/>
+		<File RelativePath="IXMmask_array.f90"/>
+		<File RelativePath="IXMmaths_basis.f90"/>
+		<File RelativePath="IXMmaths_geometry.f90"/>
+		<File RelativePath="IXMmaths_projection.f90"/>
+		<File RelativePath="IXMmaths_utils.f90"/>
+		<File RelativePath="IXMmemory.f90"/>
+		<File RelativePath="IXMmoments_utils.f90"/>
+		<File RelativePath="IXMneutron_constants.f90"/>
+		<File RelativePath="IXMneutron_units.f90"/>
+		<File RelativePath="IXMphysical_constants.f90"/>
+		<File RelativePath="IXMpointer_to_array.f90"/>
+		<File RelativePath="IXMrebin.f90"/>
+		<File RelativePath="IXMrebunch.f90"/>
+		<File RelativePath="IXMregrid.f90"/>
+		<File RelativePath="IXMregroup.f90"/>
+		<File RelativePath="IXMshift.f90"/>
+		<File RelativePath="IXMsort.f90"/>
+		<File RelativePath="IXMstatus.f90"/>
+		<File RelativePath="IXMtools.f90"/>
+		<File RelativePath="IXMtype_definitions.f90"/>
+		<File RelativePath="IXMunits_utils.f90"/>
+		<File RelativePath="IXMunspike.f90"/>
+		<File RelativePath="memory_utils.f90"/></Filter>
+		<Filter Name="Header Files" Filter="h;hpp;hxx;hm;inl;fi;fd">
+		<File RelativePath="IXMarraymanips_routines.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="IXMmemory_interface.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="IXMmemory_routines.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File></Filter></Files>
+	<Globals/></VisualStudioProject>

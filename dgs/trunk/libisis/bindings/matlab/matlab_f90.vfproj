@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualStudioProject ProjectType="typeStaticLibrary" ProjectCreator="Intel Fortran" Keyword="Static Library - Converted from CVF" Version="9.10" ProjectIdGuid="{A92AFE51-0303-4131-B8B5-B084A4084721}">
+	<Platforms>
+		<Platform Name="Win32"/></Platforms>
+	<Configurations>
+		<Configuration Name="Debug|Win32" OutputDirectory=".\matlab\matlab_c___Win32_Debug" IntermediateDirectory=".\matlab\matlab_c___Win32_Debug" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" ConfigurationType="typeStaticLibrary" Command="$(TargetPath)">
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TypeLibraryName="$(IntDir)/$(InputName).tlb"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFFortranCompilerTool" AdditionalOptions="/keep " SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" Preprocess="preprocessYes" AdditionalIncludeDirectories="../../libclasses/debug;../../libcore/debug" PreprocessorDefinitions="LIBISIS_DEBUG" WarnArgMismatch="true" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebugDLL" CompileOnly="true"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="_DEBUG" Culture="rcEnglishBritain" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFLibrarianTool" OutputFile="$(OutDir)/$(ProjectName).lib" SuppressStartupBanner="true"/></Configuration>
+		<Configuration Name="Release|Win32" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)" ConfigurationType="typeStaticLibrary" Command="$(TargetPath)">
+				<Tool Name="VFMidlTool" SuppressStartupBanner="true" TypeLibraryName="$(IntDir)/$(InputName).tlb"/>
+				<Tool Name="VFPreBuildEventTool"/>
+				<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Preprocess="preprocessYes" AdditionalIncludeDirectories="../../libclasses/release;../../libcore/release" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDLL" CompileOnly="true"/>
+				<Tool Name="VFPostBuildEventTool"/>
+				<Tool Name="VFCustomBuildTool"/>
+				<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishBritain" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+				<Tool Name="VFPreLinkEventTool"/>
+				<Tool Name="VFLibrarianTool" MustRebuild="true" OutputFile="$(OutDir)/$(ProjectName).lib" SuppressStartupBanner="true"/></Configuration></Configurations>
+	<Files>
+		<Filter Name="Source Files" Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;f90;for;f;fpp">
+		<File RelativePath="bindings.f90"/>
+		<File RelativePath="IXMaperture_m.f90"/>
+		<File RelativePath="IXMattenuator_m.f90"/>
+		<File RelativePath="IXMaxis_m.f90"/>
+		<File RelativePath="IXMbase_m.f90"/>
+		<File RelativePath="IXMbridge_m.f90"/>
+		<File RelativePath="IXMchopper_instrument_m.f90"/>
+		<File RelativePath="IXMdata_m.f90"/>
+		<File RelativePath="IXMdata_source_m.f90"/>
+		<File RelativePath="IXMdataset_1d_m.f90"/>
+		<File RelativePath="IXMdataset_2d_m.f90"/>
+		<File RelativePath="IXMdataset_3d_m.f90"/>
+		<File RelativePath="IXMdataset_4d_m.f90"/>
+		<File RelativePath="IXMdatum_array_m.f90"/>
+		<File RelativePath="IXMdatum_m.f90"/>
+		<File RelativePath="IXMdet_he3_m.f90"/>
+		<File RelativePath="IXMdet_solid_m.f90"/>
+		<File RelativePath="IXMdetector_m.f90"/>
+		<File RelativePath="IXMdiffraction_instrument_m.f90"/>
+		<File RelativePath="IXMeffdet_index_m.f90"/>
+		<File RelativePath="IXMfermi_chopper_m.f90"/>
+		<File RelativePath="IXMfileio_m.f90"/>
+		<File RelativePath="IXMgeometry_m.f90"/>
+		<File RelativePath="IXMgroup_m.f90"/>
+		<File RelativePath="IXMgroups_m.f90"/>
+		<File RelativePath="IXMhistory_m.f90"/>
+		<File RelativePath="IXMinstrument_m.f90"/>
+		<File RelativePath="IXMlattice_m.f90"/>
+		<File RelativePath="IXMmap_m.f90"/>
+		<File RelativePath="IXMmask_m.f90"/>
+		<File RelativePath="IXMmatlab_interface.f90"/>
+		<File RelativePath="IXMmoderator_m.f90"/>
+		<File RelativePath="IXMmoments_m.f90"/>
+		<File RelativePath="IXMoptions_m.f90"/>
+		<File RelativePath="IXMorientation_m.f90"/>
+		<File RelativePath="IXMpath_m.f90"/>
+		<File RelativePath="IXMpeaks_m.f90"/>
+		<File RelativePath="IXMraw_file_m.f90"/>
+		<File RelativePath="IXMrunfile_m.f90"/>
+		<File RelativePath="IXMsample_m.f90"/>
+		<File RelativePath="IXMshape_m.f90"/>
+		<File RelativePath="IXMsource_m.f90"/>
+		<File RelativePath="IXMspectra_m.f90"/>
+		<File RelativePath="IXMstring_list_m.f90"/>
+		<File RelativePath="IXMsw_bridge_m.f90"/>
+		<File RelativePath="IXMtestclass_m.f90"/>
+		<File RelativePath="IXMtranslation_m.f90"/>
+		<File RelativePath="IXMuser_m.f90"/>
+		<File RelativePath="IXMutility_m.f90"/>
+		<File RelativePath="IXMworkspace_m.f90"/>
+		<File RelativePath="IXMws_bridge_m.f90"/></Filter>
+		<Filter Name="Header Files" Filter="h;hpp;hxx;hm;inl;fi;fd">
+		<File RelativePath="advanced_unary_ops.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="binary_ops.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="binaryd1d.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="bindings_base.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="bindings_extra.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="bindings_header.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="matlab_interface_routines.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File>
+		<File RelativePath="unary_ops.f90">
+			<FileConfiguration Name="Debug|Win32" ExcludedFromBuild="true"/>
+			<FileConfiguration Name="Release|Win32" ExcludedFromBuild="true"/></File></Filter></Files>
+	<Globals/></VisualStudioProject>

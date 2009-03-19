@@ -1,0 +1,27 @@
+##====================================================================
+##  
+##  $Id: build_rules.am 422 2005-09-02 18:25:04Z faa59 $
+##
+##  This file is included by Makefile.am when automake is run 
+##  to produce the Makefile.in - it includes extra make build rules
+##  needed to e.g. build Fortran 90 files
+##
+##  Copyright (C) 2004 Freddie Akeroyd
+##  
+##====================================================================
+LTFCCOMPILE = $(LIBTOOL) --mode=compile --tag=F77 $(FC) $(AM_FCFLAGS) $(FCFLAGS)
+FCLINK = $(LIBTOOL) --mode=link --tag=CC $(FCLD) $(AM_FCFLAGS) $(FCFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+
+#	-cpp $(AM_CPPFLAGS) -C -P $< > $*_cpp.f90
+#.f90.o :
+#	-cpp $(AM_CPPFLAGS) -C $< > $*_cpp.f90
+#	perl -p -i.bak -e 's/^\s+(\w)/$$1/' $*_cpp.f90
+#	$(FC) $(AM_FCFLAGS) $(FCFLAGS) -c $*_cpp.f90 -o $@
+#	$(RM) $*_cpp.f90.bak
+#
+#.f90.lo :
+#	-cpp $(AM_CPPFLAGS) -C $< > $*_cpp.f90
+#	perl -p -i.bak -e 's/^\s+(\w)/$$1/' $*_cpp.f90
+#	$(LTFCCOMPILE) -c -o $@ `test -f '$*_cpp.f90' || echo '$(srcdir)/'`$*_cpp.f90
+#	$(RM) $*_cpp.f90.bak

@@ -1,0 +1,82 @@
+------------GTK function index help---------------
+
+-----------Dataset_1d functions-----------
+
+dh- 		plot histogram
+de- 		plot error bars
+dm- 		plot marker
+dl- 		plot line
+dp- 		marker and errorbar plot
+dd- 		marker, errorbar and line plot
+mp- 		multiplot
+
+------------Overplot functions------------
+
+ph- 		overplot histogram
+pe- 		overplot errorbar
+pm- 		overplot marker
+pl- 		overplot line
+pp- 		overplot marker and errorbar
+pd- 		overplot marker, errorbar and line
+
+
+--------Overplot Current Functions---------
+
+phoc- 		overplot histogram
+peoc- 		overplot errorbar
+pmoc- 		overplot marker
+ploc- 		overplot line
+
+-----------Dataset_2d functions-----------
+also work with arrays of dataset_1d
+
+ds- 		plot surface
+da- 		plot area color plot
+
+-----------Dataset_3d functions-----------
+
+sm-		plot sliceomatic
+
+-------------Shared Functions-------------
+
+
+aspect- 		set aspect ratio
+set_default_properties-	set default property
+lx- 			set x limits
+ly- 			set y limits
+lz - 			set z limits
+lc - 			set color limits 
+logx- 			log x
+logy- 			log y
+logz -			log z
+logc -			log color axis
+liny- 			linear y
+linx- 			linear x
+linz - 			linear z
+linc - 			linear color axis
+amark- 			change marker size and style
+aline- 			change line size and style
+acolor- 		change color
+check_figure-		check figure
+get_all_handles-	get all figure, plot, axes and other information 
+get_all_name_tags-	get all names and tags 
+get_handles		get figure handle
+linlogbutton-		put buttons
+linlogmenu-		put menu
+scf- 			set current figure
+sat- 			set application name and tag
+dxyz- 			x, y, z coordinates, and/or add text
+drxy- 			rectangular x and y coordinates
+kf- 			keep figure
+set_legend-		set legend
+sb- 			set binning
+set_user_preferences-	for setting all figure default property
+undop- 			for undo of the plot (plot will be removed)
+reset_default -		reset the defaults of the current graph type to the global defaults
+reset_all -		reset the global defaults (reset all)
+set_plot- 		set plot properties 
+set_axes- 		set axes properties
+set_figure- 		set figure properties
+color_slider- 		add sliders to adjust color scale to the plot
+fromplot- 		get data from a plot (created by graphics or otherwise)
+rename-			rename a currently open plot

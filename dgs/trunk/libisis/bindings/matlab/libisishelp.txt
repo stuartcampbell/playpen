@@ -1,0 +1,60 @@
+------------libisis function index help---------------
+-
+-----------Dataset_1d / Dataset_2d functions-----------
+-
+cos-		cosine of dataset
+cosh-		cosh of dataset
+exp-		exponent of dataset
+log-		logarithm of a dataset
+rebin-		rebin dataset
+shift-		shift dataset
+sin-		sine of dataset
+sinh-		sinh of dataset
+tan-		tan of dataset
+tanh-		tanh of dataset
+unspike-	unspike dataset	
+-
+------------IXTdataset_1d only ------------
+-
+deriv1-		derivative of dataset
+deriv2-		second derivative of dataset
+integrate-	integrate a dataset
+rebunch-	rebunch dataset
+regroup-	regroup dataset
+
+-
+-----------IXTdatset_2d only --------------
+-
+
+contract_d2d- 	contract array of IXTdatset_2d
+deriv1x-	derivative in the x direction
+deriv1y-	derivative in the y direction
+deriv2x-	second derivative in x direction
+deriv2y-	second derivative in y direction
+divide_x-	divide x rows
+divide_y-	divide y columns		
+expand_d1d-	expand into array of IXTdataset_1d
+expand_d2d-	expand into array of IXTdataset_2d
+expand_listd1d-	expand specific rows into array of IXTdataset_1d
+expand_listd2d- expand specific rows into array of IXTdataset_2d
+integrate_x-	integrate in x
+integrate_xy-	integrate in x and y 
+integrate_y-	integrate in y
+minus_x- 	minus x rows
+minus_y-	minus y columns
+plus_x-		plus x rows
+plus_y-		plus y columns
+rebin_x-	rebin x dimension
+rebin_xy-	rebin x and y dimensions
+rebin_y-	rebin y dimension
+rebunch_x-	rebunch x dimension
+rebunch_xy-	rebunch x and y dimension
+rebunch_y-	rebunch y dimension
+regroup_x-	regroup x dimension
+regroup_xy-	regroup x and y dimension
+regroup_y-	regroup y dimension
+shiftx-		shift x dimension
+shiftxy-	shift x and y dimension
+shifty-		shift y dimension
+times_x-	times x rows
+times_y-	times y columns

@@ -1,0 +1,16 @@
+#!/bin/bash
+G95_ABORT=1 G95_MEM_INIT=NAN
+export G95_ABORT G95_MEM_INIT
+case $1 in
+    idb)
+	matlab -memmgr debug -D./run_idb
+	;;
+    gdb)
+	matlab -memmgr debug -Dddd -gdb -command run_debug_matlab.gdb
+	;;
+    *)
+	echo "Usage: run_debug_matlab [ gdb | idb ]" 
+	;;
+esac
+# restore terminal settings - if debugger crashes, these get messed up
+tset -sQ

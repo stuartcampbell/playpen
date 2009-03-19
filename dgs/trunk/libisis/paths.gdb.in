@@ -1,0 +1,2 @@
+dir @TOPSOURCE@/libcore @TOPSOURCE@/libclasses
+path @TOPSOURCE@/libcore @TOPSOURCE@/libclasses

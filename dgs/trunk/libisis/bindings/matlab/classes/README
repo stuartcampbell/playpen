@@ -1,0 +1,9 @@
+To run the example start MATLAB and type  
+
+       libisisexc_test
+
+For further information on using libisisexc type
+
+       help libisisexc
+
+$Id: README 11 2004-04-20 17:26:41Z faa $

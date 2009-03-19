@@ -1,0 +1,2 @@
+! $Id: ixctypes.f90.in 439 2005-09-20 17:19:32Z faa59 $
+    integer, parameter :: cpointer_t = selected_int_kind(@F90_POINTER_KIND@)  !! Used to store a C/C++ pointer

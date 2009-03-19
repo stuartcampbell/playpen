@@ -1,0 +1,15 @@
+#!/bin/sh
+tmpstore=/tmp/lookup_func.$$
+trap "rm -f $tmpstore" EXIT
+nm ../libclasses/*.o ../libcore/*.o ../bindings/matlab/*.o | grep " T " > $tmpstore
+if ! test -z "$3"; then
+    cat $tmpstore | grep -i $3 | grep -i $2 | grep -i $1   
+elif ! test -z "$2"; then
+    cat $tmpstore | grep -i $2 | grep -i $1   
+elif ! test -z "$1"; then
+    cat $tmpstore | grep -i $1   
+else
+    echo "usage: lookup_func name1 [name2 [name3]]"
+    echo " "
+    echo "find all functions containing name1 and, optionally, name2 and name3"
+fi

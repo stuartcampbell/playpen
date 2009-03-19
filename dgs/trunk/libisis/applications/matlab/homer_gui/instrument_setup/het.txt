@@ -1,0 +1,56 @@
+%% general parameters
+    inst='HET';
+    map_file='rings_het.map';
+    mon_mapfile='';
+    hardmask='het_991.msk';
+    datadir='C:\het_files';
+    mapdir='C:\het_files';
+    maskdir='C:\het_files';
+    spefilename='';
+    spedir='C:\het_spe\';
+    paramdir='C:\het_files';
+    scalefactor=1.7016e8;
+    %% Input files
+    run_num_mono='';
+    white_file_mono='';
+    white_file='';
+    run_num='';
+    sum_files=0;
+    %% white beam settings
+    wb_int=[20,40];
+    wb_units='$e';
+    %% Monchromatic parameters
+    mono.d_units='$w';
+    d_units='$w';
+    mv_units='$w';
+    mv_mapfile='rings_het.map';
+    mv_mask=2;
+    mv_sum_files=0;
+    energy_method='ei';
+    ei_init=50;
+    norm_method=1;
+    choppertype='sloppy';
+    %% background integration limits
+    background_default=[12000,18000];
+    background=[];
+    range=[1000,2000];
+    %% Diag parameters
+    VLOW=0.1;
+    VHIGH=3.0;
+    FACTOR=2.0;
+    STAB=10.0;
+    ZERO_BKGD=false;
+    %% mono van parameters
+    mono_van_int_lim=[-1 1];
+    mono_van_units='$w';
+    vmass=32.58;
+    vrmm=50.9415;
+    mono_van_mask='';
+
+    %% run file --> spe file parameters
+    do_absolute=0;
+
+    run_mask='';
+    spe_rebin_lims=[];
+    samp_mass=1;
+    samp_rmm=1;
