@@ -1,0 +1,52 @@
+SPECTROMETER   
+efixed(meV)     = 250                direct-geometry
+DataFile(.spe)  = Spe250.spe
+DataDir         = c:\mprogs\mslice\het\
+DetFile(.phx)   = Pix_981.phx
+DetectorDir     = c:\mprogs\mslice\het\
+ParamFile(.msp) = HET_spe250_psd_la2cuo4_example.msp
+ParameterDir    = C:\mprogs\mslice\HET\
+IntensityLabel  = Intensity(abs.units)
+TitleLabel      = La_2CuO_4 RT
+ 
+SAMPLE          = single crystal
+Unit cell lattice parameters
+a(Å)    = 5.4165    b(Å)    = 13.173    c(Å)    = 5.4165    
+aa(deg) = 90.0      bb(deg) = 90.0      cc(deg) = 90.0      
+Crystal orientation
+ux      = 1         uy      = 0         uz      = 0         
+vx      = 0         vy      = 1         vz      = 0         
+Psi(deg)= 98.5      angle between ki and u
+Detectors       = PSD
+ 
+ORTHOGONAL
+VIEWING AXES   a*        b*        c*        Energy    Label
+u1      =      1         0         0         0         Q_h
+u2      =      0         0         1         0         Q_l
+u3      =      0         0         0         1         E
+ 
+SLICE PLANE    perp to axis   Energy 
+thickness                 = 150         to  200       
+horizontal range  Q_h     = -1.2        to  0.2        step       0.060345
+vertical range  Q_l       = -0.6        to  0.6        step       0.025862
+Intensity range           = 0.1         to  0.8        ColorMap   black->red
+Smoothing level           = 0          Shading    =  flat      
+ 
+CUT  along axis     [ 0, 0, Q_l ]
+from                      = -0.6        to  0.6        step       0.03
+thickness range  E        = 150         to  200
+thickness range  Q_h      = -1.1        to  -0.9
+Intensity       range     = 0           to  0.6
+Symbol          = white circle o, no line
+OutputType      = none      
+OutputFile      = 
+OutputDir       = c:\mprogs\mslice\het\
+ 
+DETECTOR TRAJECTORIES
+x          = [ Q_h, 0, 0 ]   from             to            
+y          = [ 0, 0, Q_l ]   from             to            
+z          = Energy          from 150         to 200       
+Contours   = none           
+from                 to           step1 =             step2 =             
+(hkl)points= on    (hkl)labels= on   
+Command    = 
