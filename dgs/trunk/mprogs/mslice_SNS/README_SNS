@@ -1,0 +1,14 @@
+README SNS
+
+GEG
+3.20.2009
+
+To import from michael's routines to mslice do the following
+
+mslice_sns  % opens mslice window
+datout=readmeshrange2mslice('SEQ_118_bmesh',[100:500]); % read in data the first is the starting text of each mesh file, the second input is a list of files you want
+fig=findobj('Tag','ms_ControlWindow');  % find the tag of the mslice window
+set(fig,'UserData',datout)  % put the data in the mslice window
+
+Now you can populate the single crystal boxes and use mslice as usual.
+
