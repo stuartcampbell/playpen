@@ -1,0 +1,49 @@
+SPECTROMETER   
+efixed(meV)     = 25                 direct-geometry
+DataFile(.spe)  = HET09779_2M_4.SPE
+DataDir         = c:\mprogs\mslice\het\
+DetFile(.phx)   = 2m_32.phx
+DetectorDir     = c:\mprogs\mslice\het\
+ParamFile(.msp) = HET09779_2m_cftd_example.msp
+ParameterDir    = C:\mprogs\mslice\HET\
+IntensityLabel  = Intensity (abs. units)
+TitleLabel      = CFTD 2738.2 \muAhrs 8.2K
+ 
+SAMPLE          = single crystal
+Unit cell lattice parameters
+a(Å)    = 8.113     b(Å)    = 8.119     c(Å)    = 12.35     
+aa(deg) = 90.0      bb(deg) = 90        cc(deg) = 90.0      
+Crystal orientation
+ux      = 0         uy      = 0         uz      = 1         
+vx      = 0         vy      = -1        vz      = 0         
+Psi(deg)= 0         angle between ki and u
+Detectors       = conventional (non-PSD)
+ 
+ORTHOGONAL
+VIEWING AXES   a*        b*        c*        Energy    Label
+u1      =      0         1         0         0         k
+u2      =      0         0         0         1         E
+ 
+DISPLAY   
+horizontal range* k       =             to            
+vertical range* E         = 0           to            
+Intensity range           = 0           to  10         ColorMap   black->red
+Smoothing level           =            Shading    =  flat      
+ 
+CUT  along axis     [ 0, k, 0 ]
+from                      = 0.25        to  1.75       step       0.02
+thickness range  E        = 6           to  8
+Intensity       range     =             to  
+Symbol          = white circle o, solid -
+OutputType      = none      
+OutputFile      = 
+OutputDir       = c:\mprogs\mslice\het\
+ 
+DETECTOR TRAJECTORIES
+x          = [ 0, k, 0 ]     from 0           to  2         
+y          = Energy          from 0           to  25        
+z          = none            from             to           
+Contours   = none           
+from                 to           step1 =             step2 =             
+(hkl)points= off   (hkl)labels= off  
+Command    = cftd_010
