@@ -192,26 +192,94 @@ def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5
      #generate filename
      filestr='%s_%i.nxs' %(path+instrument,runnum)
      fid=nxs.open(filestr,'r')
+     # get moderator distance
      fid.openpath('/entry/instrument/moderator/distance')
-     Lsam=fid.getdata()*-1.0
-     # get moderator distances
-     #cycle through monitors
-     monitors=['monitor1','monitor2']
+     Lsam=fid.getdata()*-1.0 #convert to sample distance from moderator   
      mon=[]
+     LM=[]
+     #cycle through monitors
+     monitors=['monitor1','monitor2']   
      for idx in range(len(monitors)):
+        # get monitor distance
      	fid.openpath('/entry/'+monitors[idx]+'/distance')
         LM.append(fid.getdata())
+	#get tof from monitor
 	fid.openpath('/entry/'+monitors[idx]+'/time_of_flight')
         tempt=fid.getdata()
+	#get tof unit from monitor
         tmpu=fid.getattr('units',11,'char')
+	#get counts from the monitor
         fid.openpath('/entry'+monitors[idx]+'data')
         I=fid.getdata()
+	#create a histogram with this info
         mon.append(histo.histogram('I(tof)',[('tof',tmpt,tmpu),],data = I,errors = I))     
      #change monitor distances from relative to sample to relative to moderator 
      LM=LM+Lsam
      #estimate the time centers for the incident energies and the distances
      time1 = esttimerange(nomEi, LM[0], emissioncor = emissioncor)
      time2 = esttimerange(nomEi, LM[1], emissioncor = emissioncor)
+     
+     #determine the peak parameters
+     # [compeaktime, errcomtime, timeval, totalcounts,
+     #  errtotalcounts, peakint, dpeakint[0], fwhm, variance, skewness,bg]
+     # Note that the errors are still error squared
+     peakar1,int1,err1,time1 = calcpeak(mon[0], time1, peakrange, bgpnts)
+     peakar2,int2,err2,time2 = calcpeak(mon[1], time2, peakrange, bgpnts)
+     
+     # sqrt statistics for errors
+     err1 = [sqrt(x) for x in err1]
+     err2 = [sqrt(x) for x in err2]
+     
+     #do the curve fitting for the first monitor peak (~Gaussian) using starting
+     #parameters output from calcpeak.
+     # p[0] = bg
+     # p[1] = amplitude
+     # p[2] = center
+     # p[3] = sigma
+     gaussparam = [peakar1[10], peakar1[4], peakar1[0], 2.35*peakar1[7] ]
+     gaussfit,num = leastsq(residualgauss, gaussparam, args=(int1,time1),maxfev=2000)   
+     
+     #do the curve fitting for the second monitor peak
+     # Ikeda-Carpenter, modified pulse shape
+     # p[0] = bg
+     # p[1] = alpha
+     # p[2] = nu
+     # p[3] = amp
+     # p[4] = loc
+     ICparam = [peakar2[10], 0.13, 1.7, peakar2[5]*20.0, peakar2[0]]
+     ICfit,num = leastsq(residualICpulse, ICparam, args=(int2,time2),maxfev=2000)
+     
+     
+     # Also fit the second monitor peak to a Gaussian
+     gaussparam2 = [peakar2[10], peakar2[5], peakar2[0], 2.35*peakar2[7] ]
+     gaussfit2,num2 = leastsq(residualgauss, gaussparam2, args=(int2,time2),maxfev=2000)   
+     
+     
+     # THREE ways to compute the energy and emmsiontime
+     # 1) Gaussian and IC fits (error in time is 1/4 of estimated fwhm)
+     # 2) Absolute peak value  (error in time is 1/4 of estimated fwhm)
+     # 3) Center of mass peak  (error in time is 1/4 of estimated fwhm) 
+     
+     # Method 1
+     Ei1,t01,dEi1,dt01 = calcenergyto(gaussfit[2], peakar1[7]/4.0, ICfit[4], peakar2[7]/4.0, LM[0], LM[1])
+     
+     # Method 2
+     Ei2,t02,dEi2,dt02 = calcenergyto(peakar1[2], peakar1[7]/4.0, peakar2[2], peakar2[7]/4.0, LM[0], LM[1])
+     
+     # Method 3
+     Ei3,t03,dEi3,dt03 = calcenergyto(peakar1[0], peakar1[7]/4.0, peakar2[0], peakar2[7]/4.0, LM[0], LM[1])
+     
+     #working here
+     #Get the beam current and the length of time of the run.
+     # Note, these functions rely on fixed format of these runinfo and cvinfo
+     # xml files.
+     #I1 = getbeamcurrent(fileroot+instrument + "_"+str(runnum)+"_runinfo.xml")
+     #trun =  getbeamtime(fileroot+instrument + "_"+str(runnum)+"_cvinfo.xml")
+     #line with I1 and trun
+     # return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], I1, trun, gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
+     #line without I1 and trun
+     return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
+
    
 #---ESTTIMERANGE---
 #estimate the time of flight range for a incident energy and distance
