@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
 from numpy import *
-import reduction.interactive as ri
+#import reduction.interactive as ri
 from xml.dom import minidom
 from scipy import *
 from scipy.optimize import leastsq
 from monfuncs import *
-import histrogram as hist
+import histogram as hist
 
 #leastsq(func, x0, args=(), Dfun=None, full_output=0, col_deriv=0, ftol=1.49012e-08, xtol=1.49012e-08, gtol=0.0, maxfev=0, epsfcn=0.0, factor=100, diag=None, warning=True)
 
@@ -37,6 +37,11 @@ I need to add weighting to the curve fitting routines, for the
 gaussian and IC fit functions.
 !!!!
 
+Modified by G. Granroth
+March 2009
+
+Added nexus_mon_calc
+This function pulls most of the data from the nexus file rather than entering it
 
 INPUT:
 path - path to the data directory
@@ -187,7 +192,7 @@ def moncalc(path, instrument ,runnum, d1mon, d2mon, nomEi, freq, emissioncor=[12
 
    return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], I1, trun, gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
 
-def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5255],peakrange=250, bgpnts = 25)
+def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5255],peakrange=250, bgpnts = 25):
      import nxs
      #generate filename
      filestr='%s_%i.nxs' %(path+instrument,runnum)
@@ -206,13 +211,20 @@ def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5
 	#get tof from monitor
 	fid.openpath('/entry/'+monitors[idx]+'/time_of_flight')
         tempt=fid.getdata()
+	#change times from corners to centers
+	tempt2=(tempt[:-1]+tempt[1:])/2.0
 	#get tof unit from monitor
         tmpu=fid.getattr('units',11,'char')
 	#get counts from the monitor
-        fid.openpath('/entry'+monitors[idx]+'data')
+        fid.openpath('/entry/'+monitors[idx]+'/data')
         I=fid.getdata()
 	#create a histogram with this info
-        mon.append(histo.histogram('I(tof)',[('tof',tmpt,tmpu),],data = I,errors = I))     
+        mon.append(hist.histogram('I(tof)',[('tof',tempt2,tmpu),],data = I,errors = I))     
+     fid.openpath('/entry/duration')
+     trun=fid.getdata()
+     fid.openpath('/entry/proton_charge')
+     I1=fid.getdata()
+     fid.close()
      #change monitor distances from relative to sample to relative to moderator 
      LM=LM+Lsam
      #estimate the time centers for the incident energies and the distances
@@ -269,16 +281,9 @@ def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5
      # Method 3
      Ei3,t03,dEi3,dt03 = calcenergyto(peakar1[0], peakar1[7]/4.0, peakar2[0], peakar2[7]/4.0, LM[0], LM[1])
      
-     #working here
-     #Get the beam current and the length of time of the run.
-     # Note, these functions rely on fixed format of these runinfo and cvinfo
-     # xml files.
-     #I1 = getbeamcurrent(fileroot+instrument + "_"+str(runnum)+"_runinfo.xml")
-     #trun =  getbeamtime(fileroot+instrument + "_"+str(runnum)+"_cvinfo.xml")
-     #line with I1 and trun
-     # return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], I1, trun, gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
-     #line without I1 and trun
-     return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
+     #return the results
+     return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], I1, trun, gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
+     
 
    
 #---ESTTIMERANGE---
