@@ -227,6 +227,7 @@ def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5
      fid.close()
      #change monitor distances from relative to sample to relative to moderator 
      LM=LM+Lsam
+     print LM
      #estimate the time centers for the incident energies and the distances
      time1 = esttimerange(nomEi, LM[0], emissioncor = emissioncor)
      time2 = esttimerange(nomEi, LM[1], emissioncor = emissioncor)
@@ -284,7 +285,40 @@ def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5
      #return the results
      return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], I1, trun, gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
      
-
+def nexus_mon_load(filestr):
+     import nxs
+     fid=nxs.open(filestr,'r')
+     # get moderator distance
+     fid.openpath('/entry/instrument/moderator/distance')
+     Lsam=fid.getdata()*-1.0 #convert to sample distance from moderator   
+     mon=[]
+     LM=[]
+     #cycle through monitors
+     monitors=['monitor1','monitor2']   
+     for idx in range(len(monitors)):
+        # get monitor distance
+     	fid.openpath('/entry/'+monitors[idx]+'/distance')
+        LM.append(fid.getdata())
+	#get tof from monitor
+	fid.openpath('/entry/'+monitors[idx]+'/time_of_flight')
+        tempt=fid.getdata()
+	#change times from corners to centers
+	tempt2=(tempt[:-1]+tempt[1:])/2.0
+	#get tof unit from monitor
+        tmpu=fid.getattr('units',11,'char')
+	#get counts from the monitor
+        fid.openpath('/entry/'+monitors[idx]+'/data')
+        I=fid.getdata()
+	#create a histogram with this info
+        mon.append(hist.histogram('I(tof)',[('tof',tempt2,tmpu),],data = I,errors = I))     
+     fid.openpath('/entry/duration')
+     trun=fid.getdata()
+     fid.openpath('/entry/proton_charge')
+     I1=fid.getdata()
+     fid.close()
+     #change monitor distances from relative to sample to relative to moderator 
+     LM=LM+Lsam
+     return [mon]
    
 #---ESTTIMERANGE---
 #estimate the time of flight range for a incident energy and distance
