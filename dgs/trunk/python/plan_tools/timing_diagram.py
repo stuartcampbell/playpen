@@ -64,7 +64,7 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0):
     if spec=='ARCS':
         L=array([8.77,11.6,13.6,3.4])
     else:
-        L=array([10.0,18.0,20.0,6.3])
+        L=array([9.78,18.0,20.0,6.3])
     dtT0=0.06/(0.2*T0nu*2.0*pi)/2.0
     vcen=E2V(E)
     tcen=L[0]/vcen
