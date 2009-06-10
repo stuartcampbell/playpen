@@ -1,5 +1,5 @@
 #python module to read SNS generated sqe files and put them in a Caltech Histogram
-from numpy import array, zeros, nan
+from numpy import array, zeros, nan, isnan
 from histogram import histogram
 #class to read SNS generated sqe files into histograms for use with Dr chops
 class SNS_dgs():
@@ -41,17 +41,22 @@ class SNS_dgs():
     	#function to create the histogram
         h=histogram(histname,[('Q',self.Q),('E',self.E)],self.I.transpose(),(self.err*self.err).transpose())
         return h
-def powfile2hist(instr,runnum,userid):
+def powfile2hist(instr,runnum,userid,remove_nans=1):
 	#function that takes an instruemnt a runnum and a user name and returns a histogram 
 	filename='/SNS/users/%s/results/%s/%d/%s_%d.sqe' %(userid,instr,runnum,instr,runnum)
 	print filename
 	datname='dat_%d'%(runnum)
 	histname='h_%d_qe'%(runnum)
-	print histname
 	exec(datname+r'=SNS_dgs()')
 	exec(datname+r'.read_sqe(filename)')
 	exec(histname+'='+datname+r".sqe_hist('"+histname+"')")
+	if remove_nans:
+	   exec(histname+'=removenans('+histname+')')
 	return(eval(histname))
+def removenans(hist):
+     hist.I[isnan(hist.I)]=0.0
+     hist.E2[isnan(hist.I)]=0.0
+     return hist
      
 
       
