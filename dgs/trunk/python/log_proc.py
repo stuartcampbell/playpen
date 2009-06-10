@@ -16,6 +16,16 @@ def runinfo(instrument,proposal,runnum):
      instrun='%s_%i' %(instrument,runnum)
      filestr=r'/'+instrument+r'-DAS-FS/'+proposal+r'/'+instrun+r'/'+instrun+'_runinfo.xml'
      return read_info(filestr)
+def runinfomult(instrument,proposal,runnums):
+     """
+       runinfomult(instrument,proposal,runnums)
+       retruns a list of dicitionaries corresponding to several runs
+     """
+     infolst=[]
+     for idx in range(len(runnums)):
+        infolst.append(runinfo(instrument,proposal,runnums[idx]))
+     return infolst
+     
 def read_info(filename):
       vainfo={}
       dat=parse(filename)
