@@ -1,5 +1,14 @@
+# routines to read an process runinfo files
+#GEG 6.2009
+#SNS
 from xml.dom.minidom import *
 def runinfo(instrument,proposal,runnum):
+     """
+       runinfo(instrument,proposal,runnum)
+       instrument is the short insturment name, proposal is the poroposal ID, 
+       runnum is the runnumber
+       returns a dictionary containing info from the run info file
+     """
      # possible instrument names
      posinst=set(['ARCS','SEQ','CNCS','BASIS'])
      if not set([instrument]).issubset(posinst):
