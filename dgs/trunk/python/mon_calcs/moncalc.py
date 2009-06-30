@@ -192,7 +192,11 @@ def moncalc(path, instrument ,runnum, d1mon, d2mon, nomEi, freq, emissioncor=[12
 
    return [runnum, nomEi,freq,Ei1,dEi1,t01,dt01,Ei2,dEi2,t02,dt02,Ei3,dEi3,t03,dt03, peakar1[0], peakar1[1], peakar1[2],peakar1[3], peakar1[4], peakar1[5], peakar1[6], peakar1[7], peakar1[8], peakar1[9],peakar1[10],peakar2[0], peakar2[1],peakar2[2], peakar2[3], peakar2[4], peakar2[5], peakar2[6], peakar2[7], peakar2[8], peakar2[9],peakar2[10], I1, trun, gaussfit[0], gaussfit[1], gaussfit[2], gaussfit[3], ICfit[0], ICfit[1], ICfit[2], ICfit[3], ICfit[4], gaussfit2[0], gaussfit2[1], gaussfit2[2], gaussfit2[3] ]
 
-def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5255],peakrange=250, bgpnts = 25):
+def nexus_mon_calc(path, instrument ,runnum, nomEi,freq,mon_frame=0,emissioncor=[128.5,-0.5255],peakrange=250, bgpnts = 25):
+     """
+     nexus_mon_calc(path, instrument ,runnum, nomEi,freq,mon_frame=0,emissioncor=[128.5,-0.5255],peakrange=250, bgpnts = 25)
+     function to determine Energy from two monitors
+     """
      import nxs
      #generate filename
      filestr='%s_%i.nxs' %(path+instrument,runnum)
@@ -231,7 +235,13 @@ def nexus_mon_calc(path, instrument ,runnum, nomEi,freq, emissioncor=[128.5,-0.5
      #estimate the time centers for the incident energies and the distances
      time1 = esttimerange(nomEi, LM[0], emissioncor = emissioncor)
      time2 = esttimerange(nomEi, LM[1], emissioncor = emissioncor)
-     
+     #determine the monitor frame
+     #if mon_frame > 0:
+     #	  tsrc=1.0/60.0
+     #    t1frm=time1/tsrc
+     #  t2frm=time2/tsrc
+     #   if t1frm>1.0:
+     #  if t2frm>1.0:
      #determine the peak parameters
      # [compeaktime, errcomtime, timeval, totalcounts,
      #  errtotalcounts, peakint, dpeakint[0], fwhm, variance, skewness,bg]

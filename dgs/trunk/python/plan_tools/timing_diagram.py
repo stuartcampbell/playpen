@@ -59,10 +59,10 @@ class Slit_pack():
             
     
     
-def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0):
+def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,e02det=0,frame_bound=0):
     """
       routine to plot timing diagram to check for fram overlap
-      timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0)
+      timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,frame_bound=0)
     """
     # define possible spectrometers
     pos_spec=set(['ARCS','SEQUOIA'])
@@ -110,11 +110,13 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0):
     vslow=sqrt(0.011)*vfermi
     tfermi=L[1]/vfermi
     tsample=L[2]/vfermi
+    tdete0=(L[2]+L[3])/vfermi
     tfermiT0=L[0]/vfermi
     tslow=(L[2]+L[3])/vslow
     tfermi=concatenate((tfermi,tfermi+1.0/60.0))
     tfermiT0=concatenate((tfermiT0,tfermiT0+1.0/60.0))
     tsample=concatenate((tsample,tsample+1.0/60.0))
+    tdete0=concatenate((tdete0,tdete0+1.0/60.0))
     tslow=concatenate((tslow,tslow+1.0/60.0))
     Efermi=V2E(vfermi)
     Efermi=concatenate((Efermi,Efermi))
@@ -132,6 +134,7 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0):
         tfermi=tfermi[kidx]
         tfermiT0=tfermiT0[kidx]
         tsample=tsample[kidx]
+	tdete0=tdete0[kidx]
         tslow=tslow[kidx]
         Efermi=Efermi[kidx]
     # generate minimum and maximum lines for detector  
@@ -142,11 +145,17 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0):
         plot([t0T0[idx],tmin[idx]],[0.0,L[1]],'k')    
         plot([t0T0[idx],tmax[idx]],[0.0,L[1]],'k')
     for idx in range(len(tfermi)):
-        plot([tfermiT0[idx],tsample[idx]],[L[0],L[2]],'g') 
+        if e02det>0:
+	     plot([tfermiT0[idx],tdete0[idx]],[L[0],L[2]+L[3]],'g') 
+	else :
+             plot([tfermiT0[idx],tsample[idx]],[L[0],L[2]],'g') 
         plot([tsample[idx],tslow[idx]],[L[2],L[2]+L[3]],'r')
         plot([tsample[idx],tsample[idx]],[L[2],L[2]+L[3]],'b')
         teststr='%1.2f'%(Efermi[idx])
         text(tfermi[idx],L[1]+0.5,teststr)
+    if frame_bound:
+        plot([1.0/60.0,1.0/60.0],[0,L[2]+L[3]],'m')
+	plot([2.0/60.0,2.0/60.0],[0,L[2]+L[3]],'m')
     xlabel('t(s)')
     ylabel('L(m)')
     title(r'E=%g meV $\nu_{fermi}$=%g Hz $\nu_{T_0}$=%g Hz slit pack:%s'%(E,Ferminu,T0nu,slit_pack.name))
