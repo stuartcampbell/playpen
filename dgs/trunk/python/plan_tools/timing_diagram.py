@@ -13,7 +13,7 @@
 #ORNL-NSSD
 
 from math import sqrt
-from numpy import array, logical_and, zeros, concatenate
+from numpy import array, logical_and, zeros, concatenate, ones
 from pylab import figure, plot, show, hold, xlabel, ylabel, title, text, pi
 from matplotlib import rc
 
@@ -63,6 +63,17 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,e02det=0,frame_bound
     """
       routine to plot timing diagram to check for fram overlap
       timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,frame_bound=0)
+      E is the incident energy in meV
+      Ferminu is the frequency of the fermi chopper in Hz
+      T0nu is the frequency of the T0 chopper in Hz
+      spec is either 'ARCS' or'SEQUOIA'
+      slit_pack is one of the values defined at the end of this file
+      show_all(default=0) toggless showing all Fermi chopper transmission settings(1) versus just those that
+      should make it through the T0 chopper(0).
+      frame_bound toggles showing the frame boundaries to check fo possible leakage through the T0 chopper.
+      The Ei and Ef are printed on the plot in meV
+      GEG
+      ORNL 7.1.2009
     """
     # define possible spectrometers
     pos_spec=set(['ARCS','SEQUOIA'])
@@ -107,20 +118,28 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,e02det=0,frame_bound
     for idx in range(npulse_f):
         vfermi[idx]=L[1]/(tcenf+idx*1.0/Ferminu)
     #generate all pulses for fermi
-    vslow=sqrt(0.011)*vfermi
+    tframe_bound=ones(npulse_f)*1.0/60.0
     tfermi=L[1]/vfermi
     tsample=L[2]/vfermi
     tdete0=(L[2]+L[3])/vfermi
     tfermiT0=L[0]/vfermi
-    tslow=(L[2]+L[3])/vslow
-    tfermi=concatenate((tfermi,tfermi+1.0/60.0))
-    tfermiT0=concatenate((tfermiT0,tfermiT0+1.0/60.0))
-    tsample=concatenate((tsample,tsample+1.0/60.0))
-    tdete0=concatenate((tdete0,tdete0+1.0/60.0))
-    tslow=concatenate((tslow,tslow+1.0/60.0))
+    if frame_bound:
+         tslow=tframe_bound
+	 vslow=L[3]/(tframe_bound - tsample)
+    else:
+         vslow=sqrt(0.011)*vfermi
+         tslow=(L[2]+L[3])/vslow 
+    tfermi=concatenate((tfermi,tfermi+tframe_bound[0]))
+    tfermiT0=concatenate((tfermiT0,tfermiT0+tframe_bound[0]))
+    tsample=concatenate((tsample,tsample+tframe_bound[0]))
+    tdete0=concatenate((tdete0,tdete0+tframe_bound[0]))
+    tslow=concatenate((tslow,tslow+tframe_bound[0]))
+    tframe_bound=concatenate((tframe_bound,tframe_bound*2.0))
     Efermi=V2E(vfermi)
+    Eslow=V2E(vslow)
     Efermi=concatenate((Efermi,Efermi))
     vfermi=concatenate((vfermi,vfermi))
+    Eslow=concatenate((Eslow,Eslow))
     #determine if all pulses shown or only those that can be transmitted
     if not show_all:
         # remove Fermi chopper pulses that are removed by the T0 chopper
@@ -137,6 +156,7 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,e02det=0,frame_bound
 	tdete0=tdete0[kidx]
         tslow=tslow[kidx]
         Efermi=Efermi[kidx]
+	Eslow=Eslow[kidx]
     # generate minimum and maximum lines for detector  
    # rc('text', usetex=True)
     figure()
@@ -153,9 +173,11 @@ def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,e02det=0,frame_bound
         plot([tsample[idx],tsample[idx]],[L[2],L[2]+L[3]],'b')
         teststr='%1.2f'%(Efermi[idx])
         text(tfermi[idx],L[1]+0.5,teststr)
+	teststr2='%1.2f'%(Eslow[idx])
+	text(tslow[idx],L[2]+L[3]-0.5,teststr2)
     if frame_bound:
-        plot([1.0/60.0,1.0/60.0],[0,L[2]+L[3]],'m')
-	plot([2.0/60.0,2.0/60.0],[0,L[2]+L[3]],'m')
+        plot([tframe_bound[0],tframe_bound[0]],[0,L[2]+L[3]],'m')
+	plot([2.0*tframe_bound[0],2.0*tframe_bound[0]],[0,L[2]+L[3]],'m')
     xlabel('t(s)')
     ylabel('L(m)')
     title(r'E=%g meV $\nu_{fermi}$=%g Hz $\nu_{T_0}$=%g Hz slit pack:%s'%(E,Ferminu,T0nu,slit_pack.name))
