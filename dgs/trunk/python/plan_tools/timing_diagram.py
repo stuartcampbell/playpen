@@ -31,7 +31,7 @@ def V2E(V):
 # for  v in  m/s returns energy in meV
     return 5.227e-6*V*V
     
-class Slit_pack():
+class Slit_pack(object):
     #class that holds slit package parameters and functions
     def __init__(self,d,r,name,R=0.05):
         self.d=d #distance between slits in m
@@ -56,7 +56,12 @@ class Slit_pack():
     def v0(self,nu):
         #optimal velocity for a chopper rotating at nu
         return self.r*4.0*pi*nu
-            
+    def Fermi_dt(self,nu,alpha=0.0):
+    	"""
+	nu is the frequency of the Fermi chopper in Hz
+	alpha is the angular divergence of the beam perpendicular to the slit package
+	"""
+        return 1/(4.0*pi*nu)*(self.d/self.R+2.0*alpha)  
     
     
 def timing_diagram(E,Ferminu,T0nu,spec,slit_pack,show_all=0,e02det=0,frame_bound=0):
