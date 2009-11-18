@@ -1,8 +1,10 @@
-from unit_convert import E2V
-from numpy import pi, log,exp,sqrt,tanh
+sys.path.append('/SNS/users/19g/SEQUOIA/commissioning/python')
+from unit_convert import E2V,E2K
+from numpy import pi, log,exp,sqrt,tanh,linspace
 from timing_diagram import Slit_pack
 from scipy.interpolate import interp1d
-from pylab import figure, plot, subplot, show, xlabel, ylabel, title	
+from pylab import figure, plot, subplot, show, xlabel, ylabel, title
+from UB import Bmat_gen,gen_rec_latt,Bmat
 
 class Chopper_spec(object):
      def __init__(self,instr_name,L,slit_pack,w=0.0254,sw=0.05,sh=0.05): 
@@ -124,8 +126,51 @@ def plot_flux(nu,Ei,Ef,Spec):
      ylabel('$d\omega$ (meV)')
      xlabel('$\\nu$ (Hz)')
      show()
-     
-
+def plot_qrange(Ei, wmin,UB=[[1,0,0],[0,1,0],[0,0,1]]):
+   """
+   """
+   ki=E2K(Ei)
+   omega=linspace(wmin,Ei*0.9,100)
+   Ef=Ei-omega
+   kf=E2K(Ef)
+   Qxmax=-kf*sin(radians(60.0))
+   Qxmin=-kf*sin(radians(2.1))
+   Qxmin2=-kf*sin(radians(-5.3))
+   Qxmax2=-kf*sin(radians(-30.0))
+   Qymax=-kf*sin(radians(30.0))
+   Qymin=-kf*sin(radians(6.7))
+   Qymin2=-kf*sin(radians(-7.5))
+   Qymax2=-kf*sin(radians(-30.0))
+   Qzmax=ki-kf*cos(radians(60.0))
+   Qzmin=ki-kf*cos(radians(2.1))
+   Qzmax2=ki-kf*cos(radians(-30.0))
+   Qzmin2=ki-kf*cos(radians(-5.3))
+   Qmins=array([Qxmin,Qymin,Qzmin])
+   Qmins2=array([Qxmin2,Qymin2,Qzmin2])
+   Qmaxs=array([Qxmax,Qymax,Qzmax])
+   Qmaxs2=array([Qxmax2,Qymax2,Qzmax2])
+   hklmins=dot(UB,Qmins)
+   hklmaxs=dot(UB,Qmaxs)
+   hklmins2=dot(UB,Qmins2)
+   hklmaxs2=dot(UB,Qmaxs2)
+   figure()
+   hold('on')
+   xlbs=['$Q_x$','$Q_y$','$Q_z$']
+   for idx in range(3):
+     subplot(2,2,idx+1)
+     plot_qlims(hklmins,hklmaxs,hklmins2,hklmaxs2,omega,idx)
+     xlabel(xlbs[idx])
+   show()
+        
+def plot_qlims(mins,maxs,mins2,maxs2,omega,idx):
+   """
+   """
+   plot(mins[idx,:],omega,'b')
+   plot(maxs[idx,:],omega,'b')
+   plot(mins2[idx,:],omega,'r')
+   plot(maxs2[idx,:],omega,'r')
+   ylabel('$\omega$')
+   
     
        
        
