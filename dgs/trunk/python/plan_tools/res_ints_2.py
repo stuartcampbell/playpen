@@ -7,13 +7,15 @@ from pylab import figure, plot, subplot, show, xlabel, ylabel, title
 from UB import Bmat_gen,gen_rec_latt,Bmat
 
 class Chopper_spec(object):
-     def __init__(self,instr_name,L,slit_pack,w=0.0254,sw=0.05,sh=0.05): 
+     def __init__(self,instr_name,L,slit_pack,hphilims,vphilims,w=0.0254,sw=0.05,sh=0.05): 
 	 
 	 self.instr_name=instr_name
 	 self.L=L
 	 self.w=w
 	 self.sw=sw
 	 self.sh=sh
+	 self.hphilims=hphilims
+	 self.vphilims=vphilims
 	 self.slit_pack=slit_pack
      def domega_in(self,Ei,Ef,nu):
          """
@@ -126,25 +128,31 @@ def plot_flux(nu,Ei,Ef,Spec):
      ylabel('$d\omega$ (meV)')
      xlabel('$\\nu$ (Hz)')
      show()
-def plot_qrange(Ei, wmin,UB=[[1,0,0],[0,1,0],[0,0,1]]):
+def plot_qrange(Ei, wmin,spec,UB=[[1,0,0],[0,1,0],[0,0,1]]):
    """
+    plot_qrange(Ei, wmin,spec,UB)
+    given an Ei and a minimum energy transfer (wmin) for a given spectrometer (spec) and with a 
+    crystal parameters and orientation defined by UB, plot the Q ranges accesible by the instrument
+    predefined values for several chopper spectrometers are given at the end of this file.
    """
    ki=E2K(Ei)
    omega=linspace(wmin,Ei*0.9,100)
    Ef=Ei-omega
    kf=E2K(Ef)
-   Qxmax=-kf*sin(radians(60.0))
-   Qxmin=-kf*sin(radians(2.1))
-   Qxmin2=-kf*sin(radians(-5.3))
-   Qxmax2=-kf*sin(radians(-30.0))
-   Qymax=-kf*sin(radians(30.0))
-   Qymin=-kf*sin(radians(6.7))
-   Qymin2=-kf*sin(radians(-7.5))
-   Qymax2=-kf*sin(radians(-30.0))
-   Qzmax=ki-kf*cos(radians(60.0))
-   Qzmin=ki-kf*cos(radians(2.1))
-   Qzmax2=ki-kf*cos(radians(-30.0))
-   Qzmin2=ki-kf*cos(radians(-5.3))
+   hphilims=radians(spec.hphilims)
+   vphilims=radians(spec.vphilims)
+   Qxmax=-kf*sin(hphilims[1])
+   Qxmin=-kf*sin(hphilims[0])
+   Qxmin2=-kf*sin(hphilims[2])
+   Qxmax2=-kf*sin(hphilims[3])
+   Qymax=-kf*sin(vphilims[1])
+   Qymin=-kf*sin(vphilims[0])
+   Qymin2=-kf*sin(vphilims[2])
+   Qymax2=-kf*sin(vphilims[3])
+   Qzmax=ki-kf*cos(hphilims[1])
+   Qzmin=ki-kf*cos(hphilims[0])
+   Qzmax2=ki-kf*cos(hphilims[3])
+   Qzmin2=ki-kf*cos(hphilims[2])
    Qmins=array([Qxmin,Qymin,Qzmin])
    Qmins2=array([Qxmin2,Qymin2,Qzmin2])
    Qmaxs=array([Qxmax,Qymax,Qzmax])
@@ -182,6 +190,6 @@ ARCS_100=Slit_pack(0.00152,0.58,'ARCS 100')
 ARCS_300=Slit_pack(0.00305,1.00,'ARCS 300')
 ARCS_700_2=Slit_pack(0.00152,1.53,'ARCS 700 2')
 ARCS_700_3=Slit_pack(0.00356,1.53,'ARCS 700 3')
-SEQUOIA=Chopper_spec('SEQUOIA',[18.0,2.0,5.5],SEQ_100)
-SEQUOIA_sloppy=Chopper_spec('SEQUOIA',[18.0,2.0,5.5],SEQ_700)
-ARCS=Chopper_spec('ARCS',[11.6,2.0,3.0],ARCS_100)
+SEQUOIA=Chopper_spec('SEQUOIA',[18.0,2.0,5.5],SEQ_100,[2.1,60.0,-5.3,-30.0],[6.7,18.0,-7.5,-18.0])
+SEQUOIA_sloppy=Chopper_spec('SEQUOIA',[18.0,2.0,5.5],SEQ_700,[2.1,60.0,-5.3,-30.0],[6.7,18.0,-7.5,-18.0])
+ARCS=Chopper_spec('ARCS',[11.6,2.0,3.0],ARCS_100,[2.1,90.0,-5.3,-30.0],[6.7,30.0,-7.5,-30.0])
