@@ -50,20 +50,36 @@ def unit_vec_omega(omega):
     """
     """
     from numpy import sin,cos
-    return [cos(omega),0,-sin(omega)]
+    return [cos(radians(omega)),0,-sin(radians(omega))]
     
-def two_vec2U(hkl1,hkl2,B,omega1,omega2):
+def two_vec2U(hkl1,hkl2,B,rot1,rot2,twotheta1,twotheta2,ccwrot=0,debug=0):
      """
      """
      from numpy.linalg import norm
      from numpy import cross
+     omega1=rot2omega(rot1,twotheta1,ccwrot)
+     omega2=rot2omega(rot2,twotheta2,ccwrot)
      uw1=unit_vec_omega(omega1)
      uw2=unit_vec_omega(omega2)
-     twmat=tranpose(twovec2_3unit(uw1,uw2))
+     twmat=transpose(twovec2_3unit(uw1,uw2))
      qc1=dot(B,hkl1)
      qc2=dot(B,hkl2)
      tcmat=transpose(twovec2_3unit(qc1,qc2))
+     # because tcmat is an orthonormal matrix, the transpose is the inverse
      U=dot(twmat,transpose(tcmat))
+     if debug:
+       print 'omega1= %g omega2=%g \n' %(omega1,omega2)
+       print "uw1\n"
+       print uw1
+       print "\nuw2\n"
+       print uw2
+       print "\n"
+       print "twmat\n"
+       print twmat
+       print "\n"
+       print "tcmat\n"
+       print tcmat
+       print "\n"
      return U
 def twovec2_3unit(prim,sec):
     """
@@ -79,5 +95,13 @@ def twovec2_3unit(prim,sec):
     out2=cross(out3,out1)
     return[out1,out2,out3]
 
-     
+def rot2omega(rot,twotheta,ccwrot):
+    """
+    sign dependent determination of omega from rot and twotheta
+    """
+    if ccwrot:
+       return(rot-twotheta/2.0)
+    else:
+       return(-rot-twotheta/2.0) 
+          
      
