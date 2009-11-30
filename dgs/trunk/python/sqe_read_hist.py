@@ -3,12 +3,13 @@ from numpy import array, zeros, nan, isnan
 from histogram import histogram
 #class to read SNS generated sqe files into histograms for use with Dr chops
 class SNS_dgs():
-    def __init__(self):
+    def __init__(self,filename):
         self.name=''
         self.Q=array([])
         self.E=array([])
         self.I=array([])
         self.err=array([])
+	self.read_sqe(filename)
     def read_sqe(self,filename):
     	#method to read sqe file
 	#filename is the full path to the sqe file
