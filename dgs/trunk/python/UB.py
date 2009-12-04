@@ -102,6 +102,27 @@ def rot2omega(rot,twotheta,ccwrot):
     if ccwrot:
        return(rot-twotheta/2.0)
     else:
-       return(-rot-twotheta/2.0) 
+       return(-rot-twotheta/2.0)
+       
+def omega2rot(omega,twotheta,ccwrot):
+    """
+    sign dependent determination of omega from rot and twotheta
+    """
+    if ccwrot:
+       return(omega+twotheta/2.0)
+    else:
+       return(-omega-twotheta/2.0)       
+def mslice_psi_2_rot(psi,U,B,hkl,twotheta):
+
+    """
+    """
+    from numpy.linalg import norm
+    UB=dot(U,B)
+    Qw=dot(UB,hkl)
+    uw=Qw/norm(Qw)
+    omega=degrees(arccos(-uw[0]))+psi
+    return omega2rot(omega,twotheta,0)
+     
+    
           
      
