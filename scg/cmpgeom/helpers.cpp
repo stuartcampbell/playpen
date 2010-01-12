@@ -199,7 +199,7 @@ Polygon *convexPolygonIntersect(Polygon &P, Polygon &Q)
             }
           else if (pclass == RIGHT)
             {
-              inflag == Q_IS_INSIDE;
+              inflag = Q_IS_INSIDE;
             }
           else
             {
