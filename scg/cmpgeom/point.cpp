@@ -89,3 +89,9 @@ double Point::length(void)
 {
   return std::sqrt(x*x + y*y);
 }
+
+std::ostream& operator<<(std::ostream &os, const Point &p)
+{
+  os << "(" << p.x << "," << p.y << ")";
+  return os;
+}
