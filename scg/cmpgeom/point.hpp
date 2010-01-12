@@ -3,6 +3,8 @@
 
 class Edge;
 
+#include <ostream>
+
 enum eEdgeClass {
   LEFT,         /**< Point is to left of edge */
   RIGHT,        /**< Point is to right of edge */
@@ -32,6 +34,7 @@ public:
   double polarAngle(void);
   double length(void);
   double distance(const Edge &e);
+  friend std::ostream& operator<<(std::ostream &os, const Point &p);
 };
 
 #endif //_POINT_HPP
