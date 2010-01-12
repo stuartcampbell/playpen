@@ -15,6 +15,7 @@ int main(void)
   plist->insert(new Vertex(-2.0, -1.0));
 
   Polygon parallelogram(plist);
+  cout << "Area of parallelogram: " << parallelogram.area(false) << endl;
 
   Vertex *s1list = new Vertex(-1.0, -4.0);
   s1list->insert(new Vertex(-1.0, -3.0));
@@ -22,6 +23,7 @@ int main(void)
   s1list->insert(new Vertex(-2.0, -4.0));
 
   Polygon rect1(s1list);
+  cout << "Area of rect1: " << rect1.area(false) << endl;
 
   Vertex *s2list = new Vertex(1.0, -1.0);
   s2list->insert(new Vertex(1.0, 3.0));
@@ -29,6 +31,7 @@ int main(void)
   s2list->insert(new Vertex(-4.0, -1.0));
 
   Polygon rect2(s2list);
+  cout << "Area of rect2: " << rect2.area(false) << endl;
 
   Polygon *inter1 = convexPolygonIntersect(parallelogram, rect1);
   cout << "Overlap 1" << endl;

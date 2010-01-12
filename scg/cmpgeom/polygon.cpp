@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include <cmath>
+#include <iostream>
 #include "polygon.hpp"
 #include "edge.hpp"
 
@@ -129,3 +131,31 @@ void Polygon::remove(void)
   _v = (--_size == 0) ? NULL : _v->ccw();
   delete v->remove();
 }
+
+double Polygon::area(const bool signed_area)
+{
+  double area = 0.0;
+  for (int i = 1; i <= this->_size; ++i)
+    {
+      Vertex *v = this-> advance(CLOCKWISE);
+
+      Point orig = v->point();
+      Point prev = v->ccw()->point();
+      Point next = v->cw()->point();
+      //std::cout << "Orig:" << orig << std::endl;
+      //std::cout << "Prev:" << prev << std::endl;
+      //std::cout << "Next:" << next << std::endl;
+
+      area += (orig.x * (next.y - prev.y));
+    }
+  area *= 0.5;
+  if (signed_area)
+    {
+      return area;
+    }
+  else
+    {
+      return std::fabs(area);
+    }
+}
+

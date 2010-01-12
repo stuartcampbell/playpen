@@ -29,6 +29,7 @@ public:
   Vertex *insert(Point&);
   void remove(void);
   Polygon *split(Vertex*);
+  double area(const bool signed_area);
 };
 
 #endif //_POLYGON_HPP
