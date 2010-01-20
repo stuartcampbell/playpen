@@ -10,7 +10,7 @@
 #include <iostream>
 using namespace std;
 
-void check_input_from_user(int argc, char * argv[]) {
+void check_input_from_user(int argc, char * argv[], int & config_file_index) {
 
 	//decode arguments
 	if (argc < 2) {
@@ -24,14 +24,15 @@ void check_input_from_user(int argc, char * argv[]) {
 	for (int i = 1; i < argc; i++) {
 		str = argv[i];
 
-		cout << "argv[" << i << "]= " << argv[i] << endl;
+//		cout << "argv[" << i << "]= " << argv[i] << endl;
 
 		if (str.compare("-o") == 0) {
 			if (i + 1 == argc) {
 				display_help_message();
 				exit(0);
 			}
-			cout << "Name of config file is: " << argv[i + 1] << endl;
+//			cout << "Name of config file is: " << argv[i + 1] << endl;
+			config_file_index = i+1;
 		}
 
 	}
