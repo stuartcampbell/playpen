@@ -26,11 +26,21 @@
 #include <iostream>
 #include <string>
 #include "check_input.h"
+#include "create_config_file.h"
+
 using namespace std;
 
 int main(int argc, char * argv[]) {
 
-	check_input_from_user(argc, argv);
+	int config_index;
+	string config_file_name; //name of config. file to be created by the prog.
+
+	check_input_from_user(argc, argv, config_index);
+	config_file_name = argv[config_index];
+
+    //Create config file name
+	create_config_file_name(config_file_name, config_index, argc, argv);
+
 
 	return 0;
 
