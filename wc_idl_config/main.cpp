@@ -24,20 +24,31 @@
  */
 
 #include <iostream>
+#include <string>
 using namespace std;
+
+void display_help_message (); //display instructions on how the program works
 
 int main(int argc, char * argv[]) {
 
 	//decode arguments
 	if (argc < 2) {
-		cout << "wc_idl_config <list_of_files>|* -o "
-			"<name_of_output_config_file" << endl;
+		display_help_message();
 		exit(0);
-	} else {
-		//list of arguments
-		cout << "list of arguments you entered:";
-		for (int i = 1; i < argc; i++) {
-			cout << argv[i] << endl;
+	}
+
+	string str; //will contain the current argument tested
+
+	//get name of output file
+	for (int i = 1; i < argc; i++) {
+		str = argv[i];
+
+		if (str.compare("-o") == 0) {
+			if (i+1 == argc) {
+				display_help_message();
+				exit(0);
+			}
+			cout << "Name of config file is: " << argv[i+1] << endl;
 		}
 	}
 
@@ -45,3 +56,8 @@ int main(int argc, char * argv[]) {
 
 }
 
+//show how the program works (the way to edit the command line)
+void display_help_message () {
+	cout << "wc_idl_config <list_of_files>|* -o "
+			"<name_of_output_config_file>" << endl;
+}
