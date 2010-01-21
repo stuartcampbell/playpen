@@ -9,7 +9,7 @@ class runinfo(object):
          findnx_str='findnexus -i %s %d --prenexus' %(instr_name,runnum)
          filestr=Popen([findnx_str],shell=True,stdout=PIPE).communicate()[0]
          filestrlst=filestr.split('\n')
-         self.filename=filename_build(instr_name,filestrlst[1],runnum)
+         self.filename=filename_build(instr_name,filestrlst[0],runnum)
 	 self.dat=parse(self.filename)
 	 self.ids=dict()
 	 idlst=self.read_ids()
@@ -72,7 +72,7 @@ class runinfo(object):
       dei=self.dat.childNodes[0].childNodes[id_idx].childNodes[parm_idx].childNodes[1]
       return dei.data
     
-    def plot_var(self,id_name,parm_name):
+    def plot_var(self,id_name,parm_name,idxflag=True):
        """
           plots a variable
        """
@@ -81,7 +81,10 @@ class runinfo(object):
        istrg=self.read_parm(id_name,parm_name)
        out=strg2lst(istrg)
        y=array(out[2])
-       x=arange(len(y))
+       if idxflag:
+          x=arange(len(y))
+       else:
+          x=out[1]
        figure()
        title("%s %s" %(self.filename,id_name))
        plot(x,y)
@@ -128,8 +131,9 @@ def strg2lst(instr):
 	  tmptime=ltmp[1].split('.')
 	  temp.append(float(ltmp[2]))
 	  tuptime=strptime(tmpdate+' '+tmptime[0],"%Y-%m-%d %H:%M:%S")
-	  dt.append(mktime(tuptime)+float('.'+tmptime[1]))
+	  dt.append(mktime(tuptime)+float('.'+tmptime[1]))	  
     outidx=range(len(temp))
+    dt=array(dt)-dt[0]
     out=[outidx,dt,temp]
     return out    
 def savelst(lstin,filename):
@@ -140,13 +144,13 @@ def savelst(lstin,filename):
     fid=open(filename,'w')
     fid.writelines(b)
     fid.close()
-def mult_run_report(instr_name,proposal,runnums,id_name,parm_name):
+def mult_run_report(instr_name,runnums,id_name,parm_name):
      """
      """
      outlst=[]
      for idx in range(len(runnums)):
 	classnm=instr_name+"_%d" %runnums[idx]
-	classstr=classnm+"=runinfo(\'%s\',\'%s\',%d)"%(instr_name,proposal,runnums[idx])
+	classstr=classnm+"=runinfo(\'%s\',%d)"%(instr_name,runnums[idx])
 	exec(classstr)
 	exec("outlst.append(%s.stat_var(\'%s\',\'%s\'))" %(classnm,id_name,parm_name))
      return(outlst)
