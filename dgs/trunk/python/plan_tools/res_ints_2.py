@@ -128,6 +128,19 @@ def plot_flux(nu,Ei,Ef,Spec):
      ylabel('$d\omega$ (meV)')
      xlabel('$\\nu$ (Hz)')
      show()
+def plot_res_omega(nu,Ei,omega,Spec):
+    """
+        Plot the energy resolution as a function of omega in meV	
+	
+    """     
+    Ef=Ei-omega
+    dw=Spec.domega_in(Ei,Ef,nu)
+    figure()
+    plot(omega,dw,'bo')
+    ylabel('$d\omega$ (meV)')
+    xlabel('$\omega$ (meV)')
+    show()
+    
 def plot_qrange(Ei, wmin,spec,UB=[[1,0,0],[0,1,0],[0,0,1]]):
    """
     plot_qrange(Ei, wmin,spec,UB)
