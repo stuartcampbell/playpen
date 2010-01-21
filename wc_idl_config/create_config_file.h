@@ -10,12 +10,7 @@
 
 #include <string>
 
-void create_config_file_name(std::string config_file_name, int config_index, int argc, char *argv[]);
-
-
-
-
-
-
+void create_config_file_name(std::string config_file_name, int config_index,
+		int argc, char *argv[]);
 
 #endif /* CREATE_CONFIG_FILE_H_ */
