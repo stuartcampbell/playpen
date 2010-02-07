@@ -14,12 +14,11 @@
 #
 # author: j35@ornl.gov
 
+use File::Find;
 
 #Name of file that contain all the files to take into account
 $config_file = "wc_config.txt"; 
 $output_file = "wc_output.txt";
-
-
 
 @input_arg = @ARGV;
 if ($#input_arg == -1) {
@@ -28,7 +27,11 @@ if ($#input_arg == -1) {
 }
 
 if ($input_arg[0] eq '-c' || $input_arg[0] eq '--config') {
-  create_config_file();
+  if ($#input_arg == 0) {
+    display_manual();
+  } else {
+    create_config_file();
+  }
 }
 elsif ($input_arg[0] eq '-h' || $input_arg[0] eq '--help') {
   display_manual();
@@ -36,19 +39,55 @@ elsif ($input_arg[0] eq '-h' || $input_arg[0] eq '--help') {
   count_line();
 }
 
-
+#------------------------------------------------------------------------------
+#This subroutine creates the config file that will be used to count the number
+#of lines
+#The files will look like this:
+#
+#
+# ########## FITStools ##############
+# FITStools/FITStoolsFITStools/FITStools
+# FITStools/FITStools.cfgFITStools/FITStools.cfg
+# FITStools/MainBaseEvent.proFITStools/MainBaseEvent.pro
+# FITStools/MakefileFITStools/Makefile
+# #FITStools/fits_open.proFITStools/fits_open.pro
+# FITStools/fits_reader.proFITStools/fits_reader.pro
+# FITStools/fits_tools_tab1.proFITStools/fits_tools_tab1.pro
+# FITStools/fits_tools_tab1_browser.proFITStools/fits_tools_tab1_browser.pro
+#
 sub create_config_file {
 
+  shift(@input_arg); #this remove the flags -c and keep the list of folders
+  @list_of_folders = ();
+  for $file (@input_arg) {
+    print "testing file/directory: $file --> ";
+    if (-d $file) { #directory
+      print " directory\n";
+      push @list_of_folders, "###$file";
+      find (\&wanted, $file);
+    } else { #file
+      print " file\n";
+    }
+    
+  }
+}
+
+
+sub wanted {
+
+  print "    --> list is $_\n";
+  
 }
 
 
 
-
 sub   display_manual {
-  print "\nwc_idl [list_of_folders_to_check>/-c/-h]\n\n";
-  print "      -c, --config    will cretae the wc_config.txt file used by\n";
-  print "      -h, --help      will display this message";
-  print "wc_idl\n\n";
+  print "\n   This program counts the number of idl lines coded.\n";
+  print "\n   wc_idl [-c <list_of_folders>|-r|-h]\n\n";
+  print "      -c, --config    creates the wc_config.txt file\n";
+  print "      -r, --run       count the number of idl lines coded in wc_config.txt\n";
+  print "      -h, --help      displays this message";
+  print "\n\nReports any bugs to j35\@ornl.gov\n\n";
 }
 
 
