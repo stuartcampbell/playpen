@@ -86,7 +86,8 @@ dspacemap_file   = 'powgen_dspacemap.dat'
 #                        proposal='2009_2_11_SCI',dfs_root='/PG3-DAS-FS')
 proposal ='2009_2_11_SCI/'
 #event_location = ('%s%s%i%s%i%s' %('/SNS/PG3/', proposal, expt_number,'/', run_number, '/preNeXus/' ))
-event_location = ('%s%i%s' %('C:/PG_DATA/PG3_', run_number,'/' ))
+#event_location = ('%s%i%s' %('C:/PG_DATA/PG3_', run_number,'/' ))
+event_location = ("")
 run_prefix = '%s_%s' % (instrument,run_number)
 
 #event_file = os.path.join(event_location, '%s_%s.rdat' % (run_prefix,labels[0]))
@@ -126,6 +127,7 @@ totchist = numpy.zeros(nd2) + 0.0   # correction histogram
 
 for i in range(nmod):
     event_file = os.path.join(event_location, '%s_%s.rdat' % (run_prefix,labels[i]))
+    event_file = "PG3_%d_neutron_event.dat" % run_number
     events  = numpy.memmap(event_file,       dtype=NeutronEvent, mode='r')
     print event_file
     
