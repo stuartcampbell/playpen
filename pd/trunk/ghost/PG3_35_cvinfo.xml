@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<RunID instrument="PG3" runnumber="35" experiment="2" version="4.2" xmlns="http://neutrons.ornl.gov/SNS/DAS/cvinfo_v4_2">
+<DAS_process id="das">
+	<cvsingle name="das.counts" deviceID="dasv1" value="340198" timestamp="2009-05-08T15:27:34-04:00" />
+	<cvsingle name="das.runtime" deviceID="dasv1" value="787.172" timestamp="2009-05-08T15:27:34-04:00" units="Time,S" />
+	<cvsingle name="das.totalvetos" deviceID="dasv1" value="0" timestamp="2009-05-08T15:27:34-04:00" />
+	<cvsingle name="das.totalpulses" deviceID="dasv1" value="47233" timestamp="2009-05-08T15:27:34-04:00" />
+	<cvsingle name="das.protoncharge" deviceID="dasv1" value="3.346263e+011" timestamp="2009-05-08T15:27:34-04:00" units="E_M,pC" />
+	<cvsingle name="das.monitorcounts" deviceID="dasv1" value="106092" timestamp="2009-05-08T15:27:34-04:00" />
+</DAS_process>
+<DAS_process id="detector">
+	<cvsingle name="BEAMMON1.toftype" deviceID="1100001" value="linear" timestamp="2009-05-08T15:27:34-04:00" />
+	<cvsingle name="BEAMMON1.tofbin" deviceID="1100001" value="1.000000" timestamp="2009-05-08T15:27:34-04:00" units="Time,uS" />
+	<cvsingle name="BEAMMON1.tofstart" deviceID="1100001" value="0.0" timestamp="2009-05-08T15:27:34-04:00" units="Time,uS" />
+	<cvsingle name="BEAMMON1.tofend" deviceID="1100001" value="200000.0" timestamp="2009-05-08T15:27:34-04:00" units="Time,uS" />
+	<cvsingle name="BEAMMON1.mode" deviceID="1100001" value="histogram" timestamp="2009-05-08T15:27:34-04:00" />
+	<cvsingle name="IPNSTestBank.toftype" deviceID="1100001" value="linear" timestamp="2009-05-08T15:27:34-04:00" />
+	<cvsingle name="IPNSTestBank.tofbin" deviceID="1100001" value="100.000000" timestamp="2009-05-08T15:27:34-04:00" units="Time,uS" />
+	<cvsingle name="IPNSTestBank.tofstart" deviceID="1100001" value="0.0" timestamp="2009-05-08T15:27:34-04:00" units="Time,uS" />
+	<cvsingle name="IPNSTestBank.tofend" deviceID="1100001" value="16666.7" timestamp="2009-05-08T15:27:34-04:00" units="Time,uS" />
+	<cvsingle name="IPNSTestBank.mode" deviceID="1100001" value="event" timestamp="2009-05-08T15:27:34-04:00" />
+</DAS_process>
+</RunID>
