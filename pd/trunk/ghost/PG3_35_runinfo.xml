@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<RunInfo instrument="PG3" runnumber="35" experiment="2" version="4.2" xmlns="http://neutrons.ornl.gov/SNS/DAS/runinfo_v4_2">
+<DateTime>
+	<StartTime> 2009-05-08T15:14:27-04:00 </StartTime>
+	<StopTime> 2009-05-08T15:27:34-04:00 </StopTime>
+	<LastUpdate> 2009-05-08T15:27:34-04:00 </LastUpdate>
+</DateTime>
+<OperationalInfo>
+		<AcceleratorPulses> 47233 </AcceleratorPulses>
+		<PCurrent units="pC"> 3.346263e+011 </PCurrent>
+		<TotalVetos>0</TotalVetos></OperationalInfo>
+<SampleInfo Name="" Identifier="">
+	<Nature>  </Nature>
+</SampleInfo>
+<GeneralInfo>
+	<Title>Mod-H4 air frame-2</Title>
+	<Notes> </Notes>
+	<ScriptID>none</ScriptID>
+	<RunStatus>Stopped</RunStatus>
+	<ExpTitle>Ni Pow SomeVac</ExpTitle>
+</GeneralInfo>
+<DetectorInfo id="1100001">
+	<CalibrationID> 4 </CalibrationID>
+	<MaxScatPixelID> 300000 </MaxScatPixelID> 
+	<MaxBMPixelID> 1 </MaxBMPixelID>
+	<ReportedXDim> 0 </ReportedXDim> 
+	<ReportedYDim> 0 </ReportedYDim>
+	<BeamMonitorInfo id="1" description="First beam monitor" name="BEAMMON1">
+		<NumPixels>1,1073741824</NumPixels>
+		<MappingFile> none </MappingFile>
+		<Mode> histogram </Mode>
+		<NumTimeChannels width="1.000000" scale="linear" startbin="0.0" endbin="200001.0">200001</NumTimeChannels>
+	</BeamMonitorInfo>
+	<Scattering id="0" description="Main Scattering Bank" name="IPNSTestBank">
+		<NumPixels>300000,0</NumPixels>
+		<MappingFile> none </MappingFile>
+		<Mode> event </Mode>
+		<NumTimeChannels width="100.0" scale="linear" startbin="0.0" endbin="16766.7">167</NumTimeChannels>
+	</Scattering>
+</DetectorInfo>
+<FileList>
+	<MetaData>
+		<cvinfo name="PG3_35_cvinfo.xml" />
+	</MetaData>
+	<DataList>
+		<monitor id="1" name="PG3_35_bmon_histo.dat" />
+		<scattering id="0" name="PG3_35_neutron_event.dat" />
+	</DataList>
+	<PulseIdList>
+		<scattering id="0" name="PG3_35_neutron_event_pulseid.dat" />
+	</PulseIdList>
+</FileList>
+<FileFormats>
+	<monitor id="1" dims="200001" vartype="uint32">
+		<Names>tof</Names>
+		<Units>usec</Units>
+	</monitor>
+	<scattering id="0" dims="0" vartype="struct,uint32,uint32">
+		<Names>tof,pixelid</Names>
+		<Units>100nsec,none</Units>
+	</scattering>
+</FileFormats>
+</RunInfo>
