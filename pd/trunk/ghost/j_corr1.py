@@ -98,7 +98,7 @@ run_prefix = '%s_%s' % (instrument,run_number)
 
 output_folder = ('output%i/' %(run_number))
 #output_folder = ('output\\%i\\' %(run_number))
-os.system('mkdir '+output_folder)
+os.system('mkdir -p '+output_folder)
 
 
 ustics = 10   # number of DAS tics in usec                                 
@@ -149,7 +149,7 @@ for i in range(nmod):
     # Plot and output
 
     sel = tsel * ib
-    dhist,dbins = numpy.histogram(d  [sel], bins=nd2, range=(lgdmin,lgdmax), new=True)
+    dhist,dbins = numpy.histogram(d  [sel], bins=nd2, range=(lgdmin,lgdmax))
     dbins = numpy.exp(dbins)
 ##    pylab.figure(200)
 ##    pylab.subplot(nmod,1,i+1)
@@ -176,7 +176,7 @@ for i in range(nmod):
         pix2 = ghost[pix,g]
         d2 = numpy.log(dspmap[pix2]*tof)
         
-        ahist,dbins = numpy.histogram(d2, weights=strength[pix ,g], bins=nd2, range=(lgdmin,lgdmax), new=True)
+        ahist,dbins = numpy.histogram(d2, weights=strength[pix ,g], bins=nd2, range=(lgdmin,lgdmax))
         zhist += ahist
         
     smw = 3
@@ -226,6 +226,9 @@ cchist = totdhist - totchist
 
 pylab.figure(500)
 
+##	green curve = Original observed data(totdhist)
+##	blue curve = Ghost profile(totchist)
+##	red curve = Corrected profile(cchist)
 pylab.plot(dbins[:-1],totdhist,linestyle='steps')
 pylab.plot(dbins[:-1],totchist,linestyle='steps')
 pylab.plot(dbins[:-1],cchist,linestyle='steps')
