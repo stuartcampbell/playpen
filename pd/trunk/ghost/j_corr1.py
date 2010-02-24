@@ -96,8 +96,8 @@ run_prefix = '%s_%s' % (instrument,run_number)
 
                           
 
-#output_folder = ('/output/%i/' %(run_number))
-output_folder = ('output\\%i\\' %(run_number))
+output_folder = ('output%i/' %(run_number))
+#output_folder = ('output\\%i\\' %(run_number))
 os.system('mkdir '+output_folder)
 
 
