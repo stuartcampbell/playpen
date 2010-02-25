@@ -79,20 +79,21 @@ for i in range(nmod):
     pix = events['pix']
     tof = events['tof']
 
-    # select ROI and events in bounds
+    # arrays of true if tof and pix is in bounds; false if not
     tsel = (tof>=tof_min) * (tof<tof_max)   # All Tof
     ib = (pix>=(pix_st[i])) * (pix<(pix_max+pix_st[i]))  # check if event is in bounds 
 
+    # print number of events
     ne =  numpy.size(pix)
     print labels[i], ' events = ', ne
     
     
     # Here comes the beauty of numpy
-    d   = numpy.log(dspmap[pix*ib]*tof) # calculate d (using tabulated Bragg formula) from 
+    d   = numpy.log(dspmap[pix*ib]*tof) # calculate d (using tabulated Bragg formula) 
 
     # Histogram original observed data
-    sel = tsel * ib
-    dhist,dbins = numpy.histogram(d  [sel], bins=nd2, range=(lgdmin,lgdmax))
+    sel = tsel * ib # False if data is not in bounds
+    dhist,dbins = numpy.histogram(d[sel], bins=nd2, range=(lgdmin,lgdmax))
     # exp of dbins since range was logarithmic
     dbins = numpy.exp(dbins)
 
@@ -103,15 +104,17 @@ for i in range(nmod):
     for g in range(maxGs):  #maxGs
         print labels[i], 'ghost set: ', g
         pix2 = ghost[pix,g]
-        d2 = numpy.log(dspmap[pix2]*tof)
+        d2 = numpy.log(dspmap[pix2]*tof) # calculate d (using tabulated Bragg formula)
+        # Histogram of ghost points
         ahist,dbins = numpy.histogram(d2, weights=strength[pix ,g], bins=nd2, range=(lgdmin,lgdmax))
+        # Sum ghost histograms for all maxGs
         zhist += ahist
         
     # smooth with average of 7 points
-    smw = 3
-    pts = 2*smw*1.0
-    for k in range(smw,nd2-smw):
-        chist[k] = sum(zhist[k-smw:k+smw+1])/pts
+#    smw = 3
+#    pts = 2*smw*1.0
+#    for k in range(smw,nd2-smw):
+#        chist[k] = sum(zhist[k-smw:k+smw+1])/pts
 
     # not using smoothing since chist is overwritten
     chist = zhist
@@ -137,26 +140,26 @@ for i in range(nmod):
 cchist = totdhist - totchist
 
 # plot final histograms
-pylab.figure(500)
+##pylab.figure(500)
 # green curve = Original observed data(totdhist)
 # blue curve = Ghost profile(totchist)
 # red curve = Corrected profile(cchist)
-line1 = pylab.plot(dbins[:-1],totdhist,linestyle='steps')
-line2 = pylab.plot(dbins[:-1],totchist,linestyle='steps')
-line3 = pylab.plot(dbins[:-1],cchist,linestyle='steps')
-pylab.figlegend((line1,line2,line3),('Original observed data','Ghost profile','Corrected profile'),'upper right')
-pylab.xlabel('d [A]')
-pylab.ylabel('sum = %i ' %(sum(cchist)))
-pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
+##line1 = ##pylab.plot(dbins[:-1],totdhist,linestyle='steps')
+##line2 = ##pylab.plot(dbins[:-1],totchist,linestyle='steps')
+##line3 = ##pylab.plot(dbins[:-1],cchist,linestyle='steps')
+##pylab.figlegend((line1,line2,line3),('Original observed data','Ghost profile','Corrected profile'),'upper right')
+##pylab.xlabel('d [A]')
+##pylab.ylabel('sum = %i ' %(sum(cchist)))
+##pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
 
 # plot corrected profile(cchist)
-pylab.figure(600)
-pylab.plot(dbins[:-1],cchist,linestyle='steps')
-pylab.xlabel('d [A]')
-pylab.ylabel('sum = %i ' %(sum(cchist)))
-pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
+##pylab.figure(600)
+##pylab.plot(dbins[:-1],cchist,linestyle='steps')
+##pylab.xlabel('d [A]')
+##pylab.ylabel('sum = %i ' %(sum(cchist)))
+##pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
 
-pylab.show()  
+##pylab.show()  
 
 # print final histograms
 inp_name = '%i_bk1%s' %(run_number,'.out')
