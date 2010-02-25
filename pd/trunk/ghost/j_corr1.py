@@ -103,7 +103,7 @@ for i in range(nmod):
     # weighted histogram approach for ghost points; histogram done 16 times
     for g in range(maxGs):  #maxGs
         print labels[i], 'ghost set: ', g
-        pix2 = ghost[pix,g]
+        pix2 = ghost[pix*ib,g]
         d2 = numpy.log(dspmap[pix2]*tof) # calculate d (using tabulated Bragg formula)
         # Histogram of ghost points
         ahist,dbins = numpy.histogram(d2, weights=strength[pix ,g], bins=nd2, range=(lgdmin,lgdmax))
