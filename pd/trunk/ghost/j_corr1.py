@@ -31,7 +31,7 @@ ddcw = 0.0004     # multiplies nd2 for max of histogram
 lgdmin = numpy.log(dmin)   # min of histogram
 lgdmax = lgdmin+(ddcw*nd2) # max of histogram
 maxGs = 16          # number of ghost maps
-maxGpix = 300000    # number of ghost maps
+maxGpix = 300000    # number of ghost map pixels
 
 # detector_list.txt file
 det_lst = open (ghost_list_file, 'r')
@@ -140,26 +140,26 @@ for i in range(nmod):
 cchist = totdhist - totchist
 
 # plot final histograms
-##pylab.figure(500)
+pylab.figure(500)
 # green curve = Original observed data(totdhist)
 # blue curve = Ghost profile(totchist)
 # red curve = Corrected profile(cchist)
-##line1 = ##pylab.plot(dbins[:-1],totdhist,linestyle='steps')
-##line2 = ##pylab.plot(dbins[:-1],totchist,linestyle='steps')
-##line3 = ##pylab.plot(dbins[:-1],cchist,linestyle='steps')
-##pylab.figlegend((line1,line2,line3),('Original observed data','Ghost profile','Corrected profile'),'upper right')
-##pylab.xlabel('d [A]')
-##pylab.ylabel('sum = %i ' %(sum(cchist)))
-##pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
+line1 = pylab.plot(dbins[:-1],totdhist,linestyle='steps')
+line2 = pylab.plot(dbins[:-1],totchist,linestyle='steps')
+line3 = pylab.plot(dbins[:-1],cchist,linestyle='steps')
+pylab.figlegend((line1,line2,line3),('Original observed data','Ghost profile','Corrected profile'),'upper right')
+pylab.xlabel('d [A]')
+pylab.ylabel('sum = %i ' %(sum(cchist)))
+pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
 
 # plot corrected profile(cchist)
-##pylab.figure(600)
-##pylab.plot(dbins[:-1],cchist,linestyle='steps')
-##pylab.xlabel('d [A]')
-##pylab.ylabel('sum = %i ' %(sum(cchist)))
-##pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
+pylab.figure(600)
+pylab.plot(dbins[:-1],cchist,linestyle='steps')
+pylab.xlabel('d [A]')
+pylab.ylabel('sum = %i ' %(sum(cchist)))
+pylab.title('Instrument:  %s  Run #%s   Module: %s' %(instrument,run_number, labels))
 
-##pylab.show()  
+pylab.show()  
 
 # print final histograms
 inp_name = '%i_bk1%s' %(run_number,'.out')
