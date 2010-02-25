@@ -139,6 +139,15 @@ for i in range(nmod):
 # subtract Ghost histogram from Original observed histogram
 cchist = totdhist - totchist
 
+# integrate 3 histograms to check conservation of intensity
+dbinsm1 = dbins[:-1]
+trapd = numpy.trapz(totdhist, dbinsm1)
+print 'Original observed data integral = ' ,trapd
+trapc = numpy.trapz(totchist, dbinsm1)
+print 'Ghost profile integral = ' ,trapc
+trapcc = numpy.trapz(cchist, dbinsm1)
+print 'Corrected profile integral = ' ,trapcc
+
 # plot final histograms
 pylab.figure(500)
 # green curve = Original observed data(totdhist)
