@@ -130,7 +130,12 @@ def plot_flux(nu,Ei,Ef,Spec):
      show()
 def plot_res_omega(nu,Ei,omega,Spec):
     """
-        Plot the energy resolution as a function of omega in meV	
+        plot_res_omega(nu,Ei,omega,Spec)
+        Plot the energy resolution as a function of omega in meV
+	nu is the Fermi chopper speed
+	Ei is the incident energy
+	omega is a numpy array of energy transfers
+	Spec is one of the spectrometers defined at the end of the file.	
 	
     """     
     Ef=Ei-omega
@@ -139,6 +144,7 @@ def plot_res_omega(nu,Ei,omega,Spec):
     plot(omega,dw,'bo')
     ylabel('$d\omega$ (meV)')
     xlabel('$\omega$ (meV)')
+    title('$E_i$ = %d meV'% Ei) 
     show()
     
 def plot_qrange(Ei, wmin,spec,UB=[[1,0,0],[0,1,0],[0,0,1]]):
