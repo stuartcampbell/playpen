@@ -21,27 +21,33 @@ class Sending(QDialog):
     def __init__(self, parent=None):
         super(Sending, self).__init__(parent)
         
-        self.browse = QPushButton("Browse Batch File(s)...")
+        self.browse = QPushButton("Browse batch file to send...")
 
         file_name = ["file1", "file2", "file3"]
-        self.listWidget = QListWidget()
-        self.listWidget.addItems(file_name)
-        self.listWidget.setCurrentRow(0)
+        self.toSendTree = QTreeView()
+
+        #vertical base for SEND and SETTINGS button
+        self.sendButton = QPushButton("SEND ->")
+        self.settingsButton = QPushButton("Settings...")
+        vLayout = QVBoxLayout()
+        vLayout.addWidget(self.sendButton)
+        vLayout.addWidget(self.settingsButton)
         
-        self.send = QPushButton("SEND...")
-        
+        self.sentTree = QTreeView()
+
         mainLayout = QVBoxLayout()
+        row2Layout = QHBoxLayout()
+        row2Layout.addWidget(self.toSendTree)
+        row2Layout.addLayout(vLayout)
+        row2Layout.addWidget(self.sentTree)
         mainLayout.addWidget(self.browse)
-        mainLayout.addWidget(self.listWidget)
-        #mainLayout.addSpacing()
+        mainLayout.addLayout(row2Layout)
         
-#        okButton = QPushButton("&OK")
         closeButton = QPushButton("CLOSE")
-        sendingButton = QPushButton("SEND...")
-        
+        closeButton.setFixedWidth(200)
+
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(closeButton)   
-        buttonLayout.addWidget(sendingButton)
         mainLayout.addLayout(buttonLayout)  
 #        mainLayout.addWidget(closeButton)
         self.setLayout(mainLayout)
@@ -52,7 +58,7 @@ class Sending(QDialog):
         self.setWindowTitle("Sending Batch Files")
                 
         #set focus on SEND button
-        sendingButton.setFocus()   
+        self.sendButton.setFocus()   
 
     def browsing(self):
 #        if not self.okToContinue():
