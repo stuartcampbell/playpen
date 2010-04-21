@@ -2,6 +2,7 @@ import os
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import qrc_resources
 
 __version__ = "1.0.0"
 
@@ -16,13 +17,22 @@ class MainForm(QDialog):
         
         #right part (image, description and launch button)
         vLayout = QVBoxLayout()
-        self.image = QLabel("here will go the preview of the application")
+#        self.image = QLabel("here will go the preview of the application")
+        pixmap = QPixmap(":/under_construction.gif")
+        self.image = QLabel(self)
+        self.image.setPixmap(pixmap)
+        
         self.descriptionWidget = QLabel("here is the description")
+        
         self.launch = QPushButton("LAUNCH APPLICATION")
-#        self.launch.setFixedHeight(30)
+        self.help = QPushButton("HELP")
+        h2Layout = QHBoxLayout()
+        h2Layout.addWidget(self.launch)
+        h2Layout.addWidget(self.help)
+        
         vLayout.addWidget(self.image)
         vLayout.addWidget(self.descriptionWidget)
-        vLayout.addWidget(self.launch)
+        vLayout.addLayout(h2Layout)
         
         #layout left and right part together
         hLayout.addWidget(self.treeWidget)
@@ -40,12 +50,17 @@ class MainForm(QDialog):
 
         self.connect(self.treeWidget, SIGNAL("itemClicked(QTreeWidgetItem*,int)"), self.tree_event)
         self.connect(self.launch, SIGNAL("clicked()"), self.launch_application)
+        self.connect(self.help, SIGNAL("clicked()"), self.launch_help)
 
 #        self.setCentralWidget(self.mainSplitter)
         self.setWindowTitle("SNS applications launcher")
         self.setMinimumWidth(500)
         self.setMinimumHeight(300)
+        
         QTimer.singleShot(0, self.initialLoad)
+
+    def launch_help(self):
+        os.system('/SNS/software/idltools/NeedHelp &')
 
     def launch_application(self):
         print 'launching current selected application'
@@ -54,6 +69,8 @@ class MainForm(QDialog):
     def tree_event(self,item):
         appli = self.itemDict[item]
         self.descriptionWidget.setText(self.description[appli])
+        pixmap = QPixmap(":/%s.gif" % self.screen[appli])
+        self.image.setPixmap(pixmap)
 
     def initialLoad(self):
         self.populateTree()
@@ -68,6 +85,7 @@ class MainForm(QDialog):
         
         self.itemDict = {}
         self.description = {}
+        self.screen = {}
         
         ##Application
         ancestor = QTreeWidgetItem(self.treeWidget, ['Application'])
@@ -77,12 +95,14 @@ class MainForm(QDialog):
         parent = QTreeWidgetItem(ancestor, ['CLoopES'])        
         self.itemDict[parent] = 'CLoopES'
         self.description['CLoopES'] = "Description of CLoopES"
+        self.screen['CLoopES'] = 'CLoop'
         parent = QTreeWidgetItem(ancestor, ['DAD'])
         self.itemDict[parent] = 'DAD'
         self.description['DAD'] = "Description of DAD"        
         parent = QTreeWidgetItem(ancestor, ['DGSreduction'])
         self.itemDict[parent] = 'DGSreduction'
         self.description['DGSreduction'] = "Description of DGSreduction"
+        self.screen['DGSreduction'] = 'DGSreduction'
         parent = QTreeWidgetItem(ancestor, ['FITStools'])
         self.itemDict[parent] = 'FITStools'        
         self.description['FITStools'] = "Description of FITStools"

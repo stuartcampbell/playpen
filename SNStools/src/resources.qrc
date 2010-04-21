@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+<file alias="BSSselection.gif">images/BSSselection.gif</file>
+<file alias="CLoop.gif">images/CLoop.gif</file>
+<file alias="DGSreduction.gif">images/DGSreduction.gif</file>
+<file alias="REFreduction.gif">images/REFreduction.gif</file>
+<file alias="under_construction.gif">images/under_construction.gif</file>
+</qresource>
+</RCC>
