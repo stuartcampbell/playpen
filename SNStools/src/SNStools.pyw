@@ -11,6 +11,10 @@ class MainForm(QDialog):
     def __init__(self, parent=None):
         super(MainForm, self).__init__(parent)
         
+        self.itemDict = {}
+        self.description = {}
+        self.screen = {}
+
         #left part of gui (widget tree)
         self.treeWidget = QTreeWidget()
         hLayout = QHBoxLayout()
@@ -66,7 +70,7 @@ class MainForm(QDialog):
         print 'launching current selected application'
 #        item = self.treeWidget.item
 
-    def tree_event(self,item):
+    def tree_event(self, item):
         appli = self.itemDict[item]
         self.descriptionWidget.setText(self.description[appli])
         pixmap = QPixmap(":/%s.gif" % self.screen[appli])
@@ -74,7 +78,14 @@ class MainForm(QDialog):
 
     def initialLoad(self):
         self.populateTree()
-
+        
+    def createItem(self, ancestor, itemName):
+        parent = QTreeWidgetItem(ancestor, [itemName])
+        self.itemDict[parent] = itemName
+        self.description[itemName] = "Description of " + itemName
+        self.screen[itemName] = itemName
+        return parent
+        
     def populateTree(self):
         selected = None
         self.treeWidget.clear()
@@ -83,177 +94,68 @@ class MainForm(QDialog):
         self.treeWidget.setHeaderHidden(True)
         self.treeWidget.setItemsExpandable(True)
         
-        self.itemDict = {}
-        self.description = {}
-        self.screen = {}
-        
         ##Application
-        ancestor = QTreeWidgetItem(self.treeWidget, ['Application'])
-        self.itemDict[ancestor] = 'Application'
-        self.description['Application'] = "Description of Application"        
+        ancestor = self.createItem(self.treeWidget, 'Application')
         self.treeWidget.expandItem(ancestor)
-        parent = QTreeWidgetItem(ancestor, ['CLoopES'])        
-        self.itemDict[parent] = 'CLoopES'
-        self.description['CLoopES'] = "Description of CLoopES"
-        self.screen['CLoopES'] = 'CLoop'
-        parent = QTreeWidgetItem(ancestor, ['DAD'])
-        self.itemDict[parent] = 'DAD'
-        self.description['DAD'] = "Description of DAD"        
-        parent = QTreeWidgetItem(ancestor, ['DGSreduction'])
-        self.itemDict[parent] = 'DGSreduction'
-        self.description['DGSreduction'] = "Description of DGSreduction"
-        self.screen['DGSreduction'] = 'DGSreduction'
-        parent = QTreeWidgetItem(ancestor, ['FITStools'])
-        self.itemDict[parent] = 'FITStools'        
-        self.description['FITStools'] = "Description of FITStools"
-        parent = QTreeWidgetItem(ancestor, ['GG'])
-        self.itemDict[parent] = 'GG'        
-        self.description['GG'] = "Description of GG"
-        parent = QTreeWidgetItem(ancestor, ['MakeNeXus'])
-        self.itemDict[parent] = 'MakeNeXus'
-        self.description['MakeNeXus'] = "Description of MakeNeXus"                
-        parent = QTreeWidgetItem(ancestor, ['plotARCS'])
-        self.itemDict[parent] = 'plotARCS'
-        self.description['plotARCS'] = "Description of plotARCS"                
-        parent = QTreeWidgetItem(ancestor, ['plotASCII'])
-        self.itemDict[parent] = 'plotASCII'
-        self.description['plotASCII'] = "Description of plotASCII"                
-#        self.treeWidget.setCurrentItem(parent)
-        parent = QTreeWidgetItem(ancestor, ['plotBSS'])
-        self.itemDict[parent] = 'plotBSS'
-        self.description['plotBSS'] = "Description of plotBSS"                
-        parent = QTreeWidgetItem(ancestor, ['plotCNCS'])
-        self.itemDict[parent] = 'plotCNCS'        
-        self.description['plotCNCS'] = "Description of plotCNCS"
-        parent = QTreeWidgetItem(ancestor, ['plotInstrument'])
-        self.itemDict[parent] = 'plotInstrument'        
-        self.description['plotInstrument'] = "Description of plotInstrument"
-        parent = QTreeWidgetItem(ancestor, ['plotROI'])
-        self.itemDict[parent] = 'plotROI'        
-        self.description['plotROI'] = "Description of plotROI"
-        parent = QTreeWidgetItem(ancestor, ['REFoffSpec'])
-        self.itemDict[parent] = 'REFoffSpec'        
-        self.description['REFoffSpec'] = "Description of REFoffSpec"
-        parent = QTreeWidgetItem(ancestor, ['REFreduction'])
-        self.itemDict[parent] = 'REFreduction'        
-        self.description['REFreduction'] = "Description of REFreduction"
-        item = QTreeWidgetItem(parent, ['1.3.x versions'])
-        self.itemDict[item] = '1.3.x versions'        
-        self.description['1.3.x versions'] = "Description of 1.3.x versions"
-        item2 = QTreeWidgetItem(item, ['High resolution version'])
-        self.itemDict[item2] = 'High resolution version'
-        self.description['High resolution version'] = "Description of high resolution version"
-        item2 = QTreeWidgetItem(item, ['Low resolution version'])
-        self.itemDict[item2] = 'Low resolution version'
-        self.description['Low resolution version'] = "Description of low resolution version"
-        item = QTreeWidgetItem(parent, ['1.4.x versions'])
-        self.itemDict[item] = '1.4.x versions'
-        self.description['1.4.x versions'] = "Description of 1.4.x versions"                
-        item2 = QTreeWidgetItem(item, ['High resolution version'])
-        self.itemDict[item2] = 'High resolution version'
-        self.description['High resolution version'] = "Description of high resolution version"
-        item2 = QTreeWidgetItem(item, ['Low resolution version'])
-        self.itemDict[item2] = 'Low resolution version'
-        self.description['Low resolution version'] = "Description of low resolution version"
-        item = QTreeWidgetItem(parent, ['1.5.x versions'])                
-        self.itemDict[item] = '1.5.x versions'        
-        self.description['1.5.x versions'] = "Description of 1.5.x versions"
-        item2 = QTreeWidgetItem(item, ['High resolution version'])
-        self.itemDict[item2] = 'High resolution version'
-        self.description['High resolution version'] = "Description of high resolution version"
-        item2 = QTreeWidgetItem(item, ['Low resolution version'])
-        self.itemDict[item2] = 'Low resolution version'
-        self.description['Low resolution version'] = "Description of low resolution version"
-        parent = QTreeWidgetItem(ancestor, ['REFscale'])        
-        self.itemDict[parent] = 'REFscale'
-        self.description['REFscale'] = "Description of REFscale"                
-        parent = QTreeWidgetItem(ancestor, ['SANSreduction'])
-        self.itemDict[parent] = 'SANSreduction'
-        self.description['SANSreduction'] = "Description of SANSreduction"
-        item = QTreeWidgetItem(parent, ['High resolution version'])
-        self.itemDict[item] = 'High resolution version'
-        self.description['High resolution version'] = "Description of high resolution version"
-        item = QTreeWidgetItem(parent, ['Low resolution version'])
-        self.itemDict[item] = 'Low resolution version'
-        self.description['Low resolution version'] = "Description of low resolution version"
+        parent = self.createItem(ancestor, 'CLoopES')
+        parent = self.createItem(ancestor, 'DAD')
+        parent = self.createItem(ancestor, 'DGSreduction')
+        parent = self.createItem(ancestor, 'FITStools')
+        parent = self.createItem(ancestor, 'GG')
+        parent = self.createItem(ancestor,'MakeNeXus')
+        parent = self.createItem(ancestor,'plotARCS')
+        parent = self.createItem(ancestor,'plotASCII')
+        parent = self.createItem(ancestor,'plotBSS')
+        parent = self.createItem(ancestor,'plotCNCS')
+        parent = self.createItem(ancestor,'plotInstrument')
+        parent = self.createItem(ancestor,'plotROI')
+        parent = self.createItem(ancestor,'REFoffSpec')
+        parent = self.createItem(ancestor,'REFreduction')
+        item = self.createItem(parent,'1.3.x versions')
+        item2 = self.createItem(item, 'High resolution version')
+        item2 = self.createItem(item, 'Low resolution version')
+        item = self.createItem(parent,'1.4.x versions')
+        item2 = self.createItem(item, 'High resolution version')
+        item2 = self.createItem(item, 'Low resolution version')
+        item = self.createItem(parent,'1.5.x versions')
+        item2 = self.createItem(item, 'High resolution version')
+        item2 = self.createItem(item, 'Low resolution version')
+        parent = self.createItem(ancestor,'REFscale')
+        parent = self.createItem(ancestor,'SANSreduction')
+        item = self.createItem(parent, 'High resolution version')
+        item = self.createItem(parent, 'Low resolution version')
         
         ##Instrument
-        ancestor = QTreeWidgetItem(self.treeWidget, ['Instruments'])
-        self.itemDict[ancestor] = 'Instruments'        
-        self.description['Instruments'] = "Description of list of Instruments"
+        ancestor = self.createItem(self.treeWidget, 'Instruments')
         #ARCS
-        parent = QTreeWidgetItem(ancestor, ['ARCS'])
-        self.itemDict[parent] = 'ARCS'        
-        self.description['ARCS'] = "Description of ARCS"
-        item = QTreeWidgetItem(parent, ['Geometry generator']) #GG
-        self.itemDict[item] = 'Geometry generator'
-        self.description['Geometry generator'] = "Description of geometry generator"        
-        item = QTreeWidgetItem(parent, ['plotARCS']) #plotARCS
-        self.itemDict[item] = 'plotARCS'
-        self.description['plotARCS'] = "Description of plotARCS" 
-        item = QTreeWidgetItem(parent, ['plotROI']) #plotROI
-        self.itemDict[item] = 'plotROI'
-        self.description['plotROI'] = "Description of plotROI"                       
+        parent = self.createItem(ancestor,'ARCS')        
+        item = self.createItem(parent, 'Geometry Generator')
+        item = self.createItem(parent, 'MakeNeXus')
+        item = self.createItem(parent, 'plotARCS')
+        item = self.createItem(parent, 'plotROI')
         #BSS
-        parent = QTreeWidgetItem(ancestor, ['BSS'])
-        self.itemDict[parent] = 'BSS'        
-        self.description['BSS'] = "Description of BSS"
-        item = QTreeWidgetItem(parent, ['BSSreduction']) #BSSreduction
-        self.itemDict[item] = 'BSSreduction'
-        self.description['BSSreduction'] = "Description of BSSreduction"
-        item = QTreeWidgetItem(parent, ['CLoopES']) #CLoopES
-        self.itemDict[item] = 'CLoopES'
-        self.description['CLoopES'] = "Description of CLoopES"
-        item = QTreeWidgetItem(parent, ['DAD']) #DAD
-        self.itemDict[item] = 'DAD'
-        self.description['DAD'] = "Description of DAD"
-        item = QTreeWidgetItem(parent, ['Geometry generator']) #GG
-        self.itemDict[item] = 'Geometry generator'
-        self.description['Geometry generator'] = "Description of geometry generator"
-        item = QTreeWidgetItem(parent, ['MakeNeXus']) #MakeNeXus
-        self.itemDict[item] = 'MakeNeXus'
-        self.description['MakeNeXus'] = "Description of MakeNeXus"
-        item = QTreeWidgetItem(parent, ['plotBSS']) #plotBSS
-        self.itemDict[item] = 'plotBSS'
-        self.description['plotBSS'] = "Description of plotBSS"
-        item = QTreeWidgetItem(parent, ['plotROI']) #plotROI
-        self.itemDict[item] = 'plotROI'
-        self.description['plotROI'] = "Description of plotROI"        
-        item = QTreeWidgetItem(parent, ['realignBSS']) #realignBSS
-        self.itemDict[item] = 'realignBSS'
-        self.description['realignBSS'] = "Description of realignBSS"
+        parent = self.createItem(ancestor,'BSS')        
+        item = self.createItem(parent, 'BSSreduction')
+        item = self.createItem(parent, 'CLoopES')
+        item = self.createItem(parent, 'DAD')        
+        item = self.createItem(parent, 'Geometry Generator')
+        item = self.createItem(parent, 'MakeNeXus')
+        item = self.createItem(parent, 'plotBSS')
+        item = self.createItem(parent, 'plotROI')        
+        item = self.createItem(parent, 'realignBSS')
         #EQSANS
-        parent = QTreeWidgetItem(ancestor, ['EQSANS'])
-        self.itemDict[parent] = 'EQSANS'        
-        self.description['EQSANS'] = "Description of EQSANS"
-        item = QTreeWidgetItem(parent, ['Geometry generator']) #GG
-        self.itemDict[item] = 'Geometry generator'
-        self.description['Geometry generator'] = "Description of geometry generator"
-        item = QTreeWidgetItem(parent, ['MakeNeXus']) #MakeNeXus
-        self.itemDict[item] = 'MakeNeXus'
-        self.description['MakeNeXus'] = "Description of MakeNeXus"   
-        item = QTreeWidgetItem(parent, ['plotROI']) #plotROI
-        self.itemDict[item] = 'plotROI'
-        self.description['plotROI'] = "Description of plotROI"
-        item = QTreeWidgetItem(parent, ['SANSreduction']) #SANSreduction
-        self.itemDict[item] = 'SANSreduction'
-        self.description['SANSreduction'] = "Description of SANSreduction"
+        parent = self.createItem(ancestor,'EQSANS')        
+        item = self.createItem(parent, 'Geometry Generator')
+        item = self.createItem(parent, 'MakeNeXus')
+        item = self.createItem(parent, 'plotROI')
+        item = self.createItem(parent, 'SANSreduction')                        
         #CNCS
-        parent = QTreeWidgetItem(ancestor, ['CNCS'])
-        self.itemDict[parent] = 'CNCS'        
-        self.description['CNCS'] = "Description of CNCS"
-        item = QTreeWidgetItem(parent, ['Geometry generator']) #GG
-        self.itemDict[item] = 'Geometry generator'
-        self.description['Geometry generator'] = "Description of geometry generator"        
-        item = QTreeWidgetItem(parent, ['MakeNeXus'])
-        self.itemDict[item] = 'MakeNeXus'
-        self.description['MakeNeXus'] = "Description of MakeNeXus"                
-        item = QTreeWidgetItem(parent, ['plotCNCS']) #plotCNCS
-        self.itemDict[item] = 'plotCNCS'
-        self.description['plotCNCS'] = "Description of plotCNCS"        
-        item = QTreeWidgetItem(parent, ['plotROI']) #plotROI
-        self.itemDict[item] = 'plotROI'
-        self.description['plotROI'] = "Description of plotROI"        
+        parent = self.createItem(ancestor,'CNCS')        
+        item = self.createItem(parent, 'DGSreduction')
+        item = self.createItem(parent, 'Geometry Generator')
+        item = self.createItem(parent, 'MakeNeXus')
+        item = self.createItem(parent, 'plotCNCS')
+        item = self.createItem(parent, 'plotROI')        
         #REF_L
         parent = QTreeWidgetItem(ancestor, ['REF_L'])
         self.itemDict[parent] = 'REF_L'        
