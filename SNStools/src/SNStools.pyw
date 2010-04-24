@@ -14,6 +14,7 @@ class MainForm(QDialog):
         self.itemDict = {}
         self.description = {}
         self.screen = {}
+        self.exe = {}
 
         #left part of gui (widget tree)
         self.treeWidget = QTreeWidget()
@@ -75,15 +76,21 @@ class MainForm(QDialog):
         self.descriptionWidget.setText(self.description[appli])
         pixmap = QPixmap(":/%s.gif" % self.screen[appli])
         self.image.setPixmap(pixmap)
+        if self.exe[appli] is None:
+            self.launch.hide()
+        else:
+            self.launch.show()
 
     def initialLoad(self):
         self.populateTree()
         
-    def createItem(self, ancestor, itemName):
+    def createItem(self, ancestor, itemName, exeName=None):
         parent = QTreeWidgetItem(ancestor, [itemName])
         self.itemDict[parent] = itemName
-        self.description[itemName] = "Description of " + itemName
-        self.screen[itemName] = itemName
+        if itemName not in self.description.keys():
+            self.description[itemName] = "Description of " + itemName
+            self.screen[itemName] = itemName
+            self.exe[itemName] = exeName
         return parent
         
     def populateTree(self):
@@ -97,7 +104,7 @@ class MainForm(QDialog):
         ##Application
         ancestor = self.createItem(self.treeWidget, 'Application')
         self.treeWidget.expandItem(ancestor)
-        parent = self.createItem(ancestor, 'CLoopES')
+        parent = self.createItem(ancestor, 'CLoopES', exeName='CLoopES')
         parent = self.createItem(ancestor, 'DAD')
         parent = self.createItem(ancestor, 'DGSreduction')
         parent = self.createItem(ancestor, 'FITStools')
