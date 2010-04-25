@@ -53,7 +53,8 @@ class MainForm(QDialog):
         
         self.setLayout(hLayout)
 
-        self.connect(self.treeWidget, SIGNAL("itemClicked(QTreeWidgetItem*,int)"), self.tree_event)
+        self.connect(self.treeWidget, SIGNAL("itemClicked(QTreeWidgetItem*,int)"), self.tree_click_event)
+        self.connect(self.treeWidget, SIGNAL("itemSelectionChanged()"), self.tree_select_event)
         self.connect(self.launch, SIGNAL("clicked()"), self.launch_application)
         self.connect(self.help, SIGNAL("clicked()"), self.launch_help)
 
@@ -71,7 +72,20 @@ class MainForm(QDialog):
         print 'launching current selected application'
 #        item = self.treeWidget.item
 
-    def tree_event(self, item):
+    def tree_select_event(self):
+        item = self.treeWidget.selectedItems()
+        appli = self.itemDict[item[0]]
+        self.descriptionWidget.setText(self.description[appli])
+        pixmap = QPixmap(":/%s.gif" % self.screen[appli])
+        self.image.setPixmap(pixmap)
+        if self.exe[appli] is None:
+            self.launch.hide()
+        else:
+            self.launch.show()
+
+
+    def tree_click_event(self, item):
+        print item
         appli = self.itemDict[item]
         self.descriptionWidget.setText(self.description[appli])
         pixmap = QPixmap(":/%s.gif" % self.screen[appli])
