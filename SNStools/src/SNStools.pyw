@@ -23,9 +23,9 @@ class MainForm(QDialog):
         #right part (image, description and launch button)
         vLayout = QVBoxLayout()
 #        self.image = QLabel("here will go the preview of the application")
-        pixmap = QPixmap(":/under_construction.gif")
+        #pixmap = QPixmap(":/under_construction.gif")
         self.image = QLabel(self)
-        self.image.setPixmap(pixmap)
+        #self.image.setPixmap(pixmap)
         
         self.descriptionWidget = QLabel("here is the description")
         
@@ -60,8 +60,8 @@ class MainForm(QDialog):
 
 #        self.setCentralWidget(self.mainSplitter)
         self.setWindowTitle("SNS applications launcher")
-        self.setMinimumWidth(500)
-        self.setMinimumHeight(300)
+        self.setMinimumWidth(1000)
+        self.setMinimumHeight(500)
         
         QTimer.singleShot(0, self.initialLoad)
 
@@ -83,9 +83,7 @@ class MainForm(QDialog):
         else:
             self.launch.show()
 
-
     def tree_click_event(self, item):
-        print item
         appli = self.itemDict[item]
         self.descriptionWidget.setText(self.description[appli])
         pixmap = QPixmap(":/%s.gif" % self.screen[appli])
@@ -98,8 +96,12 @@ class MainForm(QDialog):
     def initialLoad(self):
         self.populateTree()
         
-    def createItem(self, ancestor, itemName, exeName=None, imageName=None):
-        parent = QTreeWidgetItem(ancestor, [itemName])
+    def createItem(self, ancestor, itemName, label=None, exeName=None, imageName=None):
+        if label is None:
+            local_label = itemName
+        else:
+            local_label = label
+        parent = QTreeWidgetItem(ancestor, [local_label])
         self.itemDict[parent] = itemName
         if itemName not in self.description.keys():
             self.description[itemName] = "Description of " + itemName
@@ -118,44 +120,63 @@ class MainForm(QDialog):
         ##Application
         ancestor = self.createItem(self.treeWidget, 'Application')
         self.treeWidget.expandItem(ancestor)
+        parent = self.createItem(ancestor, 'BSSreduction', exeName='BSSreduction', imageName='BSSreduction')        
         parent = self.createItem(ancestor, 'CLoopES', exeName='CLoopES', imageName='CLoopES')
         parent = self.createItem(ancestor, 'DAD', imageName='DAD')
         parent = self.createItem(ancestor, 'DGSreduction', imageName='DGSreduction')
         parent = self.createItem(ancestor, 'FITStools', imageName='FITStools')
         parent = self.createItem(ancestor, 'Geometry Generator', imageName='GG')
-        parent = self.createItem(ancestor,'MakeNeXus', imageName='MakeNeXus')
-        parent = self.createItem(ancestor,'plotARCS', imageName='plotARCS')
-        parent = self.createItem(ancestor,'plotASCII', imageName='plotASCII')
-        parent = self.createItem(ancestor,'plotBSS', imageName='plotBSS')
-        parent = self.createItem(ancestor,'plotCNCS', imageName='plotCNCS')
-        parent = self.createItem(ancestor,'plotInstrument', imageName='under_construction')
-        parent = self.createItem(ancestor,'plotROI', imageName='plotROI')
-        parent = self.createItem(ancestor,'REFoffSpec', imageName='REFoffSpec')
-        parent = self.createItem(ancestor,'REFreduction')
-        item = self.createItem(parent,'1.3.x versions')
-        item2 = self.createItem(item, 'High resolution version', imageName='REFreduction1_3')
-        item2 = self.createItem(item, 'Low resolution version', imageName='miniREFreduction1_3')
-        item = self.createItem(parent,'1.5.x versions')
-        item2 = self.createItem(item, 'High resolution version', imageName='REFreduciton1_5')
-        item2 = self.createItem(item, 'Low resolution version', imageName='miniREFreduction1_5')
-        item = self.createItem(parent,'1.6.x versions')
-        item2 = self.createItem(item, 'High resolution version', imageName='REFreduction1_6')
-        item2 = self.createItem(item, 'Low resolution version', imageName='miniREFreduction1_6')
-        parent = self.createItem(ancestor,'REFscale', imageName='REFscale')
-        parent = self.createItem(ancestor,'SANSreduction')
-        item = self.createItem(parent, 'High resolution version', imageName='SANSreduction')
-        item = self.createItem(parent, 'Low resolution version', imageName='miniSANSreduction')
+        parent = self.createItem(ancestor, 'MakeNeXus', imageName='MakeNeXus')
+        parent = self.createItem(ancestor, 'plotARCS', imageName='plotARCS')
+        parent = self.createItem(ancestor, 'plotASCII', imageName='plotASCII')
+        parent = self.createItem(ancestor, 'plotBSS', imageName='plotBSS')
+        parent = self.createItem(ancestor, 'plotCNCS', imageName='plotCNCS')
+        parent = self.createItem(ancestor, 'plotInstrument', imageName='under_construction')
+        parent = self.createItem(ancestor, 'plotROI', imageName='plotROI')
+        parent = self.createItem(ancestor, 'realignBSS', exeName='realignBSS', imageName='realignBSS')
+        parent = self.createItem(ancestor, 'REFoffSpec', imageName='REFoffSpec')
+        parent = self.createItem(ancestor, 'REFreduction')
+        item = self.createItem(parent, '1.3.x versions')
+        item2 = self.createItem(item, '1.3.x high resolution version',
+                                label="High resolution version",
+                                imageName='REFreduction1_3')
+        item2 = self.createItem(item, '1.3.x low resolution version',
+                                label='Low resolution version',
+                                imageName='miniREFreduction1_3')
+        item = self.createItem(parent, '1.5.x versions')
+        item2 = self.createItem(item, '1.5.x high resolution version',
+                                label='High resolution version',
+                                imageName='REFreduction1_5')
+        item2 = self.createItem(item, '1.5.x low resolution version',
+                                label='Low resolution version',
+                                imageName='miniREFreduction1_5')
+        item = self.createItem(parent, '1.6.x versions')
+        item2 = self.createItem(item, '1.6.x high resolution version',
+                                label='High resolution version',
+                                imageName='REFreduction1_6')
+        item2 = self.createItem(item, '1.6.x low resolution version',
+                                label='Low resolution version',
+                                imageName='miniREFreduction1_6')
+        parent = self.createItem(ancestor, 'REFscale', imageName='REFscale')
+        parent = self.createItem(ancestor, 'SANSreduction')
+        item = self.createItem(parent, 'SANSreduction high resolution version',
+                               label='High resolution version',
+                               imageName='SANSreduction')
+        item = self.createItem(parent, 'SANSreduction low resolution version',
+                               label='Low resolution version',
+                               imageName='miniSANSreduction')
         
         ##Instrument
         ancestor = self.createItem(self.treeWidget, 'Instruments')
         #ARCS
-        parent = self.createItem(ancestor,'ARCS')        
+        parent = self.createItem(ancestor, 'ARCS')        
+        item = self.createItem(parent, 'DGSreduction')        
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotARCS')
         item = self.createItem(parent, 'plotROI')
         #BSS
-        parent = self.createItem(ancestor,'BSS')        
+        parent = self.createItem(ancestor, 'BSS')        
         item = self.createItem(parent, 'BSSreduction')
         item = self.createItem(parent, 'CLoopES')
         item = self.createItem(parent, 'DAD')        
@@ -165,119 +186,148 @@ class MainForm(QDialog):
         item = self.createItem(parent, 'plotROI')        
         item = self.createItem(parent, 'realignBSS')
         #EQSANS
-        parent = self.createItem(ancestor,'EQSANS')        
+        parent = self.createItem(ancestor, 'EQSANS')        
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotROI')
-        item = self.createItem(parent, 'SANSreduction')                        
+        item = self.createItem(parent, 'SANSreduction') 
+        item2 = self.createItem(item, 'SANSreduction high resolution version',
+                                label='High resolution version')
+        item2 = self.createItem(item, 'SANSreduction low resolution version',
+                                label='Low resolution version')                               
         #CNCS
-        parent = self.createItem(ancestor,'CNCS')        
+        parent = self.createItem(ancestor, 'CNCS')        
         item = self.createItem(parent, 'DGSreduction')
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotCNCS')
         item = self.createItem(parent, 'plotROI')        
         #REF_L
-        parent = self.createItem(ancestor,'REF_L')
+        parent = self.createItem(ancestor, 'REF_L')
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotASCII')
         item = self.createItem(parent, 'plotROI')
-        item = self.createItem(parent,'REFoffSpec')
-        item = self.createItem(parent,'REFreduction')
-        item2 = self.createItem(item,'1.3.x versions')
-        item3 = self.createItem(item2, 'High resolution version')
-        item3 = self.createItem(item2, 'Low resolution version')
-        item2 = self.createItem(item,'1.5.x versions')
-        item3 = self.createItem(item2, 'High resolution version')
-        item3 = self.createItem(item2, 'Low resolution version')
-        parent = self.createItem(parent,'REFscale')
+        item = self.createItem(parent, 'REFoffSpec')
+        item = self.createItem(parent, 'REFreduction')
+        item2 = self.createItem(item, '1.3.x versions')
+        item3 = self.createItem(item2, '1.3.x high resolution version',
+                                label='High resolution version')
+        item3 = self.createItem(item2, '1.3.x low resolution version',
+                                label='Low resolution version')
+        item2 = self.createItem(item, '1.5.x versions')
+        item3 = self.createItem(item2, '1.5.x high resolution version',
+                                label='High resolution version')
+        item3 = self.createItem(item2, '1.5.x low resolution version',
+                                label='Low resolution version')
+        parent = self.createItem(parent, 'REFscale')
         #REF_M
-        parent = self.createItem(ancestor,'REF_M')
+        parent = self.createItem(ancestor, 'REF_M')
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotASCII')
         item = self.createItem(parent, 'plotROI')
-        item = self.createItem(parent,'REFoffSpec')
-        item = self.createItem(parent,'REFreduction')
-        item2 = self.createItem(item,'1.3.x versions')
-        item3 = self.createItem(item2, 'High resolution version')
-        item3 = self.createItem(item2, 'Low resolution version')
-        item2 = self.createItem(item,'1.6.x versions')
-        item3 = self.createItem(item2, 'High resolution version')
-        item3 = self.createItem(item2, 'Low resolution version')
-        parent = self.createItem(parent,'REFscale')
+        item = self.createItem(parent, 'REFoffSpec')
+        item = self.createItem(parent, 'REFreduction')
+        item2 = self.createItem(item, '1.3.x versions')
+        item3 = self.createItem(item2, 'High resolution version',
+                                label='1.3.x high resolution version')
+        item3 = self.createItem(item2, 'Low resolution version',
+                                label='1.3.x low resolution version')
+        item2 = self.createItem(item, '1.6.x versions')
+        item3 = self.createItem(item2, '1.6.x high resolution version',
+                                label='High resolution version')
+        item3 = self.createItem(item2, '1.6.x low resolution version',
+                                label='Low resolution version')
+        parent = self.createItem(parent, 'REFscale')
         #SEQUOIA
-        parent = self.createItem(ancestor,'SEQUOIA')
+        parent = self.createItem(ancestor, 'SEQUOIA')
+        item = self.createItem(parent, 'DGSreduction')
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotASCII')
         item = self.createItem(parent, 'plotROI')
-        item = self.createItem(parent, 'DGSreduction')
         #VENUS
-        parent = self.createItem(ancestor,'VENUS')        
+        parent = self.createItem(ancestor, 'VENUS')        
         item = self.createItem(parent, 'FITStools')        
         
         ##Reduction
         ancestor = self.createItem(self.treeWidget, 'Reduction')
-        parent = self.createItem(ancestor, "ARCS")
-        parent = self.createItem(ancestor, "BSS")        
-        parent = self.createItem(ancestor, "CNCS")
-        parent = self.createItem(ancestor, "EQSANS")
-        item = self.createItem(parent, 'High resolution version')
-        item = self.createItem(parent, 'Low resolution version')        
-        parent = self.createItem(ancestor, "REF_L")
-        item = self.createItem(parent,'REFoffSpec')
-        item = self.createItem(parent,'REFreduction')
-        item2 = self.createItem(item,'1.3.x versions (old detector 256x304)')
-        item3 = self.createItem(item2, 'High resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        item3 = self.createItem(item2, 'Low resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        item2 = self.createItem(item,'1.5.x versions (new detector 304x256)')
-        item3 = self.createItem(item2, 'High resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        item3 = self.createItem(item2, 'Low resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        parent = self.createItem(ancestor, "REF_M")
-        item = self.createItem(parent,'REFoffSpec')
-        item = self.createItem(parent,'REFreduction')
-        item2 = self.createItem(item,'1.3.x versions (old detector 304x256)')
-        item3 = self.createItem(item2, 'High resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        item3 = self.createItem(item2, 'Low resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        item2 = self.createItem(item,'1.6.x versions (new detector 128x128)')
-        item3 = self.createItem(item2, 'High resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        item3 = self.createItem(item2, 'Low resolution version')
-        item4 = self.createItem(item3, 'Stable version')
-        item4 = self.createItem(item3, 'Last released version')        
-        parent = self.createItem(ancestor, "SEQUOIA")
+        parent = self.createItem(ancestor, "reduction ARCS", 
+                                label = 'ARCS',
+                                imageName='DGSreduction')
+        parent = self.createItem(ancestor, "reduction BSS", 
+                                 label = 'BSS',
+                                 imageName='BSSreduction')        
+        parent = self.createItem(ancestor, "reduction CNCS", 
+                                 label = 'CNCS',
+                                 imageName='DGSreduction')
+        parent = self.createItem(ancestor, "reduction EQSANS",
+                                 label = 'EQSANS')
+        item = self.createItem(parent, 'SANSreduction high resolution version',
+                               label = 'High resolution version')
+        item = self.createItem(parent, 'SANSreduction low resolution version',
+                               label = 'Low resolution version')
+        parent = self.createItem(ancestor, "reduction REF_L",
+                                 label = 'REF_L')
+        item = self.createItem(parent, 'REFoffSpec')
+        item = self.createItem(parent, 'REFreduction')
+
+        item2 = self.createItem(item, '1.3.x versions (old detector 256x304)')
+        item3 = self.createItem(item2, '1.3.x high resolution version',
+                                label = 'High resolution version')
+        item4 = self.createItem(item3, '1.3.x low resolution version', 
+                                label = 'Low resolution version',
+                                imageName='miniREFreduction1_3')
+        item2 = self.createItem(item, '1.5.x versions (new detector 304x256)')
+        item3 = self.createItem(item2, '1.5.x high resolution version',
+                                label = 'High resolution version')
+        item4 = self.createItem(item3, '1.5.x low resolution version', 
+                                label = 'Low resolution version',
+                                imageName='miniREFreduction1_3')
+
+        parent = self.createItem(ancestor, "reduction REF_M",
+                                 label = 'REF_M')
+        item = self.createItem(parent, 'REFoffSpec')
+        item = self.createItem(parent, 'REFreduction')
+
+        item2 = self.createItem(item, '1.3.x versions (old detector 304x256)')
+        item3 = self.createItem(item2, '1.3.x high resolution version',
+                                label = 'High resolution version')
+        item4 = self.createItem(item3, '1.3.x low resolution version', 
+                                label = 'Low resolution version',
+                                imageName='miniREFreduction1_3')
+        item2 = self.createItem(item, '1.6.x versions (new detector 304x256)')
+        item3 = self.createItem(item2, '1.6.x high resolution version',
+                                label = 'High resolution version')
+        item4 = self.createItem(item3, '1.6.x low resolution version', 
+                                label = 'Low resolution version',
+                                imageName='miniREFreduction1_3')
+
+        parent = self.createItem(ancestor, "reduction SEQUOIA",
+                                 label = 'SEQUOIA',
+                                 imageName = 'DGSreduction')
                 
         ##Utilities        
         ancestor = self.createItem(self.treeWidget, 'Utilities')        
-        parent = self.createItem(ancestor,'CLoopES')
-        parent = self.createItem(ancestor,'DAD')
-        parent = self.createItem(ancestor,'FITStools')
-        parent = self.createItem(ancestor,'Geometry Generator')
-        parent = self.createItem(ancestor,'MakeNeXus')
+        parent = self.createItem(ancestor, 'CLoopES')
+        parent = self.createItem(ancestor, 'DAD')
+        parent = self.createItem(ancestor, 'FITStools')
+        parent = self.createItem(ancestor, 'Geometry Generator')
+        parent = self.createItem(ancestor, 'MakeNeXus')
 
         ##Visualization
-        ancestor = self.createItem(self.treeWidget, 'Utilities')
+        ancestor = self.createItem(self.treeWidget, 'Visualization')
         parent = self.createItem(ancestor, "plotARCS")
         parent = self.createItem(ancestor, "plotASCII")                
         parent = self.createItem(ancestor, "plotBSS")
         parent = self.createItem(ancestor, "plotCNCS")
-        parent = self.createItem(ancestor, "plotInstruments")
+        parent = self.createItem(ancestor, "plotInstruments", imageName='under_construction')
         parent = self.createItem(ancestor, "plotROI")
+
+        ##Test
+        ancestor = self.createItem(self.treeWidget, 'Test')
+        parent = self.createItem(ancestor, "")
 
 app = QApplication(sys.argv)
 #    app.setApplicationName("Image Changer")

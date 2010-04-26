@@ -1,6 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-<file alias="BSSselection.gif">images/BSSselection.gif</file>
+<file alias="BSSreduction.gif">images/BSSreduction.gif</file>
 <file alias="GG.gif">images/GG.gif</file>
 <file alias="DAD.gif">images/DAD.gif</file>
 <file alias="MakeNeXus.gif">images/MakeNeXus.gif</file>
@@ -13,6 +13,7 @@
 <file alias="plotROI.gif">images/plotROI.gif</file>
 <file alias="plotASCII.gif">images/plotASCII.gif</file>
 <file alias="plotCNCS.gif">images/plotCNCS.gif</file>
+<file alias="plotBSS.gif">images/plotBSS.gif</file>
 <file alias="plotARCS.gif">images/plotARCS.gif</file>
 <file alias="REFreduction1_3.gif">images/REFreduction1_3.gif</file>
 <file alias="miniREFreduction1_3.gif">images/miniREFreduction1_3.gif</file>
