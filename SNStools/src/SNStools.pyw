@@ -98,12 +98,12 @@ class MainForm(QDialog):
     def initialLoad(self):
         self.populateTree()
         
-    def createItem(self, ancestor, itemName, exeName=None):
+    def createItem(self, ancestor, itemName, exeName=None, imageName=None):
         parent = QTreeWidgetItem(ancestor, [itemName])
         self.itemDict[parent] = itemName
         if itemName not in self.description.keys():
             self.description[itemName] = "Description of " + itemName
-            self.screen[itemName] = itemName
+            self.screen[itemName] = imageName
             self.exe[itemName] = exeName
         return parent
         
@@ -118,33 +118,33 @@ class MainForm(QDialog):
         ##Application
         ancestor = self.createItem(self.treeWidget, 'Application')
         self.treeWidget.expandItem(ancestor)
-        parent = self.createItem(ancestor, 'CLoopES', exeName='CLoopES')
-        parent = self.createItem(ancestor, 'DAD')
-        parent = self.createItem(ancestor, 'DGSreduction')
-        parent = self.createItem(ancestor, 'FITStools')
-        parent = self.createItem(ancestor, 'GG')
-        parent = self.createItem(ancestor,'MakeNeXus')
-        parent = self.createItem(ancestor,'plotARCS')
-        parent = self.createItem(ancestor,'plotASCII')
-        parent = self.createItem(ancestor,'plotBSS')
-        parent = self.createItem(ancestor,'plotCNCS')
-        parent = self.createItem(ancestor,'plotInstrument')
-        parent = self.createItem(ancestor,'plotROI')
-        parent = self.createItem(ancestor,'REFoffSpec')
+        parent = self.createItem(ancestor, 'CLoopES', exeName='CLoopES', imageName='CLoopES')
+        parent = self.createItem(ancestor, 'DAD', imageName='DAD')
+        parent = self.createItem(ancestor, 'DGSreduction', imageName='DGSreduction')
+        parent = self.createItem(ancestor, 'FITStools', imageName='FITStools')
+        parent = self.createItem(ancestor, 'Geometry Generator', imageName='GG')
+        parent = self.createItem(ancestor,'MakeNeXus', imageName='MakeNeXus')
+        parent = self.createItem(ancestor,'plotARCS', imageName='plotARCS')
+        parent = self.createItem(ancestor,'plotASCII', imageName='plotASCII')
+        parent = self.createItem(ancestor,'plotBSS', imageName='plotBSS')
+        parent = self.createItem(ancestor,'plotCNCS', imageName='plotCNCS')
+        parent = self.createItem(ancestor,'plotInstrument', imageName='under_construction')
+        parent = self.createItem(ancestor,'plotROI', imageName='plotROI')
+        parent = self.createItem(ancestor,'REFoffSpec', imageName='REFoffSpec')
         parent = self.createItem(ancestor,'REFreduction')
         item = self.createItem(parent,'1.3.x versions')
-        item2 = self.createItem(item, 'High resolution version')
-        item2 = self.createItem(item, 'Low resolution version')
-        item = self.createItem(parent,'1.4.x versions')
-        item2 = self.createItem(item, 'High resolution version')
-        item2 = self.createItem(item, 'Low resolution version')
+        item2 = self.createItem(item, 'High resolution version', imageName='REFreduction1_3')
+        item2 = self.createItem(item, 'Low resolution version', imageName='miniREFreduction1_3')
         item = self.createItem(parent,'1.5.x versions')
-        item2 = self.createItem(item, 'High resolution version')
-        item2 = self.createItem(item, 'Low resolution version')
-        parent = self.createItem(ancestor,'REFscale')
+        item2 = self.createItem(item, 'High resolution version', imageName='REFreduciton1_5')
+        item2 = self.createItem(item, 'Low resolution version', imageName='miniREFreduction1_5')
+        item = self.createItem(parent,'1.6.x versions')
+        item2 = self.createItem(item, 'High resolution version', imageName='REFreduction1_6')
+        item2 = self.createItem(item, 'Low resolution version', imageName='miniREFreduction1_6')
+        parent = self.createItem(ancestor,'REFscale', imageName='REFscale')
         parent = self.createItem(ancestor,'SANSreduction')
-        item = self.createItem(parent, 'High resolution version')
-        item = self.createItem(parent, 'Low resolution version')
+        item = self.createItem(parent, 'High resolution version', imageName='SANSreduction')
+        item = self.createItem(parent, 'Low resolution version', imageName='miniSANSreduction')
         
         ##Instrument
         ancestor = self.createItem(self.treeWidget, 'Instruments')
