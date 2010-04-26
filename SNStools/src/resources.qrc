@@ -1,9 +1,27 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
 <file alias="BSSselection.gif">images/BSSselection.gif</file>
-<file alias="CLoop.gif">images/CLoop.gif</file>
+<file alias="GG.gif">images/GG.gif</file>
+<file alias="DAD.gif">images/DAD.gif</file>
+<file alias="MakeNeXus.gif">images/MakeNeXus.gif</file>
+<file alias="CLoopES.gif">images/CLoopES.gif</file>
+<file alias="FITStools.gif">images/FITStools.gif</file>
+<file alias="realignBSS.gif">images/realignBSS.gif</file>
+<file alias="REFoffSpec.gif">images/REFoffSpec.gif</file>
+<file alias="REFscale.gif">images/REFscale.gif</file>
 <file alias="DGSreduction.gif">images/DGSreduction.gif</file>
-<file alias="REFreduction.gif">images/REFreduction.gif</file>
+<file alias="plotROI.gif">images/plotROI.gif</file>
+<file alias="plotASCII.gif">images/plotASCII.gif</file>
+<file alias="plotCNCS.gif">images/plotCNCS.gif</file>
+<file alias="plotARCS.gif">images/plotARCS.gif</file>
+<file alias="REFreduction1_3.gif">images/REFreduction1_3.gif</file>
+<file alias="miniREFreduction1_3.gif">images/miniREFreduction1_3.gif</file>
+<file alias="REFreduction1_5.gif">images/REFreduction1_5.gif</file>
+<file alias="miniREFreduction1_5.gif">images/miniREFreduction1_5.gif</file>
+<file alias="REFreduction1_6.gif">images/REFreduction1_6.gif</file>
+<file alias="miniREFreduction1_6.gif">images/miniREFreduction1_6.gif</file>
+<file alias="SANSreduction.gif">images/SANSreduction.gif</file>
+<file alias="miniSANSreduction.gif">images/miniSANSreduction.gif</file>
 <file alias="under_construction.gif">images/under_construction.gif</file>
 </qresource>
 </RCC>
