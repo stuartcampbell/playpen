@@ -434,7 +434,7 @@ class MainForm(QDialog):
         ancestor = self.createItem(self.treeWidget, '')
 
         ##Test
-        ancestor = self.createItem(self.treeWidget, 'Developper')
+        ancestor = self.createItem(self.treeWidget, 'Developer')
         parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
                                 imageName='REFreduction1_3',
                                 exeName='/SNS/software/idltools/ref_reduction_backup',                                
