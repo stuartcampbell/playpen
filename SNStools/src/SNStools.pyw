@@ -17,41 +17,33 @@ class MainForm(QDialog):
         self.exe = {}
 
         #left part of gui (widget tree)
+        splitter = QSplitter(Qt.Horizontal)
         self.treeWidget = QTreeWidget()
-        hLayout = QHBoxLayout()
+        splitter.addWidget(self.treeWidget)
         
         #right part (image, description and launch button)
         vLayout = QVBoxLayout()
-#        self.image = QLabel("here will go the preview of the application")
-        #pixmap = QPixmap(":/under_construction.gif")
         self.image = QLabel(self)
-        #self.image.setPixmap(pixmap)
-        
         self.descriptionWidget = QLabel("here is the description")
+        
+        vLayout.addWidget(self.image)
+        vLayout.addWidget(self.descriptionWidget)
+        widget = QWidget()
+        widget.setLayout(vLayout)
+        splitter.addWidget(widget)
         
         self.launch = QPushButton("LAUNCH APPLICATION")
         self.help = QPushButton("HELP")
         h2Layout = QHBoxLayout()
-        h2Layout.addWidget(self.launch)
         h2Layout.addWidget(self.help)
-        
-        vLayout.addWidget(self.image)
-        vLayout.addWidget(self.descriptionWidget)
-        vLayout.addLayout(h2Layout)
-        
-        #layout left and right part together
-        hLayout.addWidget(self.treeWidget)
-        hLayout.addLayout(vLayout)
+        h2Layout.addWidget(self.launch)        
 
- #       self.infoSplitter = QSplitter(Qt.Vertical)
- #       self.infoSplitter.addWidget(self.image)
- #       self.infoSplitter.addWidget(self.description)
-#        self.infoSplitter.addWidget(self.launch)
- #       self.mainSplitter = QSplitter(Qt.Horizontal)
- #       self.mainSplitter.addWidget(self.tree)
- #       self.mainSplitter.addWidget(self.infoSplitter)
-        
-        self.setLayout(hLayout)
+        #layout left and right part together
+        gvLayout = QVBoxLayout()
+        gvLayout.addWidget(splitter)
+        gvLayout.addLayout(h2Layout)
+
+        self.setLayout(gvLayout)
 
         self.connect(self.treeWidget, SIGNAL("itemClicked(QTreeWidgetItem*,int)"), self.tree_click_event)
         self.connect(self.treeWidget, SIGNAL("itemSelectionChanged()"), self.tree_select_event)
@@ -325,10 +317,15 @@ class MainForm(QDialog):
         parent = self.createItem(ancestor, "plotInstruments", imageName='under_construction')
         parent = self.createItem(ancestor, "plotROI")
 
-        ##Test
-        ancestor = self.createItem(self.treeWidget, 'Test')
-        parent = self.createItem(ancestor, "")
+        ancestor = self.createItem(self.treeWidget, '')
 
+        ##Test
+        ancestor = self.createItem(self.treeWidget, 'Developper')
+        parent = self.createItem(ancestor, "REFreduction 1.3.x beta version")
+        parent = self.createItem(ancestor, "REFreduction 1.5.x beta version")
+        parent = self.createItem(ancestor, "REFreduction 1.6.x beta version")
+        parent = self.createItem(ancestor, "REFscale beta version")        
+                
 app = QApplication(sys.argv)
 #    app.setApplicationName("Image Changer")
 form = MainForm()
