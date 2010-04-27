@@ -63,8 +63,10 @@ class MainForm(QDialog):
         os.system('/SNS/software/idltools/NeedHelp &')
 
     def launch_application(self):
-        print 'launching current selected application'
 #        item = self.treeWidget.item
+        item = self.treeWidget.selectedItems()
+        appli = self.itemDict[item[0]]
+        os.system(self.exe[appli])
 
     def tree_select_event(self):
 #        self.launch.setFocus()
