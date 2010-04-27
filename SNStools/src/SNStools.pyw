@@ -71,7 +71,7 @@ class MainForm(QDialog):
         QApplication.setOverrideCursor(Qt.WaitCursor)
         item = self.treeWidget.selectedItems()
         appli = self.itemDict[item[0]]
-        os.system(self.exe[appli])
+        os.system(self.exe[appli] + ' &')
         time.sleep(3)
         QApplication.restoreOverrideCursor()
 
