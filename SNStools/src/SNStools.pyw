@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import qrc_resources
@@ -60,10 +61,10 @@ class MainForm(QDialog):
         QTimer.singleShot(0, self.initialLoad)
 
     def launch_help(self):
-        QWidget.setCursor(Qt.WaitCursor)
-#        Qt.CursorShape = Qt.WaitCursor
+        QApplication.setOverrideCursor(Qt.WaitCursor)
         os.system('/SNS/software/idltools/NeedHelp &')
-
+        time.sleep(3)
+        QApplication.restoreOverrideCursor()
 
     def launch_application(self):
 #        item = self.treeWidget.item
@@ -71,6 +72,7 @@ class MainForm(QDialog):
         item = self.treeWidget.selectedItems()
         appli = self.itemDict[item[0]]
         os.system(self.exe[appli])
+        time.sleep(3)
         QApplication.restoreOverrideCursor()
 
     def tree_select_event(self):
