@@ -54,7 +54,6 @@ class MainForm(QDialog):
         self.connect(self.launch, SIGNAL("clicked()"), self.launch_application)
         self.connect(self.help, SIGNAL("clicked()"), self.launch_help)
 
-#        self.setCentralWidget(self.mainSplitter)
         self.setWindowTitle("SNS applications launcher")
         self.setMinimumWidth(1000)
         self.setMinimumHeight(500)
@@ -68,7 +67,6 @@ class MainForm(QDialog):
         QApplication.restoreOverrideCursor()
 
     def launch_application(self):
-#        item = self.treeWidget.item
         QApplication.setOverrideCursor(Qt.WaitCursor)
         item = self.treeWidget.selectedItems()
         appli = self.itemDict[item[0]]
@@ -77,7 +75,6 @@ class MainForm(QDialog):
         QApplication.restoreOverrideCursor()
 
     def tree_select_event(self):
-#        self.launch.setFocus()
         item = self.treeWidget.selectedItems()
         appli = self.itemDict[item[0]]
         if self.description[appli] is not None:
@@ -126,7 +123,6 @@ class MainForm(QDialog):
         self.treeWidget.clear()
         self.treeWidget.setColumnCount(1)
         self.treeWidget.setHeaderLabel('List of applications sorted by:')
-#        self.treeWidget.setHeaderLabels(["Type/Application"])
 #        self.treeWidget.setHeaderHidden(True)
         self.treeWidget.setItemsExpandable(True)
         
@@ -430,7 +426,8 @@ class MainForm(QDialog):
         parent = self.createItem(ancestor, "plotASCII")                
         parent = self.createItem(ancestor, "plotBSS")
         parent = self.createItem(ancestor, "plotCNCS")
-        parent = self.createItem(ancestor, "plotInstruments", imageName='under_construction')
+        parent = self.createItem(ancestor, "plotInstruments", 
+                                 imageName='under_construction')
         parent = self.createItem(ancestor, "plotROI")
 
         ancestor = self.createItem(self.treeWidget, '')
@@ -460,9 +457,6 @@ class MainForm(QDialog):
                                  '<br><font color=red>This is only for beta tester as it may crash')                                                     
                 
 app = QApplication(sys.argv)
-#    app.setApplicationName("Image Changer")
 form = MainForm()
 form.show()
 app.exec_()
-
-
