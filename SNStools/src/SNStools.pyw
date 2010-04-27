@@ -124,8 +124,9 @@ class MainForm(QDialog):
         selected = None
         self.treeWidget.clear()
         self.treeWidget.setColumnCount(1)
+        self.treeWidget.setHeaderLabel('List of applications sorted by:')
 #        self.treeWidget.setHeaderLabels(["Type/Application"])
-        self.treeWidget.setHeaderHidden(True)
+#        self.treeWidget.setHeaderHidden(True)
         self.treeWidget.setItemsExpandable(True)
         
         ##Application
