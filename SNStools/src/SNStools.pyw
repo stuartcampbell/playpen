@@ -50,6 +50,7 @@ class MainForm(QDialog):
 
         self.connect(self.treeWidget, SIGNAL("itemClicked(QTreeWidgetItem*,int)"), self.tree_click_event)
         self.connect(self.treeWidget, SIGNAL("itemSelectionChanged()"), self.tree_select_event)
+        self.connect(self.treeWidget, SIGNAL("itemDoubleClicked(QTreeWidgetItem*,int)"), self.launch_application)
         self.connect(self.launch, SIGNAL("clicked()"), self.launch_application)
         self.connect(self.help, SIGNAL("clicked()"), self.launch_help)
 
