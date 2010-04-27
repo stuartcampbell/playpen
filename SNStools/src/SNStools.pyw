@@ -60,13 +60,18 @@ class MainForm(QDialog):
         QTimer.singleShot(0, self.initialLoad)
 
     def launch_help(self):
+        QWidget.setCursor(Qt.WaitCursor)
+#        Qt.CursorShape = Qt.WaitCursor
         os.system('/SNS/software/idltools/NeedHelp &')
+
 
     def launch_application(self):
 #        item = self.treeWidget.item
+        QApplication.setOverrideCursor(Qt.WaitCursor)
         item = self.treeWidget.selectedItems()
         appli = self.itemDict[item[0]]
         os.system(self.exe[appli])
+        QApplication.restoreOverrideCursor()
 
     def tree_select_event(self):
 #        self.launch.setFocus()
