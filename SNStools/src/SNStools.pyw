@@ -120,91 +120,132 @@ class MainForm(QDialog):
         self.treeWidget.setItemsExpandable(True)
         
         ##Application
-        ancestor = self.createItem(self.treeWidget, 'Application', 
+        ancestor = self.createItem(self.treeWidget, 'Application',
                                    description='<html><b>List of all applications available.</b></html>')
         self.treeWidget.expandItem(ancestor)
-        parent = self.createItem(ancestor, 'BSSreduction', exeName='BSSreduction', 
+        parent = self.createItem(ancestor, 'BSSreduction',
+                                 exeName='/SNS/software/idltools/BSSreduction',
                                  imageName='BSSreduction',
-                                 description = 'Data Reduction for the <i>Backscattering</i> instrument <i>(BL2)</i>.')        
-        parent = self.createItem(ancestor, 'CLoopES', exeName='CLoopES', 
+                                 description='Data Reduction for the <i>Backscattering</i> instrument <i>(BL2)</i>.')        
+        parent = self.createItem(ancestor, 'CLoopES',
+                                 exeName='/SNS/software/idltools/CLoopES',
                                  imageName='CLoopES',
-                                 description = 'Command Line looper for elastic scans.')
-        parent = self.createItem(ancestor, 'DAD', imageName='DAD',
-                                 description = 'Dave ascii division program')
-        parent = self.createItem(ancestor, 'DGSreduction', imageName='DGSreduction',
-                                 description = 'Data reduction for the direct geometry instruments ' +
+                                 description='Command Line looper for elastic scans.')
+        parent = self.createItem(ancestor, 'DAD',
+                                 imageName='DAD',
+                                 exeName='/SNS/software/idltools/DAD',
+                                 description='Dave ascii division program')
+        parent = self.createItem(ancestor, 'DGSreduction',
+                                 imageName='DGSreduction',
+                                 exeName='/SNS/software/idltools/DGSreduction',
+                                 description='Data reduction for the direct geometry instruments ' + 
                                  '<i>ARCS, CNCS, SEQUOIA and HYSPEC</i>.')
-        parent = self.createItem(ancestor, 'FITStools', imageName='FITStools',
+        parent = self.createItem(ancestor, 'FITStools',
+                                 imageName='FITStools',
+                                 exeName='/SNS/software/idltools/FITStools',
                                  description='FITS tools program used by <i>VENUS</i>.')
-        parent = self.createItem(ancestor, 'Geometry Generator', imageName='GG',
+        parent = self.createItem(ancestor, 'Geometry Generator',
+                                 imageName='GG',
+                                 exeName='/SNS/software/idltools/GG',
                                  description='Program to generate temporary geometry files')
-        parent = self.createItem(ancestor, 'MakeNeXus', imageName='MakeNeXus',
-                                 description='Program to produce new NeXus files with user defined histograming' +
+        parent = self.createItem(ancestor, 'MakeNeXus',
+                                 imageName='MakeNeXus',
+                                 exeName='/SNS/software/bin/MakeNeXus.sh',
+                                 description='Program to produce new NeXus files with user defined histograming' + 
                                  ' schema')
-        parent = self.createItem(ancestor, 'plotARCS', imageName='plotARCS',
+        parent = self.createItem(ancestor, 'plotARCS',
+                                 imageName='plotARCS',
+                                 exeName='/SNS/software/idltools/plotARCS',
                                  description='Program to plot <i>ARCS</i> NeXus and event files')
-        parent = self.createItem(ancestor, 'plotASCII', imageName='plotASCII',
+        parent = self.createItem(ancestor, 'plotASCII',
+                                 imageName='plotASCII',
+                                 exeName='/SNS/software/idltools/plotASCII',
                                  description='Program to plot ASCII files produced by the various data reduction programs')
-        parent = self.createItem(ancestor, 'plotBSS', imageName='plotBSS',
+        parent = self.createItem(ancestor, 'plotBSS',
+                                 imageName='plotBSS',
+                                 exeName='/SNS/software/idltools/plotBSS',
                                  description='Program to plot NeXus and histogrammed files from <i>BSS</i>.')
-        parent = self.createItem(ancestor, 'plotCNCS', imageName='plotCNCS',
+        parent = self.createItem(ancestor, 'plotCNCS',
+                                 imageName='plotCNCS',
+                                 exeName='/SNS/software/idltools/plotCNCS',
                                  description='Program to plot NeXus and event file from the <i>CNCS</i> instrument.')
-        parent = self.createItem(ancestor, 'plotInstrument', imageName='under_construction',
+        parent = self.createItem(ancestor, 'plotInstrument',
+                                 imageName='under_construction',
                                  description='Program that will be able to plot any NeXus files from any instrument.')
-        parent = self.createItem(ancestor, 'plotROI', imageName='plotROI',
-                                 description='Program that plot any NeXus file and ROI files produced by the various ' +
+        parent = self.createItem(ancestor, 'plotROI',
+                                 imageName='plotROI',
+                                 exeName='/SNS/software/idltools/plotROI',
+                                 description='Program that plot any NeXus file and ROI files produced by the various ' + 
                                  'data reduction programs.')
-        parent = self.createItem(ancestor, 'realignBSS', exeName='realignBSS', imageName='realignBSS',
+        parent = self.createItem(ancestor, 'realignBSS',
+                                 exeName='/SNS/software/idltools/realignBSS',
+                                 imageName='realignBSS',
                                  description='Program to visualize tubes/pixels/tof of the <i>BSS</i> instrument.')
-        parent = self.createItem(ancestor, 'REFoffSpec', imageName='REFoffSpec',
-                                 description='Program to get specular and off-specular peaks from the <i>reflectometers</i>' +
+        parent = self.createItem(ancestor, 'REFoffSpec',
+                                 imageName='REFoffSpec',
+                                 exeName='/SNS/software/idltools/REFoffSpec',
+                                 description='Program to get specular and off-specular peaks from the <i>reflectometers</i>' + 
                                  ' instruments.')
-        parent = self.createItem(ancestor, 'REFreduction', description='Data reduction for the <i>reflectometers</i>.')
+        parent = self.createItem(ancestor, 'REFreduction',
+                                 description='Data reduction for the <i>reflectometers</i>.')
         item = self.createItem(parent, '1.3.x versions',
                                description='Data reduction for <i>REF_L</i> (256x304) and <i>REF_M</i> (304x256).')
         item2 = self.createItem(item, '1.3.x high resolution version',
+                                 exeName='/SNS/software/idltools/ref_reduction',
                                 label="High resolution version",
                                 imageName='REFreduction1_3',
-                                description='High resolution version of the data reduction for <i>REF_L</i> (256x304) ' +
+                                description='High resolution version of the data reduction for <i>REF_L</i> (256x304) ' + 
                                 'and <i>REF_M</i> (304x256).')
         item2 = self.createItem(item, '1.3.x low resolution version',
                                 label='Low resolution version',
+                                exeName='/SNS/software/idltools/mini_ref_reduction',
                                 imageName='miniREFreduction1_3',
-                                description='Low resolution version of the data reduction for <i>REF_L</i> (256x304) ' +
+                                description='Low resolution version of the data reduction for <i>REF_L</i> (256x304) ' + 
                                 'and <i>REF_M</i> (304x256).')
-        item = self.createItem(parent, '1.5.x versions', description='Data reduction for the <i>REF_L</i> with ' +
+        item = self.createItem(parent, '1.5.x versions',
+                               description='Data reduction for the <i>REF_L</i> with ' + 
                                'rotated detector (304x256).')
         item2 = self.createItem(item, '1.5.x high resolution version',
                                 label='High resolution version',
+                                exeName='/SNS/software/idltools/REFreduction_v15',
                                 imageName='REFreduction1_5',
-                                description='High resolution version of the data reduction for the <i>REF_L</i> ' +
+                                description='High resolution version of the data reduction for the <i>REF_L</i> ' + 
                                 'with rotated detector (304x256).')                                
         item2 = self.createItem(item, '1.5.x low resolution version',
                                 label='Low resolution version',
+                                exeName='/SNS/software/idltools/miniREFreduction_v15',                                
                                 imageName='miniREFreduction1_5',
-                                description='Low resolution version of the data reduction for the <i>REF_L</i> ' +
+                                description='Low resolution version of the data reduction for the <i>REF_L</i> ' + 
                                 'with rotated detector (304x256).')                                
-        item = self.createItem(parent, '1.6.x versions', description='Data Reduction for the <i>REF_M</i> with ' +
+        item = self.createItem(parent, '1.6.x versions', 
+                               description='Data Reduction for the <i>REF_M</i> with ' + 
                                'new 128x128 detector.')
         item2 = self.createItem(item, '1.6.x high resolution version',
                                 label='High resolution version',
+                                exeName='/SNS/software/idltools/REFreduction_v16',
                                 imageName='REFreduction1_6',
-                                description='High resolution version of the data Reduction for the <i>REF_M</i>' +
+                                description='High resolution version of the data Reduction for the <i>REF_M</i>' + 
                                 ' with new 128x128 detector.')                                
         item2 = self.createItem(item, '1.6.x low resolution version',
+                                exeName='/SNS/software/idltools/miniREFreduction_v16',
                                 label='Low resolution version',
                                 imageName='miniREFreduction1_6',
-                                description='Low resolution version of the data Reduction for the <i>REF_M</i>' +
+                                description='Low resolution version of the data Reduction for the <i>REF_M</i>' + 
                                 ' with new 128x128 detector.')                                
-        parent = self.createItem(ancestor, 'REFscale', imageName='REFscale',
-                                 description='Program to merge the specular reflectivity profiles from the ' +
+        parent = self.createItem(ancestor, 'REFscale', 
+                                 imageName='REFscale',
+                                 exeName='/SNS/software/idltools/REFscale',
+                                 description='Program to merge the specular reflectivity profiles from the ' + 
                                  'different angles and produce the full reflectivity profile.')
-        parent = self.createItem(ancestor, 'SANSreduction', description='Data reduction for <i>EQSANS</i>.')
+        parent = self.createItem(ancestor, 'SANSreduction', 
+                                 description='Data reduction for <i>EQSANS</i>.')
         item = self.createItem(parent, 'SANSreduction high resolution version',
+                               exeName='/SNS/software/idltools/SANSreduction',
                                label='High resolution version',
                                imageName='SANSreduction',
                                description='High resolution version of the ata reduction for <i>EQSANS</i>.')
         item = self.createItem(parent, 'SANSreduction low resolution version',
+                               exeName='/SNS/software/idltools/miniSANSreduction',
                                label='Low resolution version',
                                imageName='miniSANSreduction',
                                description='Low resolution version of the ata reduction for <i>EQSANS</i>.')                               
@@ -296,73 +337,73 @@ class MainForm(QDialog):
         
         ##Reduction
         ancestor = self.createItem(self.treeWidget, 'Reduction')
-        parent = self.createItem(ancestor, "reduction ARCS", 
-                                label = 'ARCS',
-                                description = 'Data Reduction for <i>ARCS</i>',
+        parent = self.createItem(ancestor, "reduction ARCS",
+                                label='ARCS',
+                                description='Data Reduction for <i>ARCS</i>',
                                 imageName='DGSreduction')
-        parent = self.createItem(ancestor, "reduction BSS", 
-                                 label = 'BSS',
-                                 description = 'Data Reduction for <i>BSS</i>',                                 
+        parent = self.createItem(ancestor, "reduction BSS",
+                                 label='BSS',
+                                 description='Data Reduction for <i>BSS</i>',
                                  imageName='BSSreduction')        
-        parent = self.createItem(ancestor, "reduction CNCS", 
-                                 label = 'CNCS',
-                                 description = 'Data Reduction for <i>CNCS</i>',                                 
+        parent = self.createItem(ancestor, "reduction CNCS",
+                                 label='CNCS',
+                                 description='Data Reduction for <i>CNCS</i>',
                                  imageName='DGSreduction')
         parent = self.createItem(ancestor, "reduction EQSANS",
-                                 description = 'Data Reduction for <i>EQSANS</i>',                                 
-                                 label = 'EQSANS')
+                                 description='Data Reduction for <i>EQSANS</i>',
+                                 label='EQSANS')
         item = self.createItem(parent, 'SANSreduction high resolution version',
-                               label = 'High resolution version')
+                               label='High resolution version')
         item = self.createItem(parent, 'SANSreduction low resolution version',
-                               label = 'Low resolution version')
+                               label='Low resolution version')
         
         parent = self.createItem(ancestor, "reduction HYSPEC",
-                                 description = 'Data Reduction for <i>HYSPEC</i>',                                 
-                                 label = 'HYSPEC',
-                                 imageName = 'DGSreduction')
+                                 description='Data Reduction for <i>HYSPEC</i>',
+                                 label='HYSPEC',
+                                 imageName='DGSreduction')
         
         parent = self.createItem(ancestor, "reduction REF_L",
-                                 description = 'Data Reduction for <i>REF_L</i>',                                 
-                                 label = 'REF_L')
+                                 description='Data Reduction for <i>REF_L</i>',
+                                 label='REF_L')
         item = self.createItem(parent, 'REFoffSpec')
         item = self.createItem(parent, 'REFreduction')
 
         item2 = self.createItem(item, '1.3.x versions (old detector 256x304)')
         item3 = self.createItem(item2, '1.3.x high resolution version',
-                                label = 'High resolution version')
-        item4 = self.createItem(item3, '1.3.x low resolution version', 
-                                label = 'Low resolution version',
+                                label='High resolution version')
+        item4 = self.createItem(item3, '1.3.x low resolution version',
+                                label='Low resolution version',
                                 imageName='miniREFreduction1_3')
         item2 = self.createItem(item, '1.5.x versions (new detector 304x256)')
         item3 = self.createItem(item2, '1.5.x high resolution version',
-                                label = 'High resolution version')
-        item4 = self.createItem(item3, '1.5.x low resolution version', 
-                                label = 'Low resolution version',
+                                label='High resolution version')
+        item4 = self.createItem(item3, '1.5.x low resolution version',
+                                label='Low resolution version',
                                 imageName='miniREFreduction1_3')
 
         parent = self.createItem(ancestor, "reduction REF_M",
-                                 description = 'Data Reduction for <i>REF_M</i>',                                 
-                                 label = 'REF_M')
+                                 description='Data Reduction for <i>REF_M</i>',
+                                 label='REF_M')
         item = self.createItem(parent, 'REFoffSpec')
         item = self.createItem(parent, 'REFreduction')
 
         item2 = self.createItem(item, '1.3.x versions (old detector 304x256)')
         item3 = self.createItem(item2, '1.3.x high resolution version',
-                                label = 'High resolution version')
-        item4 = self.createItem(item3, '1.3.x low resolution version', 
-                                label = 'Low resolution version',
+                                label='High resolution version')
+        item4 = self.createItem(item3, '1.3.x low resolution version',
+                                label='Low resolution version',
                                 imageName='miniREFreduction1_3')
         item2 = self.createItem(item, '1.6.x versions (new detector 304x256)')
         item3 = self.createItem(item2, '1.6.x high resolution version',
-                                label = 'High resolution version')
-        item4 = self.createItem(item3, '1.6.x low resolution version', 
-                                label = 'Low resolution version',
+                                label='High resolution version')
+        item4 = self.createItem(item3, '1.6.x low resolution version',
+                                label='Low resolution version',
                                 imageName='miniREFreduction1_3')
 
         parent = self.createItem(ancestor, "reduction SEQUOIA",
-                                 description = 'Data Reduction for <i>SEQUOIA</i>',                                 
-                                 label = 'SEQUOIA',
-                                 imageName = 'DGSreduction')
+                                 description='Data Reduction for <i>SEQUOIA</i>',
+                                 label='SEQUOIA',
+                                 imageName='DGSreduction')
                 
         ##Utilities        
         ancestor = self.createItem(self.treeWidget, 'Utilities')        
@@ -386,24 +427,25 @@ class MainForm(QDialog):
         ##Test
         ancestor = self.createItem(self.treeWidget, 'Developper')
         parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
-                                imageName = 'REFreduction1_3',
-                                description='Beta version of the data reduction for <i>REF_L</i> (256x304) ' +
+                                imageName='REFreduction1_3',
+                                exeName='/SNS/software/idltools/ref_reduction_backup',                                
+                                description='Beta version of the data reduction for <i>REF_L</i> (256x304) ' + 
                                 'and <i>REF_M</i> (304x256).<br><font color=red>This is only for beta tester as it may ' + 
                                 'crash')
         parent = self.createItem(ancestor, "REFreduction 1.5.x beta version",
-                                imageName = 'REFreduction1_5',                                 
-                                description='Beta version of the data reduction for the <i>REF_L</i> ' +
+                                imageName='REFreduction1_5',
+                                description='Beta version of the data reduction for the <i>REF_L</i> ' + 
                                 'with rotated detector (304x256). <br><font color=red>This is only for beta tester as it may ' + 
                                 'crash')                                
         parent = self.createItem(ancestor, "REFreduction 1.6.x beta version",
-                                imageName = 'REFreduction1_6',                                 
-                                description='Beta version of the data Reduction for the <i>REF_M</i>' +
+                                imageName='REFreduction1_6',
+                                description='Beta version of the data Reduction for the <i>REF_M</i>' + 
                                 ' with new 128x128 detector. <br><font color=red>This is only for beta tester as it may ' + 
                                 'crash')                                                      
         parent = self.createItem(ancestor, "REFscale beta version",
-                                imageName = 'REFscale',                                 
-                                 description='Beta version of the program that merges the specular reflectivity<br>' +
-                                 ' profiles from the different angles and produce the full reflectivity profile.' +
+                                imageName='REFscale',
+                                 description='Beta version of the program that merges the specular reflectivity<br>' + 
+                                 ' profiles from the different angles and produce the full reflectivity profile.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash')                                                     
                 
 app = QApplication(sys.argv)
