@@ -434,6 +434,12 @@ class MainForm(QDialog):
 
         ##Test
         ancestor = self.createItem(self.treeWidget, 'Developer')
+        parent = self.createItem(ancestor, "DGSreduction beta version",
+                                imageName='DGSreduction',
+                                exeName='',                                
+                                 description='Beta version of the data reduction for the direct geometry' +
+                                 ' instruments <i>ARCS, CNCS, <br>SEQUOIA and HYSPEC</i>.' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash')
         parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
                                 imageName='REFreduction1_3',
                                 exeName='/SNS/software/idltools/ref_reduction_backup',                                
