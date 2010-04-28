@@ -436,7 +436,7 @@ class MainForm(QDialog):
         ancestor = self.createItem(self.treeWidget, 'Developer')
         parent = self.createItem(ancestor, "DGSreduction beta version",
                                 imageName='DGSreduction',
-                                exeName='',                                
+                                exeName='/SNS/software/idltools/DGSreduction-dev',                                
                                  description='Beta version of the data reduction for the direct geometry' +
                                  ' instruments <i>ARCS, CNCS, <br>SEQUOIA and HYSPEC</i>.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash')
