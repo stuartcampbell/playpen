@@ -10,7 +10,7 @@
 # the GNU General Public License for more details.
 
 import sys
-#import os
+import os
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -21,10 +21,11 @@ class Sending(QDialog):
     def __init__(self, parent=None):
         super(Sending, self).__init__(parent)
         
-        self.browse = QPushButton("Browse batch file to send...")
+        self.browse = QPushButton("Browse for batch file(s) to send...")
 
-        file_name = ["file1", "file2", "file3"]
-        self.toSendTree = QTreeView()
+        self.toSendTree = QTreeWidget()
+        self.toSendTree.setColumnCount(1)
+        self.toSendTree.setHeaderHidden(True)
 
         #vertical base for SEND and SETTINGS button
         self.sendButton = QPushButton("SEND ->")
@@ -61,25 +62,21 @@ class Sending(QDialog):
         self.sendButton.setFocus()   
 
     def browsing(self):
-#        if not self.okToContinue():
-#            return
-        file = QFileDialog.getOpenFileName(self, "Select a batch file to send", 
-                                                     "/Users/j35/results/", "Text Files (*.txt)")
-        print file
-#        if dialog.exec_():
-#            print "ok"
-#            self.addRecentFile(self.filename)
-#            self.image = QImage()
-#            for action, check in self.resetableActions:
-#                action.setChecked(check)
-#            self.image = dialog.image()
-#            self.filename = None
-#            self.dirty = True
-#            self.showImage()
-#            self.sizeLabel.setText("%d x %d" % (self.image.width(),
-#                                                self.image.height()))
-#            self.updateStatus("Created new image")
+        oFiles = QFileDialog.getOpenFileNames(self, "Select 1 or more batch file(s) to send", 
+                                            "/Users/j35/results/", "Text Files (*.txt)")
+        self.toSendTree.clear()
+        for file in oFiles:
+            parent = self.add_file_to_tree(file)
+            self.add_txt_file_to_parent(parent, file)
 
+    def add_file_to_tree(self, file):
+        parent = QTreeWidgetItem(self.toSendTree, [file])
+        return parent
+
+    def add_txt_file_to_parent(self,parent,file):
+        txt_files = ['myfile1.txt','myfile2.txt','myfile3.txt']
+        for txt_file in txt_files:
+            item = QTreeWidgetItem(parent,[txt_file])
 
 class Form(QDialog):
 
