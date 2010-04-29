@@ -119,7 +119,7 @@ class MainForm(QDialog):
         return parent
         
     def populateTree(self):
-        selected = None
+        #selected = None
         self.treeWidget.clear()
         self.treeWidget.setColumnCount(1)
         self.treeWidget.setHeaderLabel('List of applications sorted by:')
@@ -442,7 +442,6 @@ class MainForm(QDialog):
                                  '<br><font color=red>This is only for beta tester as it may crash')
         parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
                                 imageName='REFreduction1_3',
-                                exeName='/SNS/software/idltools/ref_reduction_backup',                                
                                 description='Beta version of the data reduction for <i>REF_L</i> (256x304) ' + 
                                 'and <i>REF_M</i> (304x256).<br><font color=red>This is only for beta tester as it may ' + 
                                 'crash')
@@ -458,9 +457,11 @@ class MainForm(QDialog):
                                 'crash')                                                      
         parent = self.createItem(ancestor, "REFscale beta version",
                                 imageName='REFscale',
+                                exeName='/SNS/software/idltools/dev/REFscale',
                                  description='Beta version of the program that merges the specular reflectivity<br>' + 
                                  ' profiles from the different angles and produce the full reflectivity profile.' + 
-                                 '<br><font color=red>This is only for beta tester as it may crash')                                                     
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>' +
+                                 '<br><br>This beta version is currently for the REF_M team')                                                     
                 
 app = QApplication(sys.argv)
 form = MainForm()
