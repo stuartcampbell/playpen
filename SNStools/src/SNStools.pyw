@@ -419,6 +419,10 @@ class MainForm(QDialog):
         parent = self.createItem(ancestor, 'FITStools')
         parent = self.createItem(ancestor, 'Geometry Generator')
         parent = self.createItem(ancestor, 'MakeNeXus')
+        parent = self.createItem(ancestor, 'NeedHelp',
+                                 imageName='NeedHelp',
+                                 exeName='/SNS/software/idltools/NeedHelp', 
+                                 description='Tool to quickly access some of our serviced and get help.')
 
         ##Visualization
         ancestor = self.createItem(self.treeWidget, 'Visualization')
