@@ -24,5 +24,6 @@
 <file alias="SANSreduction.gif">images/SANSreduction.gif</file>
 <file alias="miniSANSreduction.gif">images/miniSANSreduction.gif</file>
 <file alias="under_construction.gif">images/under_construction.gif</file>
+<file alias="NeedHelp.gif">images/NeedHelp.gif</file>
 </qresource>
 </RCC>
