@@ -69,7 +69,7 @@ class Sending(QDialog):
         for file in oFiles:
             parent = self.add_file_to_tree(file)
             txt_files = self.get_output_files(file)
-            print(txt_files)
+#            print(txt_files)
             self.add_txt_file_to_parent(parent, txt_files)
 
     def get_output_files(self,file):
@@ -81,10 +81,10 @@ class Sending(QDialog):
         lines = text.split('\n')
         output_files=[]
         for line in lines:
-            print(line)
-            m = re.search('--output=(.*)',line)
+            m = re.findall('--output=([^ ]*)',line)
             if m is not None:
-                output_files.append(m.group(1))
+                for i in range(len(m)):
+                    output_files.append(m[i])
         return output_files
 
     def add_file_to_tree(self, file):
