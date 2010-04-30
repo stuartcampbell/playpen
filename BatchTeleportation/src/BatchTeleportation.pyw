@@ -11,6 +11,7 @@
 
 import sys
 import os
+import re
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -63,18 +64,37 @@ class Sending(QDialog):
 
     def browsing(self):
         oFiles = QFileDialog.getOpenFileNames(self, "Select 1 or more batch file(s) to send", 
-                                            "/Users/j35/results/", "Text Files (*.txt)")
+                                            "/Users/j35/results/", "Text files (*.txt *.dat)")
         self.toSendTree.clear()
         for file in oFiles:
             parent = self.add_file_to_tree(file)
-            self.add_txt_file_to_parent(parent, file)
+            txt_files = self.get_output_files(file)
+            print(txt_files)
+            self.add_txt_file_to_parent(parent, txt_files)
+
+    def get_output_files(self,file):
+        #open and read file to retrieve name of output files
+        f = open(file,"r")
+        text = f.read() 
+        print(text)
+        print("==================")
+        lines = text.split('\n')
+        output_files=[]
+        for line in lines:
+            print(line)
+            m = re.search('--output=(.*)',line)
+            if m is not None:
+                output_files.append(m.group(1))
+        return output_files
+
+        txt_files = ['myfile1.txt','myfile2.txt','myfile3.txt']
+        return txt_files 
 
     def add_file_to_tree(self, file):
         parent = QTreeWidgetItem(self.toSendTree, [file])
         return parent
 
-    def add_txt_file_to_parent(self,parent,file):
-        txt_files = ['myfile1.txt','myfile2.txt','myfile3.txt']
+    def add_txt_file_to_parent(self,parent,txt_files):
         for txt_file in txt_files:
             item = QTreeWidgetItem(parent,[txt_file])
 
@@ -102,12 +122,12 @@ class Form(QDialog):
         self.connect(self.receiveButton, SIGNAL("clicked()"), self.receive)
         
     def send(self):
-        print "Launch SENDING BATCH FILE form" #not modal window
+        print("Launch SENDING BATCH FILE form") #not modal window
         self.sendButton.setFocus()
         
         dialog = Sending(self)
         if dialog.exec_():
-            print "ok"
+            print ("ok")
         #os.system('python Sending.pyw &')
         
     #this event is triggered when the application is quit
@@ -118,7 +138,7 @@ class Form(QDialog):
 #            event.ignore()
         
     def receive(self):
-        print "Launch INSTALLING BATCH FILE form"
+        print ("Launch INSTALLING BATCH FILE form")
         self.receiveButton.setFocus()
     
 # ask the user if he wants to save or not unsaved data (ok, no or cancel)
