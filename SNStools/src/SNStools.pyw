@@ -431,12 +431,12 @@ class MainForm(QDialog):
         parent = self.createItem(ancestor, "plotBSS")
         parent = self.createItem(ancestor, "plotCNCS")
         parent = self.createItem(ancestor, "plotInstruments", 
-                                 imageName='under_construction')
+                                 imageName='under_construction')    
         parent = self.createItem(ancestor, "plotROI")
 
         ancestor = self.createItem(self.treeWidget, '')
 
-        ##Test
+        ##Dev
         ancestor = self.createItem(self.treeWidget, 'Developer')
         parent = self.createItem(ancestor, "DGSreduction beta version",
                                 imageName='DGSreduction',
@@ -467,6 +467,15 @@ class MainForm(QDialog):
                                  '<br><font color=red>This is only for beta tester as it may crash</font>' +
                                  '<br><br>This beta version is currently for the REF_M team')                                                     
                 
+        ##test
+        ancestor = self.createItem(self.treeWidget, 'Debugging')
+        parent = self.createItem(ancestor, "REFreduction 1.3.x debugging version",
+                                imageName='REFreduction1_3',
+                                exeName='/SNS/software/idltools/test/ref_reduction',
+                                description='Debugging version of the data reduction for <i>REF_L</i> (256x304) ' + 
+                                'and <i>REF_M</i> (304x256).<br><font color=red>This is only for developers')
+
+
 app = QApplication(sys.argv)
 form = MainForm()
 form.show()
