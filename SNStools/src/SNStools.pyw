@@ -195,7 +195,7 @@ class MainForm(QDialog):
                                  ' instruments.')
         parent = self.createItem(ancestor, 'REFreduction',
                                  description='Data reduction for the <i>reflectometers</i>.')
-        item = self.createItem(parent, '1.3.x versions',
+        item = self.createItem(parent, '1.3.x versions. Data reduction for REF_L (256x304) and REF_M (304x256).',
                                description='Data reduction for <i>REF_L</i> (256x304) and <i>REF_M</i> (304x256).')
         item2 = self.createItem(item, '1.3.x high resolution version',
                                  exeName='/SNS/software/idltools/ref_reduction',
@@ -209,7 +209,7 @@ class MainForm(QDialog):
                                 imageName='miniREFreduction1_3',
                                 description='Low resolution version of the data reduction for <i>REF_L</i> (256x304) ' + 
                                 'and <i>REF_M</i> (304x256).')
-        item = self.createItem(parent, '1.5.x versions',
+        item = self.createItem(parent, '1.5.x versions. Data reduction for the REF_L with rotated detector (304x256).',
                                description='Data reduction for the <i>REF_L</i> with ' + 
                                'rotated detector (304x256).')
         item2 = self.createItem(item, '1.5.x high resolution version',
@@ -224,7 +224,7 @@ class MainForm(QDialog):
                                 imageName='miniREFreduction1_5',
                                 description='Low resolution version of the data reduction for the <i>REF_L</i> ' + 
                                 'with rotated detector (304x256).')                                
-        item = self.createItem(parent, '1.6.x versions', 
+        item = self.createItem(parent, '1.6.x versions. Data Reduction for the REF_M with new 128x128 detector.', 
                                description='Data Reduction for the <i>REF_M</i> with ' + 
                                'new 128x128 detector.')
         item2 = self.createItem(item, '1.6.x high resolution version',
