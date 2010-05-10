@@ -5,7 +5,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import qrc_resources
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 class MainForm(QDialog):
 
