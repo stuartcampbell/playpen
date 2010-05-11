@@ -5,7 +5,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import qrc_resources
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 class MainForm(QDialog):
 
@@ -54,7 +54,7 @@ class MainForm(QDialog):
         self.connect(self.launch, SIGNAL("clicked()"), self.launch_application)
         self.connect(self.help, SIGNAL("clicked()"), self.launch_help)
 
-        self.setWindowTitle("SNS applications launcher")
+        self.setWindowTitle("SNS applications launcher (" + __version__ + ")")
         self.setMinimumWidth(1000)
         self.setMinimumHeight(500)
         
@@ -438,6 +438,12 @@ class MainForm(QDialog):
 
         ##Dev
         ancestor = self.createItem(self.treeWidget, 'Developer')
+        parent = self.createItem(ancestor, "BatchTeleportation beta version",
+                                imageName='BatchTeleportation',
+                                exeName='/SNS/software/idltools/pyqt/BatchTeleportation',                                
+                                 description='Beta version of the BatchTelporation program.<br>' + 
+                                 'This application can be used to send by email a Batch File from one user to another user.<br>' +
+                                 'The program takes care of attaching the right files with it and install them at the right place')
         parent = self.createItem(ancestor, "DGSreduction beta version",
                                 imageName='DGSreduction',
                                 exeName='/SNS/software/idltools/DGSreduction-dev',                                

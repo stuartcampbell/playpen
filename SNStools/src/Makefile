@@ -9,5 +9,5 @@ all:
 install:
 	pyrcc4 -o qrc_resources.py resources.qrc
 	cp qrc_resources.py /SNS/software/idltools/pyqt/SNStools/
-	cp images/*.gif /SNS/software/idltools/pyqt/SNStools/images/
+	cp SNStools_images/*.gif /SNS/software/idltools/pyqt/SNStools/images/
 	cp *.pyw /SNS/software/idltools/pyqt/SNStools/
