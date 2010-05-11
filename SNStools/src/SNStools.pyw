@@ -471,7 +471,7 @@ class MainForm(QDialog):
         ancestor = self.createItem(self.treeWidget, 'Debugging')
         parent = self.createItem(ancestor, "REFreduction 1.3.x debugging version",
                                 imageName='REFreduction1_3',
-                                exeName='/SNS/software/idltools/test/ref_reduction',
+                                exeName='/SNS/software/idltools/test/ref_reduction_test',
                                 description='Debugging version of the data reduction for <i>REF_L</i> (256x304) ' + 
                                 'and <i>REF_M</i> (304x256).<br><font color=red>This is only for developers')
 
