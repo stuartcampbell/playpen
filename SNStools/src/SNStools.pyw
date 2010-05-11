@@ -440,7 +440,7 @@ class MainForm(QDialog):
         ancestor = self.createItem(self.treeWidget, 'Developer')
         parent = self.createItem(ancestor, "BatchTeleportation beta version",
                                 imageName='BatchTeleportation',
-                                exeName='/SNS/software/idltools/pyqt/BatchTeleportation',                                
+                                exeName='/SNS/software/idltools/pyqt/BatchTeleportation/BatchTeleportation',                                
                                  description='Beta version of the BatchTelporation program.<br>' + 
                                  'This application can be used to send by email a Batch File from one user to another user.<br>' +
                                  'The program takes care of attaching the right files with it and install them at the right place')
