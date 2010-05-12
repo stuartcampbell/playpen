@@ -467,7 +467,7 @@ class MainForm(QDialog):
                                 'crash')                                                      
         parent = self.createItem(ancestor, "REFscale beta version",
                                 imageName='REFscale',
-                                exeName='/SNS/software/idltools/dev/REFscale',
+                                exeName='/SNS/software/idltools/dev/REFscale_dev',
                                  description='Beta version of the program that merges the specular reflectivity<br>' + 
                                  ' profiles from the different angles and produce the full reflectivity profile.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>' +
