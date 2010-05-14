@@ -130,6 +130,11 @@ class MainForm(QDialog):
         ancestor = self.createItem(self.treeWidget, 'Application',
                                    description='<html><b>List of all applications available.</b></html>')
         self.treeWidget.expandItem(ancestor)
+        parent = self.createItem(ancestor, "BatchTeleportation",
+                                imageName='BatchTeleportation',
+                                exeName='/SNS/software/idltools/pyqt/BatchTeleportation/BatchTeleportation',                                
+                                 description='This application can be used to send by email a Batch File from one user to another user.<br>' +
+                                 'The program takes care of attaching the right files with it and install them at the right place')
         parent = self.createItem(ancestor, 'BSSreduction',
                                  exeName='/SNS/software/idltools/BSSreduction',
                                  imageName='BSSreduction',
@@ -295,6 +300,7 @@ class MainForm(QDialog):
         item = self.createItem(parent, 'plotROI')        
         #REF_L
         parent = self.createItem(ancestor, 'REF_L')
+        item = self.createItem(parent, "BatchTeleportation")
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotASCII')
@@ -314,6 +320,7 @@ class MainForm(QDialog):
         parent = self.createItem(parent, 'REFscale')
         #REF_M
         parent = self.createItem(ancestor, 'REF_M')
+        item = self.createItem(parent, "BatchTeleportation")        
         item = self.createItem(parent, 'Geometry Generator')
         item = self.createItem(parent, 'MakeNeXus')
         item = self.createItem(parent, 'plotASCII')
@@ -414,6 +421,7 @@ class MainForm(QDialog):
                 
         ##Utilities        
         ancestor = self.createItem(self.treeWidget, 'Utilities')        
+        parent = self.createItem(ancestor, "BatchTeleportation")
         parent = self.createItem(ancestor, 'CLoopES')
         parent = self.createItem(ancestor, 'DAD')
         parent = self.createItem(ancestor, 'FITStools')
@@ -438,12 +446,6 @@ class MainForm(QDialog):
 
         ##Dev
         ancestor = self.createItem(self.treeWidget, 'Developer')
-        parent = self.createItem(ancestor, "BatchTeleportation beta version",
-                                imageName='BatchTeleportation',
-                                exeName='/SNS/software/idltools/pyqt/BatchTeleportation/BatchTeleportation',                                
-                                 description='Beta version of the BatchTelporation program.<br>' + 
-                                 'This application can be used to send by email a Batch File from one user to another user.<br>' +
-                                 'The program takes care of attaching the right files with it and install them at the right place')
         parent = self.createItem(ancestor, "DGSreduction beta version",
                                 imageName='DGSreduction',
                                 exeName='/SNS/software/idltools/DGSreduction-dev',                                
