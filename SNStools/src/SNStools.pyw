@@ -4,8 +4,8 @@ import time
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import qrc_resources
-
-__version__ = "1.0.3"
+from version import version as __version__
+from logger import logger
 
 class MainForm(QDialog):
 
@@ -484,6 +484,7 @@ class MainForm(QDialog):
                                 'and <i>REF_M</i> (304x256).<br><font color=red>This is only for developers')
 
 
+logger(application='SNStools') 
 app = QApplication(sys.argv)
 form = MainForm()
 form.show()
