@@ -247,7 +247,7 @@ class MainForm(QDialog):
         parent = self.createItem(ancestor, 'REFscale', 
                                  imageName='REFscale',
                                  exeName='/SNS/software/idltools/REFscale',
-                                 description='Program to merge the specular reflectivity profiles from the ' + 
+                                 description='Program to merge the specular reflectivity profiles from the <br>' + 
                                  'different angles and produce the full reflectivity profile.')
         parent = self.createItem(ancestor, 'SANSreduction', 
                                  description='Data reduction for <i>EQSANS</i>.')
@@ -317,7 +317,15 @@ class MainForm(QDialog):
                                 label='High resolution version')
         item3 = self.createItem(item2, '1.5.x low resolution version',
                                 label='Low resolution version')
-        parent = self.createItem(parent, 'REFscale')
+        parent = self.createItem(parent, 'REFscale (beta and stable)')
+        item = self.createItem(parent, "REFscale")
+        item = self.createItem(parent, "REFscale (backup version)",
+                               imageName='REFscale',
+                               exeName='/SNS/software/idltools/REFscale_backup',
+                               description='Backup version of program to merge the specular <br> ' +
+                               'reflectivity profiles from the different angles and produce <br> ' +
+                               'the full reflectivity profile.')
+        
         #REF_M
         parent = self.createItem(ancestor, 'REF_M')
         item = self.createItem(parent, "BatchTeleportation")        
