@@ -444,48 +444,51 @@ class MainForm(QDialog):
 
         ancestor = self.createItem(self.treeWidget, '')
 
-        ##Dev
+        ##Beta version
         ancestor = self.createItem(self.treeWidget, 'Beta Version',
                                    description = 'Various Beta Version of some of our applications. <br>' +
                                    'Chances that it will crash are pretty high so just be aware !')
                                    
+        parent = self.createItem(ancestor, "CLoopES",
+                                 exeName = '/SNS/software/idltools/dev/CLoopES_beta',
+                                 description = 'Beta version of CLoopES to test paralle processing of jobs')
         parent = self.createItem(ancestor, "DGSreduction beta version",
                                 imageName='DGSreduction',
                                 exeName='/SNS/software/idltools/DGSreduction-dev',                                
                                  description='Beta version of the data reduction for the direct geometry' +
                                  ' instruments <i>ARCS, CNCS, <br>SEQUOIA and HYSPEC</i>.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash')
-        parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
-                                imageName='REFreduction1_3',
-                                description='Beta version of the data reduction for <i>REF_L</i> (256x304) ' + 
-                                'and <i>REF_M</i> (304x256).<br><font color=red>This is only for beta tester as it may ' + 
-                                'crash')
-        parent = self.createItem(ancestor, "REFreduction 1.5.x beta version",
-                                imageName='REFreduction1_5',
-                                description='Beta version of the data reduction for the <i>REF_L</i> ' + 
-                                'with rotated detector (304x256). <br><font color=red>This is only for beta tester as it may ' + 
-                                'crash')                                
-        parent = self.createItem(ancestor, "REFreduction 1.6.x beta version",
-                                imageName='REFreduction1_6',
-                                description='Beta version of the data Reduction for the <i>REF_M</i>' + 
-                                ' with new 128x128 detector. <br><font color=red>This is only for beta tester as it may ' + 
-                                'crash')                                                      
+#        parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
+#                                imageName='REFreduction1_3',
+#                                description='Beta version of the data reduction for <i>REF_L</i> (256x304) ' + 
+#                                'and <i>REF_M</i> (304x256).<br><font color=red>This is only for beta tester as it may ' + 
+#                                'crash')
+#        parent = self.createItem(ancestor, "REFreduction 1.5.x beta version",
+#                                imageName='REFreduction1_5',
+#                                description='Beta version of the data reduction for the <i>REF_L</i> ' + 
+#                                'with rotated detector (304x256). <br><font color=red>This is only for beta tester as it may ' + 
+#                                'crash')                                
+#        parent = self.createItem(ancestor, "REFreduction 1.6.x beta version",
+#                                imageName='REFreduction1_6',
+#                                description='Beta version of the data Reduction for the <i>REF_M</i>' + 
+#                                ' with new 128x128 detector. <br><font color=red>This is only for beta tester as it may ' + 
+#                                'crash')                                                      
         parent = self.createItem(ancestor, "REFscale beta version",
                                 imageName='REFscale',
-                                exeName='/SNS/software/idltools/dev/REFscale_dev',
+                                exeName='/SNS/software/idltools/beta/REFscale_dev',
                                  description='Beta version of the program that merges the specular reflectivity<br>' + 
                                  ' profiles from the different angles and produce the full reflectivity profile.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>' +
                                  '<br><br>This beta version is currently for the REF_M team')                                                     
                 
-        ##test
-        ancestor = self.createItem(self.treeWidget, 'Developer only !',
-                                   description = 'If you are not a developer, my advise would be to stay away from this branch  ;-) !')
-        parent = self.createItem(ancestor, "REFreduction 1.3.x debugging version",
-                                imageName='REFreduction1_3',
-                                exeName='/SNS/software/idltools/test/ref_reduction_test',
-                                description='Debugging version of the data reduction for <i>REF_L</i> (256x304) ' + 
-                                'and <i>REF_M</i> (304x256).<br><font color=red>This is only for developers')
+        ##developer
+#        ancestor = self.createItem(self.treeWidget, 'Developer only !',
+#                                       description = 'If you are not a developer, my advise would be to stay away from this branch  ;-) !')
+#        parent = self.createItem(ancestor, "REFreduction 1.3.x debugging version",
+#                                imageName='REFreduction1_3',
+#                                exeName='/SNS/software/idltools/dev/ref_reduction_test',
+#                                description='Debugging version of the data reduction for <i>REF_L</i> (256x304) ' + 
+#                                'and <i>REF_M</i> (304x256).<br><font color=red>This is only for developers')
 
 
 logger(application='SNStools') 
