@@ -445,7 +445,10 @@ class MainForm(QDialog):
         ancestor = self.createItem(self.treeWidget, '')
 
         ##Dev
-        ancestor = self.createItem(self.treeWidget, 'Developer')
+        ancestor = self.createItem(self.treeWidget, 'Beta Version',
+                                   description = 'Various Beta Version of some of our applications. <br>' +
+                                   'Chances that it will crash are pretty high so just be aware !')
+                                   
         parent = self.createItem(ancestor, "DGSreduction beta version",
                                 imageName='DGSreduction',
                                 exeName='/SNS/software/idltools/DGSreduction-dev',                                
@@ -476,7 +479,8 @@ class MainForm(QDialog):
                                  '<br><br>This beta version is currently for the REF_M team')                                                     
                 
         ##test
-        ancestor = self.createItem(self.treeWidget, 'Debugging')
+        ancestor = self.createItem(self.treeWidget, 'Developer only !',
+                                   description = 'If you are not a developer, my advise would be to stay away from this branch  ;-) !')
         parent = self.createItem(ancestor, "REFreduction 1.3.x debugging version",
                                 imageName='REFreduction1_3',
                                 exeName='/SNS/software/idltools/test/ref_reduction_test',
