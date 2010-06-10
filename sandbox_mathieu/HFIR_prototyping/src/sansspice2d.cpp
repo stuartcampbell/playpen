@@ -22,6 +22,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <math.h>
 #include "Poco/Path.h"
 #include "Poco/StringTokenizer.h"
 #include "Poco/DOM/DOMParser.h"
@@ -34,7 +35,7 @@
 using namespace std;
 using Poco::XML::Element;
 
-#include "readspice2d.h"
+#include "sansspice2d.h"
 
 // Parse string and convert to numeric type
 template <class T>
@@ -50,9 +51,9 @@ namespace HFIR
 	namespace SANS
 	{
 		/// Constructor
-		ReadSpice2D::ReadSpice2D( const std::string& filepath ) : filepath(filepath), success(false) {}
+		SANSSpice2D::SANSSpice2D( const std::string& filepath ) : filepath(filepath), success(false) {}
 		/// Destructor
-		ReadSpice2D::~ReadSpice2D() {}
+		SANSSpice2D::~SANSSpice2D() {}
 
     /*
      * Returns the value of an XML element as a double
@@ -60,7 +61,7 @@ namespace HFIR
      * @param element_name Name of the child element to retrieve
      * @returns Double value
      */
-    double ReadSpice2D::_getDouble(Element* parent_element, const std::string& element_name) {
+    double SANSSpice2D::_getDouble(Element* parent_element, const std::string& element_name) {
       Element*element = parent_element->getChildElement(element_name);
       throwException(element, element_name, filepath);
       std::stringstream x(element->innerText());
@@ -75,7 +76,7 @@ namespace HFIR
      * @param element_name Name of the child element to retrieve
      * @returns Long value
      */
-    long ReadSpice2D::_getLong(Element* parent_element, const std::string& element_name) {
+    long SANSSpice2D::_getLong(Element* parent_element, const std::string& element_name) {
       Element*element = parent_element->getChildElement(element_name);
       throwException(element, element_name, filepath);
       std::stringstream x(element->innerText());
@@ -90,7 +91,7 @@ namespace HFIR
      * @param element_name Name of the child element to retrieve
      * @returns bool value
      */
-    bool ReadSpice2D::_getBool(Element* parent_element, const std::string& element_name) {
+    bool SANSSpice2D::_getBool(Element* parent_element, const std::string& element_name) {
       Element*element = parent_element->getChildElement(element_name);
       throwException(element, element_name, filepath);
       std::stringstream x(element->innerText());
@@ -105,7 +106,7 @@ namespace HFIR
      * @param element_name Name of the child element to retrieve
      * @returns String value
      */
-		const std::string ReadSpice2D::_getString(Element* parent_element, const std::string& element_name) {
+		const std::string SANSSpice2D::_getString(Element* parent_element, const std::string& element_name) {
       Element*element = parent_element->getChildElement(element_name);
       throwException(element, element_name, filepath);
       return element->innerText();
@@ -114,7 +115,7 @@ namespace HFIR
 		/*
 		 *
 		 */
-		void ReadSpice2D::read()
+		void SANSSpice2D::read()
 		{
 			// Set up the DOM parser and parse xml file
 			Poco::XML::DOMParser pParser;
@@ -225,8 +226,9 @@ namespace HFIR
       // Read in the data buffer
       std::string data_str = _getString(sasEntryElem, "Detector");
 
-      // Create empty data array
-      data = vector< vector<int> >(getNPixelsX(), vector<int>(getNPixelsY(), 0));
+      // Create empty data arrays
+      data      = DetectorArray(getNPixelsX(), vector<double>(getNPixelsY(), 0));
+      dataError = DetectorArray(getNPixelsX(), vector<double>(getNPixelsY(), 0));
 
       // Parse out each pixel. Pixels can be separated by white space, a tab, or an end-of-line character
       Poco::StringTokenizer pixels(data_str, " \n\t", Poco::StringTokenizer::TOK_TRIM | Poco::StringTokenizer::TOK_IGNORE_EMPTY);
@@ -234,7 +236,6 @@ namespace HFIR
 
       int ipixel = 0;
       int npixelsx = getNPixelsX();
-      int npixelsy = getNPixelsY();
 
       while (pixel != pixels.end())
       {
@@ -244,7 +245,12 @@ namespace HFIR
         // Get the count value and assign it to the right bin
         int count;
         from_string<int>(count, *pixel, std::dec);
-        data[ix][iy] = count;
+        data[ix][iy] = (double)count;
+
+        // Data uncertainties, computed according to the IGOR reduction code
+        dataError[ix][iy] = sqrt( 0.5 + fabs( (double)count - 0.5 ));
+        // The following is what I would suggest instead...
+        //dataError[ix][iy] = count > 0 ? sqrt((double)count) : 0.0;
 
         ++pixel;
         ipixel++;
@@ -255,12 +261,39 @@ namespace HFIR
 
 		}
 
+		/*
+		 * Scale the data by the given scaling factor
+		 */
+		void SANSSpice2D::scaleBy( double scale ) {
+      for(unsigned int ix=0; ix<data.size(); ix++) {
+        for(unsigned int iy=0; iy<data.size(); iy++) {
+          data[ix][iy] *= scale;
+          dataError[ix][iy] *= scale;
+        }
+      }
+		}
+
+		/*
+		 * Substract another data array from the current data array
+		 */
+		void SANSSpice2D::subtractFrom( SANSSpice2D& to_subtract ) {
+		  DetectorArray sub_data = to_subtract.getData();
+
+      for(unsigned int ix=0; ix<data.size(); ix++) {
+        for(unsigned int iy=0; iy<data.size(); iy++) {
+          data[ix][iy] -= sub_data[ix][iy];
+          //dataError[ix][iy] ...
+        }
+      }
+		}
+
+
 		/* This method throws not found error if a element is not found in the xml file
 		 * @param elem pointer to  element
 		 * @param name  element name
 		 * @param fileName xml file name
 		 */
-		void ReadSpice2D::throwException(Poco::XML::Element* elem, const std::string & name,
+		void SANSSpice2D::throwException(Poco::XML::Element* elem, const std::string & name,
 		    const std::string& fileName)
 		{
 		  if (!elem)
