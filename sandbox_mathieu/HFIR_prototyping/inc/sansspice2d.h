@@ -34,6 +34,9 @@ namespace Poco {
 using Poco::XML::Element;
 using namespace std;
 
+/// Detector array definition
+typedef vector< vector<double> > DetectorArray;
+
 namespace HFIR
 {
   namespace SANS
@@ -41,13 +44,14 @@ namespace HFIR
     /*
      *  Standalone class to load HFIR/SPICE data for SANS
      */
-    class ReadSpice2D
+    class SANSSpice2D
     {
       public:
         /// Constructor
-    	  ReadSpice2D( const std::string& );
+        // TODO: make copy constructor and constructor without arguments
+    	  SANSSpice2D( const std::string& );
     	  /// Destructor
-    	  ~ReadSpice2D();
+    	  ~SANSSpice2D();
     	  /// Get file path
     	  const std::string& getFilePath() const { return filepath; };
 
@@ -131,11 +135,20 @@ namespace HFIR
         /// PSD counts [counts]
         double getPSDCounts() const { return psdCounts; };
 
-        /// Detector data. The data is stored as "INT32", so an integer will suffice.
-        vector< vector<int> > data;
+        /// Detector data.
+        // The Spice format stores the data as "INT32", so an integer would suffice.
+        // We'll use that class for corrected data so we use doubles instead.
+        DetectorArray data;
+        DetectorArray dataError;
 
         /// Read the data file
     	  void read();
+    	  /// Get data pointer
+    	  const DetectorArray& getData() const { return data; };
+    	  /// Scale the data by the given amount
+    	  void scaleBy( double );
+    	  /// Subtract another data set from the current one
+    	  void subtractFrom( SANSSpice2D& );
 
       private:
     	  /// Location of the file to read
