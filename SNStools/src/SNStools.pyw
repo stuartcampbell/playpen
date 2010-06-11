@@ -463,21 +463,6 @@ class MainForm(QtGui.QDialog):
                                  description='Beta version of the data reduction for the direct geometry' + 
                                  ' instruments <i>ARCS, CNCS, <br>SEQUOIA and HYSPEC</i>.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash')
-#        parent = self.createItem(ancestor, "REFreduction 1.3.x beta version",
-#                                imageName='REFreduction1_3',
-#                                description='Beta version of the data reduction for <i>REF_L</i> (256x304) ' + 
-#                                'and <i>REF_M</i> (304x256).<br><font color=red>This is only for beta tester as it may ' + 
-#                                'crash')
-#        parent = self.createItem(ancestor, "REFreduction 1.5.x beta version",
-#                                imageName='REFreduction1_5',
-#                                description='Beta version of the data reduction for the <i>REF_L</i> ' + 
-#                                'with rotated detector (304x256). <br><font color=red>This is only for beta tester as it may ' + 
-#                                'crash')                                
-#        parent = self.createItem(ancestor, "REFreduction 1.6.x beta version",
-#                                imageName='REFreduction1_6',
-#                                description='Beta version of the data Reduction for the <i>REF_M</i>' + 
-#                                ' with new 128x128 detector. <br><font color=red>This is only for beta tester as it may ' + 
-#                                'crash')                                                      
         parent = self.createItem(ancestor, "REFscale beta version",
                                 imageName='REFscale',
                                 exeName='/SNS/software/idltools/beta/REFscale_dev',
@@ -485,7 +470,13 @@ class MainForm(QtGui.QDialog):
                                  ' profiles from the different angles and produce the full reflectivity profile.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>' + 
                                  '<br><br>This beta version is currently for the REF_M team')                                                     
-                
+        parent = self.createItem(ancestor, "REFoffSpec beta version",
+                                 imageName='REFoffSpec',
+                                 exeName='/SNS/software/idltools/beta/REFoffSpec_beta',
+                                 description='Beta version of the REFoffSpec<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>' + 
+                                 '<br><br>This beta version is currently for the REF_M team')       
+
         ##developer
 #        ancestor = self.createItem(self.treeWidget, 'Developer only !',
 #                                       description = 'If you are not a developer, my advise would be to stay away from this branch  ;-) !')
