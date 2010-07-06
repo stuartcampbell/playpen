@@ -251,9 +251,21 @@ class MainForm(QtGui.QDialog):
                         ' with new 128x128 detector.')                                
         parent = self.createItem(ancestor, 'REFscale',
                                  imageName='REFscale',
-                                 exeName='/SNS/software/idltools/REFscale',
-                                 description='Program to merge the specular reflectivity profiles from the <br>' + 
-                                 'different angles and produce the full reflectivity profile.')
+                                 description='Program to merge the specular reflectivity profiles <br>' +
+                                 'from the different angles and produce the full reflectivity profile.')
+        self.createItem(parent, 'REFscale_l',
+                        imageName = 'REFscale',
+                        exeName = '/SNS/software/idltools/REFscale_l',
+                        description = 'Program to merge the specular reflectivity profiles of the <br>' +
+                                'liquids reflectometer from the different angles and produce the full <br>' +
+                                'reflectivity profile.')
+        self.createItem(parent, 'REFscale_m',
+                        imageName = 'REFscale',
+                        exeName = '/SNS/software/idltools/REFscale_m',
+                        description = 'Program to merge the specular reflectivity profiles of the <br>' +
+                                'magnetism reflectometer from the different angles and produce the full <br>' +
+                                'reflectivity profile.')
+
         parent = self.createItem(ancestor, 'SANSreduction',
                                  description='Data reduction for <i>EQSANS</i>.')
         item = self.createItem(parent, 'SANSreduction high resolution version',
@@ -323,7 +335,7 @@ class MainForm(QtGui.QDialog):
         self.createItem(item2, '1.5.x low resolution version',
                         label='Low resolution version')
         item = self.createItem(parent, 'REFscale (beta and stable)')
-        self.createItem(item, "REFscale")
+        self.createItem(item, "REFscale_l")
         self.createItem(item, "REFscale (backup version)",
                         imageName='REFscale',
                         exeName='/SNS/software/idltools/REFscale_backup',
@@ -350,7 +362,8 @@ class MainForm(QtGui.QDialog):
                         label='High resolution version')
         self.createItem(item2, '1.6.x low resolution version',
                         label='Low resolution version')
-        self.createItem(parent, 'REFscale')
+        self.createItem(parent, 'REFscale_m')
+            
         #SEQUOIA
         parent = self.createItem(ancestor, 'SEQUOIA')
         self.createItem(parent, 'DGSreduction')
@@ -465,13 +478,6 @@ class MainForm(QtGui.QDialog):
                                  description='Beta version of the data reduction for the direct geometry' + 
                                  ' instruments <i>ARCS, CNCS, <br>SEQUOIA and HYSPEC</i>.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash')
-        parent = self.createItem(ancestor, "REFscale beta version",
-                                imageName='REFscale',
-                                exeName='/SNS/software/idltools/beta/REFscale_dev',
-                                 description='Beta version of the program that merges the specular reflectivity<br>' + 
-                                 ' profiles from the different angles and produce the full reflectivity profile.' + 
-                                 '<br><font color=red>This is only for beta tester as it may crash</font>' + 
-                                 '<br><br>This beta version is currently for the REF_M team')                                                     
         parent = self.createItem(ancestor, "REFoffSpec beta version",
                                  imageName='REFoffSpec',
                                  exeName='/SNS/software/idltools/beta/REFoffSpec_beta',
