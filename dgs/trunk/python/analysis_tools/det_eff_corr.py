@@ -41,6 +41,9 @@ def det_eff_corr(filename,write_spe=False,debug=False):
    if debug:
      print "after get data"
      print time.localtime()
+   rn.opendata('polar')
+   polar=rn.getdata()
+   rn.closedata()
    rn.opendata('energy')
    en=rn.getdata()
    rn.closedata()
@@ -87,4 +90,68 @@ def det_eff_corr(filename,write_spe=False,debug=False):
    if debug:
      print "after close"
      print time.localtime()
+   if write_spe:
+        spefilename = filenew.replace('.nxspe', '.spe')
+        spefile = open(spefilename, "w")
+        
+        len_det = len(polar)
+        len_energy = len(en)
+        
+        print >> spefile, "%5i%5i" % (len_det, len_energy-1)
+        
+        print >> spefile, "### Phi Grid"
+        for i in range(len_det+1):
+            spefile.write("%10.3E" % 1.0)
+            if ((i+1) % 8) == 0:
+                print >> spefile 
+
+    # Make sure that there is a newline at the end of this section
+        if ((len_det+1) % 8) != 0:
+            print >> spefile
+
+        print >> spefile, "### Energy Grid"
+        for i in range(len_energy):
+            spefile.write("%10.3E" % (so.axis[0].val[i]))  
+            if ((i+1) % 8) == 0:
+                print >> spefile
+                
+    # Make sure that there is a newline at the end of this section
+        if ((len_energy) % 8) != 0:
+            print >> spefile
    
+    # Now write the data....
+
+       for i in range(len_det):
+
+            print >> spefile, "### S(Phi,w)"
+            counter_y = 1
+            # Extract out the counts for this angle
+            yvalues = dat[i,:]
+            for y in yvalues:    
+                spefile.write("%10.3E" % (y))
+                if (counter_y % 8) == 0:
+                    print >> spefile
+                counter_y = counter_y + 1
+
+    # Make sure that there is a newline at the end of this section
+    # (we subtract the 1 because we've just added it at the end of 
+    # the above loop!
+            if ((counter_y-1) % 8) != 0:
+                print >> spefile
+    
+    
+            print >> spefile, "### Errors"
+            counter_err_y = 1
+            # Extract out the errors for this angle
+            err_values = err[i,:]
+            for err_y in err_values:
+                spefile.write("%10.3E" % (math.sqrt(math.fabs(err_y))))
+                if (counter_err_y % 8) == 0:
+                    print >> spefile
+                counter_err_y = counter_err_y + 1
+        
+        # Make sure that there is a newline at the end of this section
+        # (we subtract the 1 because we've just added it at the end of 
+        # the above loop!
+            if ((counter_var_y-1) % 8) != 0:
+                print >> spefile
