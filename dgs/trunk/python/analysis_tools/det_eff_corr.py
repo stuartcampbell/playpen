@@ -15,9 +15,12 @@ def He3_cross(v,P,T,L):
    PdT=P/T
    return PdT*L*8606.3/v
    
-def det_eff_corr(filename,write_spe=False, write_nxspe=True, debug=False):
+def det_eff_corr(filename,scl=1.0,write_spe=False, write_nxspe=True, debug=False):
    """ function to correct for detector efficiency
        takes as an input an nxspefile
+       Flags:
+       		write_spe=False change to True to write an spec file
+		write_nxspe=True change to False to not write the nxspe file
    """		
    # create output file
    if debug:
@@ -64,7 +67,7 @@ def det_eff_corr(filename,write_spe=False, write_nxspe=True, debug=False):
    rn.closedata()
    vf=E2V(Ei-en)
    vf=(vf[:-1]+vf[1:])/2.0 #find center velocities
-   fac=-1.0/(expm1(-He3_cross(vf,10.0,290.0,2.54)))
+   fac=-scl/(expm1(-He3_cross(vf,10.0,290.0,2.54)))
    fac_m=tile(fac,(dat.shape[0],1))
    dat=dat*fac_m
    err=err*fac_m
