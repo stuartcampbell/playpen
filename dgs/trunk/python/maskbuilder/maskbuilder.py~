@@ -10,22 +10,15 @@ import string
 
 
 ###################################################
-## comments from first peer review
-##
-## I need the shortlen and nbanks of CNCS and SEQ (not done yet)
-##
-## Add ability to comment lines in the masktextfile (not done yet)
-##
+## comments from first review
+## I need the shortlen and nbanks of CNCS and SEQ##
+## Add ability to comment lines in the masktextfile.
 ## Check ability to have no angular range
-##
-## Think of good way to not have anything masked. (not successfull)
-##
-## Consider XML style formatting of masking file. (considered and not used)
-##
+## Think of good way to not have anything masked.
+## Consider XML style formatting of masking file.
 ## Check spelling.
-##
 ## Top is 127
-##
+## double check long and short
 ##
 ##
 ###################################################
@@ -70,31 +63,14 @@ buliding masks for dgs reduction.
 ##    e.g.
 ##    [14, 18, 7, 8]
 ##
-##    for no masking of tube ends use
-##    [0, 0, 0, 0]
-##
 ##    second row describes the angular ranges one would like to mask between
 ##    units are in scattering angle in degrees
 ##    [[minangle1, maxangle1],[minangle2,maxangle2],[minangle3,maxangle3],[etc]]
 ##    e.g.
 ##    [[0,5], [32.75,33.75], [110,125]]
 ##
-##    for no masking of angular range use
-##    [[0,0]]
-##
-##
 ##    Remaining lines describe the packs, detectors and pixels to mask
-##    examples:
-##    45   -    masks pack 45
-##    2-7  -    masks packs 2 through 7
-##    8,2  -    masks tube 2 of pack 8
-##    9-10,1-7   - masks tubes 1 through 7 of packs 9 and 10
-##    15,1,24-26  - masks pixels 24-26 of tube 1 of pack 15
 ##
-##
-##  WARNINGS:
-##    I do not know what will happen if one masks out so many pixels on the top and bottom
-##    of a tube, that they overlap.
 ##
 ##################################################
 
@@ -129,13 +105,11 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
     filestr=filestr.strip('\n')
     fid = nxs.open(filestr,'r')
 
-
-
     #mask the ends of the packs
-    lbt = tubeendarr[2]
-    lbb = tubeendarr[3]
-    sbt = tubeendarr[0]
-    sbb = tubeendarr[1]
+    lbt = tubeendarr[0]
+    lbb = tubeendarr[1]
+    sbt = tubeendarr[2]
+    sbb = tubeendarr[3]
     masktext1 = maskends(fid, nbanks,shortlen, lbt, lbb, sbt, sbb)
 
 
@@ -152,6 +126,8 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
     #mask the packs, tubes and pixels in the droppacks text.
     masktext3 = ''
     masktext3 = parsemasklist(droppacks)
+
+    
 
 
 
@@ -202,7 +178,7 @@ def maskends(fileid, nbanks,shortlen, lbt, lbb, sbt, sbb):
 
         #check if the sizearray is not short
         if (sizearray[1] > shortlen):
-            # increment over the tubenumbersmaskparamsfile
+            # increment over the tubenumbers
             while (tubenum <= numtubes):
                 #increment over the pixel numbers starting from bottom
                 pixelnum = 0
@@ -450,7 +426,7 @@ def parsemasklist(inputar):
 # reads a maskfile that has the syntax of
 #bankXX_Y_Z, where XX Y and Z are pack, tube, and pixel numbers
 # the output is a coordinatefile
-#def nexus_mask_reader(instrument,runnum,maskfile,filename="default"):
+def nexus_mask_reader(instrument,runnum,maskfile,filename="default"):
 
 
 
