@@ -25,7 +25,7 @@ def  bandwidth_calc(Ei,T0nu,T0w=0.19,spec='SEQUOIA'):
     tcen=L[0]/vcen
     tT0min=tcen-dtT0/2.0
     tT0max=tcen+dtT0/2.0
-    return [V2lambda(L[0]/tT0min),V2lambda(L[0]/tT0max)]
+    return {"lambdamin":V2lambda(L[0]/tT0min),"lambdamax":V2lambda(L[0]/tT0max), "tmin":tT0min, "tmax":tT0max}
     
     
     

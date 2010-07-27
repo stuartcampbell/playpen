@@ -1,6 +1,7 @@
+import sys
 sys.path.append('/SNS/users/19g/SEQUOIA/commissioning/python')
 from unit_convert import E2V,E2K
-from numpy import pi, log,exp,sqrt,tanh,linspace
+from numpy import pi, log,exp,sqrt,tanh,linspace, radians
 from timing_diagram import Slit_pack
 from scipy.interpolate import interp1d
 from pylab import figure, plot, subplot, show, xlabel, ylabel, title
