@@ -185,7 +185,8 @@ class mag_bank(object):
        for x in keylst:
 	   Itmp=self.data_dict[x][0][:,pixlims[0]:pixlims[1],:].sum(axis=1)
 	   xtmp=self.data_dict[x][4][:,pixlims[0]:pixlims[1],:].mean(axis=1)
-	   xtmp=xtmp[:,1:]+xtmp[:,:-1]/2.0
+	   xtmp=(xtmp[:,1:]+xtmp[:,:-1])/2.0
+	   print xtmp
 	   tube=tile(arange(8),(140,1))
 	   tube=swapaxes(tube,0,1)   
 	   pylab.subplot(rwn,clnum,idx)
@@ -212,8 +213,8 @@ class mag_bank(object):
 	      clnum=len(keylst)/rwn+1
        for x in keylst:
 	   Itmp=self.data_dict[x][0][:,pixlims[0]:pixlims[1],:].sum(axis=1)
-	   xtmp=self.data_dict[x][3][:,pixlims[0]:pixlims[1],:].mean(axis=1)
-	   xtmp=xtmp[:,1:]+xtmp[:,:-1]/2.0
+	   xtmp=self.data_dict[x][2][:,pixlims[0]:pixlims[1],:].mean(axis=1)
+	   xtmp=(xtmp[:,1:]+xtmp[:,:-1])/2.0
 	   tube=tile(arange(8),(140,1))
 	   tube=swapaxes(tube,0,1)   
 	   pylab.subplot(rwn,clnum,idx)
