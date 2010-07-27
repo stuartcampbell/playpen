@@ -1,6 +1,6 @@
 import nxs
 from scipy.optimize import leastsq 
-from numpy import sqrt
+from numpy import sqrt, pi
 from unit_convert import *
 from enthought.tvtk.tools import mlab
 import pylab

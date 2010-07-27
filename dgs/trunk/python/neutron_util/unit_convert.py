@@ -13,3 +13,13 @@ def V2E(V):
     """
 # for  v in  m/s returns energy in meV
     return 5.227e-6*V*V
+    
+def V2lambda(V):
+    return sqrt(81.81/V2E(V))
+
+def E2lambda(E):
+   return sqrt(81.81/E)
+   
+def lambda2E(l):
+   return 81.81/l/l
+   
