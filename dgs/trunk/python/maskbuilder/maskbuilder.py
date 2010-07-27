@@ -10,22 +10,13 @@ import string
 
 
 ###################################################
-## comments from first peer review
+## unaddressed comments from first peer review
 ##
-## I need the shortlen and nbanks of CNCS and SEQ (not done yet)
+## I need the proper shortlen and nbanks of CNCS and SEQ (not done yet)
 ##
 ## Add ability to comment lines in the masktextfile (not done yet)
 ##
-## Check ability to have no angular range
-##
-## Think of good way to not have anything masked. (not successfull)
-##
-## Consider XML style formatting of masking file. (considered and not used)
-##
 ## Check spelling.
-##
-## Top is 127
-##
 ##
 ##
 ###################################################
@@ -36,7 +27,7 @@ import string
 M. B. Stone
 buliding masks for dgs reduction.
 """
-
+        nbanks = 200
 
 ###############################################
 ## nexus_mask_builder                        ##
@@ -59,10 +50,9 @@ buliding masks for dgs reduction.
 ##
 ##
 ## output:
-## filename =  string, thisis the output filname
+## filename =  string, this is the output filname
 ##
-##
-##
+##        
 ## The maskparamsfile
 ##    first row describes the number of pixels to mask at the top and bottom
 ##    of short and long tubes.  units are in pixels
@@ -91,10 +81,18 @@ buliding masks for dgs reduction.
 ##    9-10,1-7   - masks tubes 1 through 7 of packs 9 and 10
 ##    15,1,24-26  - masks pixels 24-26 of tube 1 of pack 15
 ##
+##    Examples
+##        Input files:  See file1.dat, file2.dat and masktextexample.dat for examples
+##
+##        Using code:
+##        $ python
+##        >>> import maskbuilder as mb
+##        >>> mb.nexus_mask_builder("ARCS",1066,"file1.dat",filename="outputfile.dat")
+##                
 ##
 ##  WARNINGS:
 ##    I do not know what will happen if one masks out so many pixels on the top and bottom
-##    of a tube, that they overlap.
+##    of a tube, that they overlap or if one masks a single pixel more than once.
 ##
 ##################################################
 
@@ -105,13 +103,11 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
     # take care of instrument specific book-keeping
     if (instrument == 'ARCS'):
         shortlen = 0.5 # length below which a tube is considered short
-        nbanks = 115   # total number of packs (banks ala Nexus)
     if (instrument == 'CNCS'):
         shortlen = 0.5
-        nbanks = 50
     if (instrument == 'SEQ'):
         shortlen = 0.5
-        nbanks = 113
+
 
     #read the maskparamsfile
     #print maskparamsfile
@@ -129,6 +125,11 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
     filestr=filestr.strip('\n')
     fid = nxs.open(filestr,'r')
 
+    #determine the banks in the file
+    fid.openpath('/entry/instrument')
+    banks=array(fid.getentries().keys())
+    banks=banks[(banks>'bank')&(banks<'bank999')]
+
 
 
     #mask the ends of the packs
@@ -136,7 +137,7 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
     lbb = tubeendarr[3]
     sbt = tubeendarr[0]
     sbb = tubeendarr[1]
-    masktext1 = maskends(fid, nbanks,shortlen, lbt, lbb, sbt, sbb)
+    masktext1 = maskends(fid, banks, shortlen, lbt, lbb, sbt, sbb)
 
 
     #mask the scattering angle ranges    
@@ -145,7 +146,7 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
     for angles in anglearr:
         lowerangle = angles[0]
         upperangle = angles[1]
-        masktext2 += maskanglerange(fid, nbanks,lowerangle,upperangle)
+        masktext2 += maskanglerange(fid, banks,lowerangle,upperangle)
 
 
 
@@ -181,7 +182,7 @@ def nexus_mask_builder(instrument,runnum,maskparamsfile,filename="default"):
 #
 # Assumes 8 tubes per bank for all instruments (numbered 0-7).
 # Assumes 128 pixels per tube for all instruments numbered 0-127
-def maskends(fileid, nbanks,shortlen, lbt, lbb, sbt, sbb):
+def maskends(fileid, bankslist,shortlen, lbt, lbb, sbt, sbb):
 
 
     numpixels=127
@@ -189,11 +190,12 @@ def maskends(fileid, nbanks,shortlen, lbt, lbb, sbt, sbb):
     
     masktext = ""
 
-    #loop through all of the banks
-    bank = 1
-    while (bank <= nbanks):
+    #loop through all of the banks in banklist
+    for bank in bankslist:
+    
+        #print bank,nbanks
         #get the sizearray
-        fileid.openpath('/entry/instrument/bank'+str(bank)+
+        fileid.openpath('/entry/instrument/'+bank+
                                    '/origin/shape/size')
         sizearray=fileid.getdata()
 
@@ -207,13 +209,13 @@ def maskends(fileid, nbanks,shortlen, lbt, lbb, sbt, sbb):
                 #increment over the pixel numbers starting from bottom
                 pixelnum = 0
                 while (pixelnum < lbt):
-                    masktext += "bank"+str(bank)+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
+                    masktext += bank+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
                     pixelnum += 1
 
                 #now increment over the pixel numbers starting from the top
                 pixelnum = 127
                 while (numpixels-pixelnum < lbb):
-                    masktext += "bank"+str(bank)+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
+                    masktext += bank+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
                     pixelnum -= 1
         
                 tubenum+=1
@@ -224,21 +226,17 @@ def maskends(fileid, nbanks,shortlen, lbt, lbb, sbt, sbb):
                 #increment over the pixel numbers starting from bottom
                 pixelnum = 0
                 while (pixelnum < sbt):
-                    masktext += "bank"+str(bank)+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
+                    masktext += bank+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
                     pixelnum += 1
 
                 #now increment over the pixel numbers starting from the top
                 pixelnum = 127
                 while (numpixels-pixelnum < sbb):
-                    masktext += "bank"+str(bank)+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
+                    masktext += bank+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
                     pixelnum -= 1
         
                 tubenum+=1
         
-        bank = bank + 1
-    
-
-
 
     return masktext
 
@@ -257,7 +255,7 @@ def maskends(fileid, nbanks,shortlen, lbt, lbb, sbt, sbb):
 #
 # Assumes 8 tubes per bank for all instruments (numbered 0-7).
 # Assumes 128 pixels per tube for all instruments numbered 0-127
-def maskanglerange(fileid, nbanks,lowerangle,upperangle):
+def maskanglerange(fileid, banklist,lowerangle,upperangle):
 
 
     numpixels=127
@@ -267,9 +265,13 @@ def maskanglerange(fileid, nbanks,lowerangle,upperangle):
 
     #loop through all of the banks
     bank = 1
-    while (bank <= nbanks):
+    #Temporary SEQ fix
+  #  bank = 38
+  #  nbanks = 150
+
+    for bank in banklist:
         #get the sizearray
-        fileid.openpath('/entry/instrument/bank'+str(bank)+
+        fileid.openpath('/entry/instrument/'+bank+
                                    '/polar_angle')
         ## theta arrray is 8 by 128
         thetaarray=fileid.getdata()
@@ -287,14 +289,13 @@ def maskanglerange(fileid, nbanks,lowerangle,upperangle):
                     
                     #Test the scattering angle.
                     if (thetavalue > lowerangle and thetavalue < upperangle):
-                        masktext += "bank"+str(bank)+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
+                        masktext += bank+"_"+str(tubenum)+"_"+str(pixelnum)+"\n"
 
                         
                     pixelnum += 1
         
                 tubenum+=1
                 
-        bank += 1
 
     return masktext
 
