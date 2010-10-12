@@ -26,5 +26,6 @@
 <file alias="under_construction.gif">SNStools_images/under_construction.gif</file>
 <file alias="NeedHelp.gif">SNStools_images/NeedHelp.gif</file>
 <file alias="BatchTeleportation.gif">SNStools_images/BatchTeleportation.gif</file>
+<file alias="REFscaleOFF.gif">SNStools_images/REFscaleOFF.gif</file>
 </qresource>
 </RCC>

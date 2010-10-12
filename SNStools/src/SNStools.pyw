@@ -265,6 +265,11 @@ class MainForm(QtGui.QDialog):
                         description = 'Program to merge the specular reflectivity profiles of the <br>' +
                                 'magnetism reflectometer from the different angles and produce the full <br>' +
                                 'reflectivity profile.')
+        
+        self.createItem(ancestor, 'REFscaleOFF',
+                        imageName='REFscaleOFF',
+                        exeName='/SNS/software/idltools/REFscaleOFF',
+                        description='Program to scale and stitch rtof files')
 
         parent = self.createItem(ancestor, 'SANSreduction',
                                  description='Data reduction for <i>EQSANS</i>.')
@@ -342,6 +347,7 @@ class MainForm(QtGui.QDialog):
                         description='Backup version of program to merge the specular <br> ' + 
                         'reflectivity profiles from the different angles and produce <br> ' + 
                         'the full reflectivity profile.')
+        self.createItem(parent, 'REFscaleOFF')
         
         #REF_M
         parent = self.createItem(ancestor, 'REF_M')
@@ -363,6 +369,7 @@ class MainForm(QtGui.QDialog):
         self.createItem(item2, '1.6.x low resolution version',
                         label='Low resolution version')
         self.createItem(parent, 'REFscale_m')
+        self.createItem(parent, 'REFscaleOFF')
             
         #SEQUOIA
         parent = self.createItem(ancestor, 'SEQUOIA')
