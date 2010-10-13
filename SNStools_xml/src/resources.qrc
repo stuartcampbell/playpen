@@ -1,0 +1,31 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+<file alias="BSSreduction.gif">SNStools_images/BSSreduction.gif</file>
+<file alias="GG.gif">SNStools_images/GG.gif</file>
+<file alias="DAD.gif">SNStools_images/DAD.gif</file>
+<file alias="MakeNeXus.gif">SNStools_images/MakeNeXus.gif</file>
+<file alias="CLoopES.gif">SNStools_images/CLoopES.gif</file>
+<file alias="FITStools.gif">SNStools_images/FITStools.gif</file>
+<file alias="realignBSS.gif">SNStools_images/realignBSS.gif</file>
+<file alias="REFoffSpec.gif">SNStools_images/REFoffSpec.gif</file>
+<file alias="REFscale.gif">SNStools_images/REFscale.gif</file>
+<file alias="DGSreduction.gif">SNStools_images/DGSreduction.gif</file>
+<file alias="plotROI.gif">SNStools_images/plotROI.gif</file>
+<file alias="plotASCII.gif">SNStools_images/plotASCII.gif</file>
+<file alias="plotCNCS.gif">SNStools_images/plotCNCS.gif</file>
+<file alias="plotBSS.gif">SNStools_images/plotBSS.gif</file>
+<file alias="plotARCS.gif">SNStools_images/plotARCS.gif</file>
+<file alias="REFreduction1_3.gif">SNStools_images/REFreduction1_3.gif</file>
+<file alias="miniREFreduction1_3.gif">SNStools_images/miniREFreduction1_3.gif</file>
+<file alias="REFreduction1_5.gif">SNStools_images/REFreduction1_5.gif</file>
+<file alias="miniREFreduction1_5.gif">SNStools_images/miniREFreduction1_5.gif</file>
+<file alias="REFreduction1_6.gif">SNStools_images/REFreduction1_6.gif</file>
+<file alias="miniREFreduction1_6.gif">SNStools_images/miniREFreduction1_6.gif</file>
+<file alias="SANSreduction.gif">SNStools_images/SANSreduction.gif</file>
+<file alias="miniSANSreduction.gif">SNStools_images/miniSANSreduction.gif</file>
+<file alias="under_construction.gif">SNStools_images/under_construction.gif</file>
+<file alias="NeedHelp.gif">SNStools_images/NeedHelp.gif</file>
+<file alias="BatchTeleportation.gif">SNStools_images/BatchTeleportation.gif</file>
+<file alias="REFscaleOFF.gif">SNStools_images/REFscaleOFF.gif</file>
+</qresource>
+</RCC>
