@@ -1,0 +1,80 @@
+
+###############################################
+## nexus_mask_builder                        ##
+###############################################
+## nexus_mask_builder will build a mask based upon
+## consideration of masking pixels at the end of short
+## and long tubes, as well as masking between sets of
+## angular ranges in scattering angle (i.e. two-theta).
+## one can also mask combinations of packs, detectors and pixels.
+##
+## assumptions: 8 tubes per pack,
+##             128 pixels per tube
+##
+## function call
+## nexus_mask_builder(instrument,runnum,maskparamsfile,filename=filename)
+##
+##
+## input:
+## instrument = string, 'ARCS' or 'CNCS' or 'SEQ'
+## runnum = integer, some runnumber to use for an existing
+##          neXus file in order to read the instrument geometry
+## maskparamsfile = a text file listing the parameters for masking
+##                  a complete description of this file is given below
+## filename = string, the filename which will be given to the mask file.
+##
+##
+## output:
+## filename =  string, this is the output filname
+##
+##        
+## The maskparamsfile
+##    first row describes the number of pixels to mask at the top and bottom
+##    of short and long tubes.  units are in pixels
+##    [shorttubetop, shorttubebottom, longtubetop, longtubebottom]
+##    e.g.
+##    [14, 18, 7, 8]
+##
+##    for no masking of tube ends use
+##    [0, 0, 0, 0]
+##
+##    second row describes the angular ranges one would like to mask between
+##    units are in scattering angle in degrees
+##    [[minangle1, maxangle1],[minangle2,maxangle2],[minangle3,maxangle3],[etc]]
+##    e.g.
+##    [[0,5], [32.75,33.75], [110,125]]
+##
+##    for no masking of angular range use
+##    [[0,0]]
+##
+##
+##    Remaining lines describe the packs, detectors and pixels to mask.
+##    use commas to seperate packs, detectors and tubes,
+##    use hyphens to represent continus ranges of one of these
+##    types to mask
+##
+##    examples:
+##    45   -    masks pack 45
+##    2-7  -    masks packs 2 through 7
+##    8,2  -    masks tube 2 of pack 8
+##    9-10,1-7   - masks tubes 1 through 7 of packs 9 and 10
+##    15,1,24-26  - masks pixels 24-26 of tube 1 of pack 15
+##
+##
+
+##    Examples
+##        Input files:  See file1example.dat, file2example.dat and masktextexample.dat for examples
+##
+##        Using code:
+##        $ python
+##        >>> import maskbuilder as mb
+##        >>> mb.nexus_mask_builder("ARCS",1066,"file1.dat",filename="outputfile.dat")
+
+
+
+##                
+##
+##  WARNINGS:
+##    I do not know what will happen if one masks out so many pixels on the top and bottom
+##    of a tube, that they overlap or if one masks a single pixel more than once.
+##
