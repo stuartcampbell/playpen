@@ -27,7 +27,7 @@ import string
 M. B. Stone
 buliding masks for dgs reduction.
 """
-        nbanks = 200
+
 
 ###############################################
 ## nexus_mask_builder                        ##
@@ -82,7 +82,7 @@ buliding masks for dgs reduction.
 ##    15,1,24-26  - masks pixels 24-26 of tube 1 of pack 15
 ##
 ##    Examples
-##        Input files:  See file1.dat, file2.dat and masktextexample.dat for examples
+##        Input files:  See file1example.dat, file2example.dat and masktextexample.dat for examples
 ##
 ##        Using code:
 ##        $ python
