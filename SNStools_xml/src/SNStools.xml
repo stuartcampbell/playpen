@@ -1,0 +1,305 @@
+<Applauncher>
+	<Application description="List of applications available">
+                <BatchTeleportation>
+                                <description>This application can be used to send by email a Batch File from one user to another user. The program takes care of attaching the right files with it and install them at the right place.</description>
+                                <image>BatchTeleportation</image>
+                                <exe>/SNS/software/idltools/pyqt/BatchTeleportation/BatchTeleportation</exe>
+								<path>
+									<value where="Application" name="BatchTeleporatation"></value>
+									<value where="Instruments/REF_L" name="BatchTeleportation"></value>
+									<value where="Instruments/REF_M" name="BatchTeleportation"></value>
+									<value where="Utilities" name="BatchTeleportation"></value>
+								</path>
+                </BatchTeleportation>
+                <BSSreduction>
+                                <description>Data Reduction for the <i>Backscattering</i>instrument.</description>
+                                <image>BSSreduction</image>
+                                <exe>/SNS/software/idltools/BSSreduction</exe>
+								<path>
+									<value where="Applications" name="BSSreduction"></value>
+									<value where="Instruments/BSS" name="BSSreduction"></value>
+									<value where="Reduction" name="BSS"></value>
+								</path>
+                </BSSreduction>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <CLoopES>
+                                <Description>Command Line lopper for elastic scans.</Description>
+                                <Image>CLoopES</Image>
+                                <Exe>/SNS/software/idltools/CLoopES</Exe>
+                </CLoopES>
+                <DAD>
+                                <Description>Dave ASCII division program.</Description>
+                                <Image>DAD</Image>
+                                <Exe>/SNS/software/idltools/DAD</Exe>
+                </DAD>
+                <DGSreduction>
+                                <Description>Data reduction for the direct geometry instruments <i>ARCS, CNCS, SEQUOIA, and HYSPEC</i>.</Description>
+                                <Image>DGSreduction</Image>
+                                <Exe>/SNS/software/idltools/DGSreduction</Exe>
+                </DGSreduction>
+                <FITStools>
+                                <Description>FITS tools program used by <i>VENUS</i>.</Description>
+                                <Image>FITStools</Image>
+                                <Exe>/SNS/software/idltools/FITStools</Exe>
+                </FITStools>
+                <Geometry_Generator>
+                                <Description>Program to generate temporary Geometry files.</Description>
+                                <Image>GG</Image>
+                                <Exe>/SNS/software/idltools/GG</Exe>
+                </Geometry_Generator>
+                <MakeNeXus>
+                                <Description>Program to produce new NeXus files with user defined histograming schema.</Description>
+                                <Image>MakeNeXus</Image>
+                                <Exe>/SNS/software/bin/MakeNeXus.sh</Exe>
+                </MakeNeXus>
+                <NeedHelp>
+                                <Description>Tool to quickly access some of our services and get help.</Description>
+                                <Image>NeedHelp</Image>
+                                <Exe>/SNS/software/idltools/NeedHelp</Exe>
+                </NeedHelp>
+                <plotARCS>
+                                <Description>Program to plot <i>ARCS</i> NeXus and event files.</Description>
+                                <Image>plotARCS</Image>
+                                <Exe>/SNS/software/idltools/plotARCS</Exe>
+                </plotARCS>
+                <plotASCII>
+                                <Description>Program to plot ASCII files produced by various data reduction programs.</Description>
+                                <Image>plotASCII</Image>
+                                <Exe>/SNS/software/idltools/plotASCII</Exe>
+                </plotASCII>
+                <plotBSS>
+                                <Description>Program to plot NeXus and histogrammed files from <i>BSS</i>.</Description>
+                                <Image>plotBSS</Image>
+                                <Exe>/SNS/software/idltools/plotBSS</Exe>
+                </plotBSS>
+                <plotCNCS>
+                                <Description>Program to plot NeXus and event file from the <i>CNCS</i> instrument.</Description>
+                                <Image>plotCNCS</Image>
+                                <Exe>/SNS/software/idltools/plotCNCS</Exe>
+                </plotCNCS>
+                <plotInstrument>
+                                <Description>Program that will be able to plot any NeXus files from any instrument.</Description>
+                                <Image>plotInstrument</Image>
+                                <Exe>/SNS/software/idltools/plotInstrument</Exe>
+                </plotInstrument>
+				 <plotROI>
+                                <Description>Program that plot any NeXus file and ROI files produced by the various data reduction programs.</Description>
+                                <Image>plotROI</Image>
+                                <Exe>/SNS/software/idltools/plotROI</Exe>
+                </plotROI>
+                <realignBSS>
+                                <Description>Program to visualize tubes/pixels/tof of the <i>BSS</i> intrument.</Description>
+                                <Image>realignBSS</Image>
+                                <Exe>/SNS/software/idltools/realignBSS</Exe>
+                </realignBSS>
+                <REFoffSpec>
+                                <Description>Program to get specular and off-specular peaks from the <i>reflectometers</i> instruments.</Description>
+                                <Image>REFoffSpec</Image>
+                                <Exe>/SNS/software/idltools/REFoffSpec</Exe>
+                </REFoffSpec>
+				<REFreduction>
+			 
+		                <versions1.3.x name='1.3.x versions.'>
+                                                <HiRes name='High resolution version'>
+				                                <Description>High resolution version of the the data reduction for <i>REF_L</i> (256x304) and <i>REF_M</i> (304x256). </Description>
+						                <Image>REFreduction1_3</Image>
+			                			<Exe>/SNS/software/idltools/ref_reduction</Exe>
+                				</HiRes>
+                                                <LoRes name='Low resolution version'>
+				                                <Description>Low resolution version of the the data reduction for <i>REF_L</i> (256x304) and <i>REF_M</i> (304x256). </Description>
+						                <Image>miniREFreduction1_3</Image>
+			                			<Exe>/SNS/software/idltools/mini_ref_reduction</Exe>
+				                </LoRes>
+	                	</versions1.3.x>
+		                <versions1.5.x name='1.5.x versions.'>
+                                                <HiRes name='High resolution version'>
+				                                <Description>High resolution version of the the data reduction for <i>REF_L</i> with rotated detector (304x256). </Description>
+						                <Image>REFreduction1_5</Image>
+						                <Exe>/SNS/software/idltools/REFreduction_v15</Exe>
+				                </HiRes>
+                                                <LoRes name='Low resolution version'>
+				                                <Description>Low resolution version of the the data reduction for <i>REF_L</i> (256x304) and <i>REF_M</i> (304x256). </Description>
+						                <Image>miniREFreduction1_5</Image>
+			                			<Exe>/SNS/software/idltools/miniREFreduction_v15</Exe>
+			                	</LoRes>
+		                </versions1.5.x>
+		                <versions1.6.x name='1.6.x versions.'>
+                                                <HiRes name='High resolution version'>
+				                                <Description>High resolution version of the the data reduction for <i>REF_M</i> with new (128x128) detector. </Description>
+                						<Image>REFreduction1_6</Image>
+		                				<Exe>/SNS/software/idltools/REFreduction_v16</Exe>
+				                </HiRes>
+                                                <LoRes name='Low resolution version'>
+				                                <Description>Low resolution version of the the data reduction for <i>REF_L</i> (256x304) and <i>REF_M</i> (304x256). </Description>
+						                <Image>miniREFreduction1_6</Image>
+			                			<Exe>/SNS/software/idltools/miniREFreduction_v16</Exe>
+			                	</LoRes>
+		                </versions1.6.x>
+		</REFreduction>
+		<REFscale>
+		  <Description>Program to merge the specular reflectivity profiles from the different angles and produce the full reflectivity profile.</Description>
+		  <Image>REFscale</Image>
+                                <REFscale_l>
+						<Description>Program to merge the specular reflectivity profiles of the liquids reflectometer from the different angles and produce the full reflectivity profile.</Description>
+						<Image>REFscale</Image>
+						<Exe>/SNS/software/idltools/REFscale_l</Exe>
+                                </REFscale_l>
+				<REFscale_m>
+						<Description>Program to merge the specular reflectivity profiles of the magnetism reflectometer from the different angles and produce the full reflectivity profile.</Description>
+						<Image>REFscale</Image>
+						<Exe>/SNS/software/idltools/REFscale_m</Exe>
+                                </REFscale_m>
+		</REFscale>
+		<SANSreduction>
+		                <HiRes name='High resolution version'>
+						<Description>High resolution version of the data reduction for <i>EQSANS</i>.</Description>
+						<Image>SANSreduction</Image>
+						<Exe>/SNS/software/idltools/SANSreduction</Exe>
+                                </HiRes>
+                                <LoRes name='Low resolution version'>
+						<Description>Low resolution version of the data reduction for <i>EQSANS</i>.</Description>
+						<Image>miniSANSreduction</Image>
+						<Exe>/SNS/software/idltools/miniSANSreduction</Exe>
+                                </LoRes>
+		</SANSreduction>
+</Application>
+<Instruments>
+		<ARCS>
+                                <DGSreduction></DGSreduction>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotARCS></plotARCS>
+				<plotROI></plotROI>
+		</ARCS>
+		<BSS>
+				<BSSreduction></BSSreduction>
+				<CLoopES></CLoopES>
+				<DAD></DAD>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotBSS></plotBSS>
+				<plotROI></plotROI>
+				<realignBSS></realignBSS>
+		</BSS>
+		<EQSANS>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotROI></plotROI>
+				<SANSreduction></SANSreduction>
+		</EQSANS>
+		<CNCS>
+				<DGSreduction></DGSreduction>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotCNCS></plotCNCS>
+				<plotROI></plotROI>
+		</CNCS>
+		<REF_L>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotASCII></plotASCII>
+				<plotROI></plotROI>
+				<REFoffSpec></REFoffSpec>
+				<REFreduction></REFreduction>
+				<REFscale name='REFscale (beta and stable)'>
+						<REFscale_l></REFscale_l>
+						<REFscalebackup name='REF scale (backup version)'>
+								<Description>Backup version of program to merge the specular reflectivity profiles of the liquids reflectometer from the different angles and produce the full reflectivity profile.</Description>
+								<Image>REFscale</Image>
+								<Exe>/SNS/software/idltools/REFscale_backup</Exe>
+						</REFscalebackup>
+				</REFscale>
+		</REF_L>
+		<REF_M>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotASCII></plotASCII>
+				<plotROI></plotROI>
+				<REFoffSpec></REFoffSpec>
+				<REFreduction></REFreduction>
+				<REFscale_m></REFscale_m>
+		</REF_M>
+		<SEQUOIA>
+				<DGSreduction></DGSreduction>
+				<Geometry_Generator></Geometry_Generator>
+				<MakeNeXus></MakeNeXus>
+				<plotASCII></plotASCII>
+				<plotROI></plotROI>
+		</SEQUOIA>
+		<VENUS>
+				<FITStools></FITStools>
+		</VENUS>		
+</Instruments>
+<Reduction>
+		<ARCS>
+				<Description>Data Reduction for <i>ARCS</i></Description>
+				<Image>DGSreduction</Image>
+		</ARCS>
+		<BSS>
+				<Description>Data Reduction for <i>BSS</i></Description>
+				<Image>BSSreduction</Image>
+		</BSS>
+		<CNCS>
+				<Description>Data Reduction for <i>CNCS</i></Description>
+				<Image>DGSreduction</Image>
+		</CNCS>
+		<EQSANS>
+				<Description>Data Reduction for <i>EQSANS</i></Description>
+		</EQSANS>
+		<HYSPEC>
+				<Description>Data Reduction for <i>HYSPEC</i></Description>
+				<Image>HYSPEC</Image>
+		</HYSPEC>
+		<REF_L>
+				<Description>Data Reduction for <i>REF_L</i></Description>
+		</REF_L>
+		<REF_M>
+				<Description>Data Reduction for <i>REF_M</i></Description>
+		</REF_M>
+		<SEQUOIA>
+				<Description>Data Reduction for <i>SEQUOIA</i></Description>
+				<Image>DGSreduction</Image>
+		</SEQUOIA>
+</Reduction>
+<Utilities>
+		<CLoopES></CLoopES>
+		<DAD></DAD>
+		<FITStools></FITStools>
+		<Geometry_Generator></Geometry_Generator>
+		<MakeNeXus></MakeNeXus>
+		<NeedHelp></NeedHelp>
+</Utilities>
+<Visualization>
+		<plotARCS></plotARCS>
+		<plotASCII></plotASCII>
+		<plotBSS></plotBSS>
+		<plotCNCS></plotCNCS>
+		<plotInstruments></plotInstruments>
+		<plotROI></plotROI>
+</Visualization>
+<Beta name='Beta Version'>
+		<CLoopES>
+				<Description>Beta version of CLoopES to test parallel processing of jobs.</Description>
+				<Exe>/SNS/software/idltools/dev/CLoopES_beta</Exe>
+		</CLoopES>
+		<DGSreductionbeta name='DGSreduction beta version'>
+				<Description>Beta version of the data reduction for the direct geometry.</Description>
+				<Image>DGSreduction</Image>
+				<Exe>/SNS/software/idltools/dev/DGSreduction-dev</Exe>
+		</DGSreductionbeta>
+		<REFoffSpecbeta name='REFoffSpec beta version'>
+				<Description>Beta version of the REFoffSpec. This is only for beta tester as it may crash. This beta version is currently for the REF_M team</Description>
+				<Image>REFoffSpec</Image>
+				<Exe>/SNS/software/idltools/beta/REFoffSpec_beta</Exe>
+		</REFoffSpecbeta>
+</Beta>
+</Applauncher>
