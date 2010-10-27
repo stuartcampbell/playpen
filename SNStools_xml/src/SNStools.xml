@@ -20,86 +20,162 @@
 									<value where="Instruments/BSS" name="BSSreduction"></value>
 									<value where="Reduction" name="BSS"></value>
 								</path>
-                </BSSreduction>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                </BSSreduction>                
                 <CLoopES>
                                 <Description>Command Line lopper for elastic scans.</Description>
                                 <Image>CLoopES</Image>
                                 <Exe>/SNS/software/idltools/CLoopES</Exe>
+								<path>
+									<value where="Applications" name="CLoopES"></value>
+									<value where="Instruments/BSS" name="CLoopES"></value>
+									<value where="Utilities" name="CLoopES"></value>
+								</path>
                 </CLoopES>
                 <DAD>
                                 <Description>Dave ASCII division program.</Description>
                                 <Image>DAD</Image>
                                 <Exe>/SNS/software/idltools/DAD</Exe>
+								<path>
+									<value where="Applications" name="DAD"></value>
+									<value where="Instruments/BSS" name="DAD"></value>
+									<value where="Utilities" name="DAD"></value>
+								</path>
                 </DAD>
                 <DGSreduction>
                                 <Description>Data reduction for the direct geometry instruments <i>ARCS, CNCS, SEQUOIA, and HYSPEC</i>.</Description>
                                 <Image>DGSreduction</Image>
                                 <Exe>/SNS/software/idltools/DGSreduction</Exe>
+								<path>
+									<value where="Applications" name="DGSreduction"></value>
+									<value where="Instruments/ARCS" name="DGSreduction"></value>
+									<value where="Instruments/CNCS" name="DGSreduction"></value>
+								</path>
                 </DGSreduction>
                 <FITStools>
                                 <Description>FITS tools program used by <i>VENUS</i>.</Description>
                                 <Image>FITStools</Image>
                                 <Exe>/SNS/software/idltools/FITStools</Exe>
+								<path>
+									<value where="Applications" name="FITStools"></value>
+									<value where="Instruments/VENUS" name="FITStools"></value>
+									<value where="Utilities" name="FITStools"></value>
+								</path>
                 </FITStools>
                 <Geometry_Generator>
                                 <Description>Program to generate temporary Geometry files.</Description>
                                 <Image>GG</Image>
                                 <Exe>/SNS/software/idltools/GG</Exe>
+								<path>
+									<value where="Applications" name="Geometry Generator"></value>
+									<value where="Instruments/ARCS" name="Geometry Generator"></value>
+									<value where="Instruments/BSS" name="Geometry Generator"></value>
+									<value where="Instruments/EQSANS" name="Geometry Generator"></value>
+									<value where="Instruments/CNCS" name="Geometry Generator"></value>
+									<value where="Instruments/REF_L" name="Geometry Generator"></value>
+									<value where="Instruments/REF_M" name="Geometry Generator"></value>
+									<value where="Instruments/SEQUOIA" name="Geometry Generator"></value>
+									<value where="Utilities" name="Geometry Generator"></value>
+								</path>
                 </Geometry_Generator>
                 <MakeNeXus>
                                 <Description>Program to produce new NeXus files with user defined histograming schema.</Description>
                                 <Image>MakeNeXus</Image>
                                 <Exe>/SNS/software/bin/MakeNeXus.sh</Exe>
+								<path>
+									<value where="Applications" name="MakeNeXus"></value>
+									<value where="Instruments/ARCS" name="MakeNeXus"></value>
+									<value where="Instruments/BSS" name="MakeNeXus"></value>
+									<value where="Instruments/EQSANS" name="MakeNeXus"></value>
+									<value where="Instruments/CNCS" name="MakeNeXus"></value>
+									<value where="Instruments/REF_L" name="MakeNeXus"></value>
+									<value where="Instruments/REF_M" name="MakeNeXus"></value>
+									<value where="Instruments/SEQUOIA" name="MakeNeXus"></value>
+									<value where="Utilities" name="MakeNeXus"></value>
+								</path>
                 </MakeNeXus>
                 <NeedHelp>
                                 <Description>Tool to quickly access some of our services and get help.</Description>
                                 <Image>NeedHelp</Image>
                                 <Exe>/SNS/software/idltools/NeedHelp</Exe>
+								<path>
+									<value where="Applications" name="NeedHelp"></value>
+									<value where="Reduction" name="NeedHelp"></value>
+								</path>
                 </NeedHelp>
                 <plotARCS>
                                 <Description>Program to plot <i>ARCS</i> NeXus and event files.</Description>
                                 <Image>plotARCS</Image>
                                 <Exe>/SNS/software/idltools/plotARCS</Exe>
+								<path>
+									<value where="Applications" name="plotARCS"></value>
+									<value where="Instruments/ARCS" name="plotARCS"></value>
+									<value where="Visualization" name="plotARCS"></value>
+								</path>
                 </plotARCS>
                 <plotASCII>
                                 <Description>Program to plot ASCII files produced by various data reduction programs.</Description>
                                 <Image>plotASCII</Image>
                                 <Exe>/SNS/software/idltools/plotASCII</Exe>
+								<path>
+									<value where="Applications" name="plotASCII"></value>
+									<value where="Instruments/REF_L" name="plotASCII"></value>
+									<value where="Instruments/REF_M" name="plotASCII"></value>
+									<value where="Instruments/SEQUOIA" name="plotASCII"></value>
+									<value where="Visualization" name="plotASCII"></value>
+								</path>
                 </plotASCII>
                 <plotBSS>
                                 <Description>Program to plot NeXus and histogrammed files from <i>BSS</i>.</Description>
                                 <Image>plotBSS</Image>
                                 <Exe>/SNS/software/idltools/plotBSS</Exe>
+								<path>
+									<value where="Applications" name="plotBSS"></value>
+									<value where="Visualization" name="plotBSS"></value>
+								</path>
                 </plotBSS>
                 <plotCNCS>
                                 <Description>Program to plot NeXus and event file from the <i>CNCS</i> instrument.</Description>
                                 <Image>plotCNCS</Image>
                                 <Exe>/SNS/software/idltools/plotCNCS</Exe>
+								<path>
+									<value where="Applications" name="plotCNCS"></value>
+									<value where="Instruments/CNCS" name="plotCNCS"></value>
+									<value where="Visualization" name="plotCNCS"></value>
+								</path>
                 </plotCNCS>
                 <plotInstrument>
                                 <Description>Program that will be able to plot any NeXus files from any instrument.</Description>
                                 <Image>plotInstrument</Image>
                                 <Exe>/SNS/software/idltools/plotInstrument</Exe>
+								<path>
+									<value where="Applications" name="plotInstrument"></value>
+									<value where="Visualization" name="plotInstrument"></value>
+								</path>
                 </plotInstrument>
-				 <plotROI>
+		<plotROI>
                                 <Description>Program that plot any NeXus file and ROI files produced by the various data reduction programs.</Description>
                                 <Image>plotROI</Image>
                                 <Exe>/SNS/software/idltools/plotROI</Exe>
+								<path>
+									<value where="Applications" name="plotROI"></value>
+									<value where="Instruments/ARCS" name="plotROI"></value>
+									<value where="Instruments/BSS" name="plotROI"></value>
+									<value where="Instruments/EQSANS" name="plotROI"></value>
+									<value where="Instruments/CNCS" name="plotROI"></value>
+									<value where="Instruments/REF_L" name="plotROI"></value>
+									<value where="Instruments/REF_M" name="plotROI"></value>
+									<value where="Instruments/SEQUOIA" name="plotROI"></value>
+									<value where="Visualization" name="plotROI"></value>
+								</path>
                 </plotROI>
                 <realignBSS>
                                 <Description>Program to visualize tubes/pixels/tof of the <i>BSS</i> intrument.</Description>
                                 <Image>realignBSS</Image>
                                 <Exe>/SNS/software/idltools/realignBSS</Exe>
+								<path>
+									<value where="Applications" name="realignBSS"></value>
+									<value where="Instruments/BSS" name="realignBSS"></value>
+								</path>
                 </realignBSS>
                 <REFoffSpec>
                                 <Description>Program to get specular and off-specular peaks from the <i>reflectometers</i> instruments.</Description>
