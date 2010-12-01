@@ -1,0 +1,7 @@
+import _pyhl
+import Numeric
+aList = _pyhl.read_nodelist(REF_L_23554.nxs)
+aList.selectNode('/duration')
+aList.fetch()
+duration = aList.getNode('/duration').data()
+print duration
