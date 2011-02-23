@@ -7,9 +7,10 @@ class Form(QDialog):
     def __init__(self, parent=None):
         super(Form, self).__init__(parent)
   
-        search = QLineEdit("Search Name")
+        self.run_number = QLineEdit("Run number")
         browse = QLineEdit("Browse Path")
         searchButton = QPushButton("Search")
+        self.connect(searchButton, SIGNAL("clicked()"), self.launch_search)
         browseButton = QPushButton("Browse")
         protonchargeLabel = QLabel("<p ALIGN=RIGHT>" + "Proton Charge" + "</p>")
         timestartLabel = QLabel("<p ALIGN=RIGHT>" + "Time Start" + "</p>")
@@ -24,7 +25,7 @@ class Form(QDialog):
         thiLabel = QLabel("<p ALIGN=RIGHT>" + "THI" + "</p>")
         totalcountsLabel = QLabel("<p ALIGN=RIGHT>" + "Total Counts" + "</p>")
         ccwLabel = QLabel("<p ALIGN=RIGHT>" + "Chopper Center Wavelength" + "</p>")
-        protonchargeInfo = QLineEdit("")
+        self.protonchargeInfo = QLineEdit("")
         timestartInfo = QLineEdit("")
         durationInfo = QLineEdit("")
         slit1Info = QLineEdit("")
@@ -38,7 +39,7 @@ class Form(QDialog):
         totalcountsInfo = QLineEdit("")
         ccwInfo = QLineEdit("")
         layout = QGridLayout()
-        layout.addWidget(search, 0,0,1,2)
+        layout.addWidget(self.run_number, 0,0,1,2)
         layout.addWidget(browse, 1,0,1,2)
         layout.addWidget(searchButton, 0,2)
         layout.addWidget(browseButton, 1,2)
@@ -55,7 +56,7 @@ class Form(QDialog):
         layout.addWidget(thiLabel, 12,0)
         layout.addWidget(totalcountsLabel, 13,0)
         layout.addWidget(ccwLabel, 14,0)
-        layout.addWidget(protonchargeInfo, 2,1)
+        layout.addWidget(self.protonchargeInfo, 2,1)
         layout.addWidget(timestartInfo, 3,1)
         layout.addWidget(durationInfo, 4,1)
         layout.addWidget(slit1Info, 5,1)
@@ -69,8 +70,22 @@ class Form(QDialog):
         layout.addWidget(totalcountsInfo, 13,1)
         layout.addWidget(ccwInfo, 14,1)
         self.setLayout(layout)
-        search.setFocus()
+        self.run_number.setFocus()
         self.setWindowTitle("ViewNex")
+        
+    def launch_search(self):
+        #retrieve run number entered in the first text box
+        run_number = self.run_number.text()
+        #run findnexus command with run number retrieved from the run number box
+        #command to run in the back
+        #  > findnexus -i <instrument> run_number
+        # retrieve what findnexus will return (should be the full path to a nexus file)
+        # then use that file name with your readnxs.py function to retrieve the various fields we want
+        # let suppose you retrieve the proton charge, to put this value in the right box
+        self.protonchargeInfo.setText("1.4545454")
+        
+        
+        
 app = QApplication(sys.argv)
 form = Form()
 form.show()
