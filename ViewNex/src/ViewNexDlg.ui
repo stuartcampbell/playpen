@@ -65,7 +65,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="Run_Number_label" >
+   <widget class="QLabel" name="runnumberLabel" >
     <property name="geometry" >
      <rect>
       <x>20</x>
@@ -81,7 +81,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="runLineEdit" >
+   <widget class="QLineEdit" name="runInfo" >
     <property name="geometry" >
      <rect>
       <x>100</x>
@@ -91,7 +91,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="Instrument_label" >
+   <widget class="QLabel" name="instrumentLabel" >
     <property name="geometry" >
      <rect>
       <x>240</x>
@@ -107,7 +107,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="OR" >
+   <widget class="QLabel" name="orLabel" >
     <property name="geometry" >
      <rect>
       <x>260</x>
@@ -123,7 +123,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QComboBox" name="instrumentDropList" >
+   <widget class="QComboBox" name="instrumentInfo" >
     <property name="geometry" >
      <rect>
       <x>310</x>
@@ -193,7 +193,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QLineEdit" name="browseLineEdit" >
+   <widget class="QLineEdit" name="browseInfo" >
     <property name="geometry" >
      <rect>
       <x>140</x>
@@ -261,38 +261,6 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="timestartInfo" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>30</y>
-      <width>160</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="protonchargeInfo" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>70</y>
-      <width>140</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="Duration_label" >
     <property name="geometry" >
      <rect>
@@ -325,36 +293,44 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="durationInfo" >
+   <widget class="QLineEdit" name="timestartInfo" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>30</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="protonchargeInfo" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>70</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="durationInfo" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>30</y>
-      <width>160</width>
-      <height>21</height>
+      <width>151</width>
+      <height>25</height>
      </rect>
     </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
    </widget>
-   <widget class="QLabel" name="totalcountsInfo" >
+   <widget class="QLineEdit" name="totalcountsInfo" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>70</y>
-      <width>160</width>
-      <height>21</height>
+      <width>151</width>
+      <height>25</height>
      </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
     </property>
    </widget>
   </widget>
@@ -386,22 +362,6 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="slit1Info" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>30</y>
-      <width>171</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="Slit_3_label" >
     <property name="geometry" >
      <rect>
@@ -413,38 +373,6 @@
     </property>
     <property name="text" >
      <string>&lt;p align="right">Slit 3:&lt;/p></string>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Slit_3" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>70</y>
-      <width>171</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="slit2Info" >
-    <property name="geometry" >
-     <rect>
-      <x>350</x>
-      <y>30</y>
-      <width>160</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
     </property>
     <property name="wordWrap" >
      <bool>false</bool>
@@ -482,20 +410,44 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="slit4Info" >
+   <widget class="QLineEdit" name="slit1Info" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>30</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="slit3Info" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>70</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="slit2Info" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>30</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="slit4Info" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>70</y>
-      <width>160</width>
-      <height>21</height>
+      <width>151</width>
+      <height>25</height>
      </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
     </property>
    </widget>
   </widget>
@@ -543,38 +495,6 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="tthetaInfo" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>30</y>
-      <width>171</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="thsInfo" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>70</y>
-      <width>171</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QLabel" name="tthd_label" >
     <property name="geometry" >
      <rect>
@@ -607,40 +527,48 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLabel" name="thiInfo" >
+   <widget class="QLineEdit" name="tthetaInfo" >
     <property name="geometry" >
      <rect>
-      <x>350</x>
-      <y>70</y>
-      <width>160</width>
-      <height>21</height>
+      <x>110</x>
+      <y>30</y>
+      <width>151</width>
+      <height>25</height>
      </rect>
     </property>
-    <property name="text" >
-     <string/>
-    </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
-    </property>
    </widget>
-   <widget class="QLabel" name="tthdInfo" >
+   <widget class="QLineEdit" name="tthdInfo" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>30</y>
-      <width>160</width>
-      <height>21</height>
+      <width>151</width>
+      <height>25</height>
      </rect>
     </property>
-    <property name="text" >
-     <string/>
+   </widget>
+   <widget class="QLineEdit" name="thsInfo" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>70</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
     </property>
-    <property name="wordWrap" >
-     <bool>false</bool>
+   </widget>
+   <widget class="QLineEdit" name="thiInfo" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>70</y>
+      <width>151</width>
+      <height>25</height>
+     </rect>
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="label" >
+  <widget class="QLabel" name="fullfilenameLabel" >
    <property name="geometry" >
     <rect>
      <x>10</x>
@@ -653,17 +581,14 @@
     <string>Full file name:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Full_file_name" >
+  <widget class="QLineEdit" name="fullfilenameInfo" >
    <property name="geometry" >
     <rect>
      <x>100</x>
      <y>190</y>
      <width>441</width>
-     <height>19</height>
+     <height>25</height>
     </rect>
-   </property>
-   <property name="text" >
-    <string/>
    </property>
   </widget>
  </widget>
