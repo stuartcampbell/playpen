@@ -491,6 +491,25 @@ class MainForm(QtGui.QDialog):
                                  description='Beta version of the REFoffSpec<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>' + 
                                  '<br><br>This beta version is currently for the REF_M team')       
+        parent = self.createItem(ancestor, "REFreduction 1.5 beta version",
+                                 imageName = 'REFreduction',
+                                 description='Beta version of REFreduction<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+        self.createItem(parent, "Low resolution version",
+                        imageName = 'miniREFreduction1_5',
+                        exeName = '/SNS/software/idltools/beta/miniREFreduction_v15_beta',
+                        description='Beta version of mini REFreduction<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+        self.createItem(parent, "High resolution version",
+                        imageName = 'REFreduction1_5',
+                        exeName = '/SNS/software/idltools/beta/REFreduction_v15_beta',
+                        description='Beta version of REFreduction<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+
+        
+
+
+
 
         ##developer
 #        ancestor = self.createItem(self.treeWidget, 'Developer only !',
