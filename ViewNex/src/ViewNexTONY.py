@@ -73,64 +73,72 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         #slit1
         file.opendata('/entry/instrument/aperture1/s1t/value')
         s1t = str(file.getdata())
+        units = file.getattr('units',10,'char')
         file.closedata()
+        _s1t = float(s1t)
+
         file.opendata('/entry/instrument/aperture1/s1b/value')
         s1b = str(file.getdata())
         file.closedata
-        file.opendata('/entry/instrument/aperture1/s1l/value')
-        s1l = str(file.getdata())
-        file.closedata
-        file.opendata('/entry/instrument/aperture1/s1r/value')
-        s1r = str(file.getdata())
-        file.closedata
-
-        #slit2
-        file.opendata('/entry/instrument/aperture2/s2t/value')
-        s2t = str(file.getdata())
-        file.closedata()
-        file.opendata('/entry/instrument/aperture2/s2b/value')
-        s2b = str(file.getdata())
-        file.closedata
-        file.opendata('/entry/instrument/aperture2/s2l/value')
-        s2l = str(file.getdata())
-        file.closedata()
-        file.opendata('/entry/instrument/aperture2/s2r/value')
-        s2r = str(file.getdata())
-        file.closedata
-
-        #slit3
-        file.opendata('/entry/instrument/aperture3/s3t/value')
-        s3t = str(file.getdata())
-        file.closedata()
-        file.opendata('/entry/instrument/aperture3/s3b/value')
-        s3b = str(file.getdata())
-        file.closedata
-        file.opendata('/entry/instrument/aperture3/s3l/value')
-        s3l = str(file.getdata())
-        file.closedata()
-        file.opendata('/entry/instrument/aperture3/s3r/value')
-        s3r = str(file.getdata())
-        file.closedata
-
-        #slit4
-        file.opendata('/entry/instrument/aperture4/s4t/value')
-        s4t = str(file.getdata())
-        file.closedata()
-        file.opendata('/entry/instrument/aperture4/s4b/value')
-        s4b = str(file.getdata())
-        file.closedata
-        file.opendata('/entry/instrument/aperture4/s4l/value')
-        s4l = str(file.getdata())
-        file.closedata()
-        file.opendata('/entry/instrument/aperture4/s4r/value')
-        s4r = str(file.getdata())
-        file.closedata
-       
-        #theta
-        file.opendata('/instrument/bank1/Theta/readback')
-        theta = str(file.getdata())
-        file.closedata()
-        self.tthetainfo.setText(theta)
+        _s1b = float(s1b)
+        
+        _s1 = _s1t - _s1b
+        self.slit1h.setText(str(_s1) + ' ' + units)
+        
+#        file.opendata('/entry/instrument/aperture1/s1l/value')
+#        s1l = str(file.getdata())
+#        file.closedata
+#        file.opendata('/entry/instrument/aperture1/s1r/value')
+#        s1r = str(file.getdata())
+#        file.closedata
+#
+#        #slit2
+#        file.opendata('/entry/instrument/aperture2/s2t/value')
+#        s2t = str(file.getdata())
+#        file.closedata()
+#        file.opendata('/entry/instrument/aperture2/s2b/value')
+#        s2b = str(file.getdata())
+#        file.closedata
+#        file.opendata('/entry/instrument/aperture2/s2l/value')
+#        s2l = str(file.getdata())
+#        file.closedata()
+#        file.opendata('/entry/instrument/aperture2/s2r/value')
+#        s2r = str(file.getdata())
+#        file.closedata
+#
+#        #slit3
+#        file.opendata('/entry/instrument/aperture3/s3t/value')
+#        s3t = str(file.getdata())
+#        file.closedata()
+#        file.opendata('/entry/instrument/aperture3/s3b/value')
+#        s3b = str(file.getdata())
+#        file.closedata
+#        file.opendata('/entry/instrument/aperture3/s3l/value')
+#        s3l = str(file.getdata())
+#        file.closedata()
+#        file.opendata('/entry/instrument/aperture3/s3r/value')
+#        s3r = str(file.getdata())
+#        file.closedata
+#
+#        #slit4
+#        file.opendata('/entry/instrument/aperture4/s4t/value')
+#        s4t = str(file.getdata())
+#        file.closedata()
+#        file.opendata('/entry/instrument/aperture4/s4b/value')
+#        s4b = str(file.getdata())
+#        file.closedata
+#        file.opendata('/entry/instrument/aperture4/s4l/value')
+#        s4l = str(file.getdata())
+#        file.closedata()
+#        file.opendata('/entry/instrument/aperture4/s4r/value')
+#        s4r = str(file.getdata())
+#        file.closedata
+#       
+#        #theta
+#        file.opendata('/instrument/bank1/Theta/readback')
+#        theta = str(file.getdata())
+#        file.closedata()
+#        self.tthetainfo.setText(theta)
 
         
 
