@@ -167,6 +167,7 @@ class Ui_ViewNexDlg(object):
 #        QtCore.QMetaObject.connectSlotsByName(ViewNexDlg)
 
         self.connect(self.searchButton, QtCore.SIGNAL("clicked()"), self.on_searchButton_clicked)
+        self.connect(self.browseButton, QtCore.SIGNAL("clicked()"), self.on_browseButton_clicked)
 
 
     def retranslateUi(self, ViewNexDlg):

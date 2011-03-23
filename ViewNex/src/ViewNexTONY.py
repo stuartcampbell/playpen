@@ -1,6 +1,7 @@
 import re
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import QtGui
 import ui_ViewNexDlg
 import os
 
@@ -40,7 +41,12 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         print 'here'
 
     def on_browseButton_clicked(self):
-        print 'in on_browseButton_clicked'
+        file_path = os.path.expanduser("~/")
+        oFiles = QtGui.QFileDialog.getOpenFileNames(self, "Select a NeXus file",
+                                            file_path, "NeXus files (*.nxs)")
+        for file in oFiles:
+            self.retrieve_metadata(file)
+            return
         
 if __name__ == "__main__":
     import sys
