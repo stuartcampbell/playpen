@@ -159,12 +159,15 @@ class Ui_ViewNexDlg(object):
         self.fullfilenameLabel = QtGui.QLabel(ViewNexDlg)
         self.fullfilenameLabel.setGeometry(QtCore.QRect(10, 190, 91, 19))
         self.fullfilenameLabel.setObjectName("fullfilenameLabel")
-        self.fullfilenameInfo = QtGui.QLineEdit(ViewNexDlg)
-        self.fullfilenameInfo.setGeometry(QtCore.QRect(100, 190, 441, 25))
+        self.fullfilenameInfo = QtGui.QLabel(ViewNexDlg)
+        self.fullfilenameInfo.setGeometry(QtCore.QRect(100, 190, 441, 33))
         self.fullfilenameInfo.setObjectName("fullfilenameInfo")
 
         self.retranslateUi(ViewNexDlg)
-        QtCore.QMetaObject.connectSlotsByName(ViewNexDlg)
+#        QtCore.QMetaObject.connectSlotsByName(ViewNexDlg)
+
+        self.connect(self.searchButton, QtCore.SIGNAL("clicked()"), self.on_searchButton_clicked)
+
 
     def retranslateUi(self, ViewNexDlg):
         ViewNexDlg.setWindowTitle(QtGui.QApplication.translate("ViewNexDlg", "Form1", None, QtGui.QApplication.UnicodeUTF8))

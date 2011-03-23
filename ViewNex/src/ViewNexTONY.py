@@ -19,14 +19,25 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
     def instrumentInfo_valueChanged(self, inst):
         return self.apply
     
-
     def on_searchButton_clicked(self):
-        self.protonchargeInfo.setText("1.4545454")
-        os.system(findnexus -i, inst, runnum)
-        findnexus.exec_(i, runnum, inst)
+        print 'in on_searchButton_clicked'
+        #get instrument selected
+        instrument = self.instrumentInfo.currentText()
+        #get run number defined
+        run_number = self.runInfo.text()
+        result = os.popen('findnexus -i '+ str(instrument) + ' ' + str(run_number)).read()
+        self.fullfilenameInfo.setText(result)
+     
+        #check that nexus is a real file
+        result = result.split('\n')
+        _file = os.path.expanduser(result[0])
+        if os.path.exists(_file):
+            print 'file exist'
+        else:
+            print 'does not exist'
 
     def on_browseButton_clicked(self):
-        self.protonchargeInfo.setText("1.4545454")
+        print 'in on_browseButton_clicked'
         
 if __name__ == "__main__":
     import sys
