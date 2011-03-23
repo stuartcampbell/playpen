@@ -82,7 +82,7 @@ class Ui_ViewNexDlg(object):
         self.Total_counts_label.setGeometry(QtCore.QRect(260, 70, 90, 21))
         self.Total_counts_label.setWordWrap(False)
         self.Total_counts_label.setObjectName("Total_counts_label")
-        self.timestartInfo = QtGui.QLineEdit(self.groupBox_2)
+        self.timestartInfo = QtGui.QLabel(self.groupBox_2)
         self.timestartInfo.setGeometry(QtCore.QRect(110, 30, 151, 25))
         self.timestartInfo.setObjectName("timestartInfo")
         self.protonchargeInfo = QtGui.QLineEdit(self.groupBox_2)

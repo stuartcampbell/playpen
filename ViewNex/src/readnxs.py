@@ -1,5 +1,33 @@
-import tables
-h5_file = tables.openFile('REF_L_23554.nxs','r')
-tab = h5_file.root.REF_L_23554.raw_data
-for line in tab.iterrows():
-    print line
+import nxs
+
+filename = 'REF_L_23554.nxs'
+
+file=nxs.open(filename,'r')
+file.opengroup('entry','NXentry')
+
+#start_time
+file.opendata('start_time')
+print 'start_time: ' + file.getdata()
+file.closedata()
+
+#duration
+file.opendata('duration')
+duration = str(file.getdata())
+unit = file.getattr('units',10,'char')
+print 'Duration is: ' + duration + unit
+file.closedata()
+
+#proton charge
+file.opendata('proton_charge')
+proton_charge = str(file.getdata())
+unit = file.getattr('units',15,'char')
+print 'Proton charge is: ' + proton_charge + unit
+file.closedata()
+
+#total counts
+file.opendata('total_counts')
+print 'Total counts: ' + str(file.getdata())
+file.closedata()
+
+#slit1,2,3 and 4
+file.opendata
