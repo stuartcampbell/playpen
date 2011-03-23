@@ -32,9 +32,11 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         result = result.split('\n')
         _file = os.path.expanduser(result[0])
         if os.path.exists(_file):
-            print 'file exist'
-        else:
-            print 'does not exist'
+            self.retrieve_metadata(_file)
+
+    def retrieve_metadata(self,file):
+        #FIXME
+        #use your nexus parser to retrieve the various metadata
 
     def on_browseButton_clicked(self):
         print 'in on_browseButton_clicked'
