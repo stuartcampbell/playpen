@@ -293,44 +293,56 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="timestartInfo" >
+   <widget class="QLabel" name="timestartinfo" >
     <property name="geometry" >
      <rect>
       <x>110</x>
       <y>30</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
+    <property name="text" >
+     <string/>
+    </property>
    </widget>
-   <widget class="QLineEdit" name="protonchargeInfo" >
+   <widget class="QLabel" name="protonchargeinfo" >
     <property name="geometry" >
      <rect>
       <x>110</x>
       <y>70</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
+    <property name="text" >
+     <string/>
+    </property>
    </widget>
-   <widget class="QLineEdit" name="durationInfo" >
+   <widget class="QLabel" name="durationinfo" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>30</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
+    <property name="text" >
+     <string/>
+    </property>
    </widget>
-   <widget class="QLineEdit" name="totalcountsInfo" >
+   <widget class="QLabel" name="totalcountsinfo" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>70</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="text" >
+     <string/>
     </property>
    </widget>
   </widget>
@@ -340,7 +352,7 @@
      <x>10</x>
      <y>330</y>
      <width>532</width>
-     <height>112</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="title" >
@@ -366,7 +378,7 @@
     <property name="geometry" >
      <rect>
       <x>70</x>
-      <y>70</y>
+      <y>80</y>
       <width>40</width>
       <height>21</height>
      </rect>
@@ -398,7 +410,7 @@
     <property name="geometry" >
      <rect>
       <x>310</x>
-      <y>70</y>
+      <y>80</y>
       <width>40</width>
       <height>21</height>
      </rect>
@@ -410,44 +422,238 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="slit1Info" >
+   <widget class="QLabel" name="slit1w" >
     <property name="geometry" >
      <rect>
-      <x>110</x>
+      <x>120</x>
       <y>30</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QLineEdit" name="slit3Info" >
-    <property name="geometry" >
-     <rect>
-      <x>110</x>
-      <y>70</y>
-      <width>151</width>
-      <height>25</height>
-     </rect>
+    <property name="text" >
+     <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="slit2Info" >
-    <property name="geometry" >
-     <rect>
-      <x>350</x>
-      <y>30</y>
-      <width>151</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="slit4Info" >
+   <widget class="QLabel" name="slit4info" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>70</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit2info" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>30</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>30</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>w:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_2" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>50</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>h:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_3" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>80</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>w:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_4" >
+    <property name="geometry" >
+     <rect>
+      <x>110</x>
+      <y>100</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>h:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_5" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>50</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>h:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_6" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>100</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>h:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_7" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>80</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>w:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1info_8" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>30</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>w:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit1h" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>50</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit2w" >
+    <property name="geometry" >
+     <rect>
+      <x>360</x>
+      <y>30</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit2h" >
+    <property name="geometry" >
+     <rect>
+      <x>360</x>
+      <y>50</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit3w" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>80</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit3h" >
+    <property name="geometry" >
+     <rect>
+      <x>120</x>
+      <y>100</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit4w" >
+    <property name="geometry" >
+     <rect>
+      <x>360</x>
+      <y>80</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="slit4h" >
+    <property name="geometry" >
+     <rect>
+      <x>360</x>
+      <y>100</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
     </property>
    </widget>
   </widget>
@@ -455,7 +661,7 @@
    <property name="geometry" >
     <rect>
      <x>10</x>
-     <y>450</y>
+     <y>470</y>
      <width>532</width>
      <height>111</height>
     </rect>
@@ -527,44 +733,56 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tthetaInfo" >
+   <widget class="QLabel" name="tthetainfo" >
     <property name="geometry" >
      <rect>
       <x>110</x>
       <y>30</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QLineEdit" name="tthdInfo" >
-    <property name="geometry" >
-     <rect>
-      <x>350</x>
-      <y>30</y>
-      <width>151</width>
-      <height>25</height>
-     </rect>
+    <property name="text" >
+     <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="thsInfo" >
+   <widget class="QLabel" name="thsinfo" >
     <property name="geometry" >
      <rect>
       <x>110</x>
       <y>70</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
+    <property name="text" >
+     <string/>
+    </property>
    </widget>
-   <widget class="QLineEdit" name="thiInfo" >
+   <widget class="QLabel" name="tthdinfo" >
+    <property name="geometry" >
+     <rect>
+      <x>350</x>
+      <y>30</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="thiinfo" >
     <property name="geometry" >
      <rect>
       <x>350</x>
       <y>70</y>
       <width>151</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="text" >
+     <string/>
     </property>
    </widget>
   </widget>
