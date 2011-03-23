@@ -37,6 +37,7 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
     def retrieve_metadata(self,file):
         #FIXME
         #use your nexus parser to retrieve the various metadata
+        print 'here'
 
     def on_browseButton_clicked(self):
         print 'in on_browseButton_clicked'
