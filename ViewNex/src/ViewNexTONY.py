@@ -194,7 +194,7 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         self.slit4w.setText(str(_s4w) + ' ' + units)
 
         #ttheta
-        file.opendata('/entry/instrument/bank1/TwoTheta/value')
+        file.opendata('/entry/instrument/bank1/TwoTheta/readback')
         ttheta = str(file.getdata())
         units = file.getattr('units',10,'char')
         file.closedata()
@@ -205,7 +205,7 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         tthd = str(file.getdata())
         units = file.getattr('units',10,'char')
         file.closedata()
-        self.tthetainfo.setText(tthd + ' ' + units)
+        self.tthdinfo.setText(tthd + ' ' + units)
 
         #ths
         file.opendata('/entry/sample/ths/value')
@@ -220,17 +220,6 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         units = file.getattr('units',10,'char')
         file.closedata()
         self.thiinfo.setText(thi + ' ' +units)
-
-        #fullfilenameinfo
-        self.fullfilenameinfo.setText(str(file))
-
-        #browseinfo
-        self.browseinfo.setText(str(file_path))
- 
-
-        
-
-        
         
         #do the same for all the other one
         
@@ -244,6 +233,10 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         oFiles = QtGui.QFileDialog.getOpenFileNames(self, "Select a NeXus file",
                                             file_path, "NeXus files (*.nxs)")
         for file in oFiles:
+            
+            #fullfilenameinfo
+            self.fullfilenameInfo.setText(str(file))
+            
             self.retrieve_metadata(file)
             return
 
