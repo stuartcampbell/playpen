@@ -24,7 +24,6 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         return self.apply
     
     def on_searchButton_clicked(self):
-        print 'in on_searchButton_clicked'
         #get instrument selected
         self.instrument = self.instrumentInfo.currentText()
         #get run number defined
