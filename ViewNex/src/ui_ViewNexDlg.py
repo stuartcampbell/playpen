@@ -226,7 +226,7 @@ class Ui_ViewNexDlg(object):
         self.retranslateUi(ViewNexDlg)
 #        QtCore.QMetaObject.connectSlotsByName(ViewNexDlg)
         self.connect(self.browseButton, QtCore.SIGNAL("clicked()"), self.on_browseButton_clicked)
-        self.connect(self.searchButton, QtCore.SIGNAL("clicked"), self.on_searchButton_clicked)
+        self.connect(self.searchButton, QtCore.SIGNAL("clicked()"), self.on_searchButton_clicked)
 
     def retranslateUi(self, ViewNexDlg):
         ViewNexDlg.setWindowTitle(QtGui.QApplication.translate("ViewNexDlg", "Form1", None, QtGui.QApplication.UnicodeUTF8))
