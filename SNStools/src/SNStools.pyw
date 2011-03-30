@@ -485,26 +485,26 @@ class MainForm(QtGui.QDialog):
                                  description='Beta version of the data reduction for the direct geometry' + 
                                  ' instruments <i>ARCS, CNCS, <br>SEQUOIA and HYSPEC</i>.' + 
                                  '<br><font color=red>This is only for beta tester as it may crash')
-        parent = self.createItem(ancestor, "REFoffSpec beta version",
-                                 imageName='REFoffSpec',
-                                 exeName='/SNS/software/idltools/beta/REFoffSpec_beta',
-                                 description='Beta version of the REFoffSpec<br>' + 
-                                 '<br><font color=red>This is only for beta tester as it may crash</font>' + 
-                                 '<br><br>This beta version is currently for the REF_M team')       
-        parent = self.createItem(ancestor, "REFreduction 1.3 beta version",
-                                 imageName = 'REFreduction',
-                                 description='Beta version of REFreduction<br>' + 
-                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
-        self.createItem(parent, "High resolution version 1.3 beta",
-                        imageName = 'REFreduction1_3',
-                        exeName = '/SNS/software/idltools/beta/REFreduction_v13_beta',
-                        description='Beta version of REFreduction<br>' + 
-                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
-        self.createItem(parent, 'Low resolution version 1.3 beta',
-                        imageName = 'miniREFreduction1_3',
-                        exeName = '/SNS/software/idltools/beta/miniREFreduction_v13_beta',
-                        description='Beta version of mini REFreduction<br>' + 
-                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+#        parent = self.createItem(ancestor, "REFoffSpec beta version",
+#                                 imageName='REFoffSpec',
+#                                 exeName='/SNS/software/idltools/beta/REFoffSpec_beta',
+#                                 description='Beta version of the REFoffSpec<br>' + 
+#                                 '<br><font color=red>This is only for beta tester as it may crash</font>' + 
+#                                 '<br><br>This beta version is currently for the REF_M team')       
+#        parent = self.createItem(ancestor, "REFreduction 1.3 beta version",
+#                                 imageName = 'REFreduction',
+#                                 description='Beta version of REFreduction<br>' + 
+#                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+#        self.createItem(parent, "High resolution version 1.3 beta",
+#                        imageName = 'REFreduction1_3',
+#                        exeName = '/SNS/software/idltools/beta/REFreduction_v13_beta',
+#                        description='Beta version of REFreduction<br>' + 
+#                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+#        self.createItem(parent, 'Low resolution version 1.3 beta',
+#                        imageName = 'miniREFreduction1_3',
+#                        exeName = '/SNS/software/idltools/beta/miniREFreduction_v13_beta',
+#                        description='Beta version of mini REFreduction<br>' + 
+#                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
         parent = self.createItem(ancestor, "REFreduction 1.5 beta version",
                                  imageName = 'REFreduction',
                                  description='Beta version of REFreduction<br>' + 
