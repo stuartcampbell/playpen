@@ -72,7 +72,7 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         file.closedata()
         self.totalcountsinfo.setText(total_counts)
 
-        #slit1
+        #slit1 - height
         file.opendata('/entry/instrument/aperture1/s1t/value')
         s1t = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -81,12 +81,13 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture1/s1b/value')
         s1b = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s1b = float(s1b)
         
         _s1h = _s1t - _s1b
         self.slit1h.setText(str(_s1h) + ' ' + units)
 
+        #slit1 - width
         file.opendata('/entry/instrument/aperture1/s1r/value')
         s1r = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -95,13 +96,13 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture1/s1l/value')
         s1l = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s1l = float(s1l)
         
         _s1w = _s1r - _s1l
         self.slit1w.setText(str(_s1w) + ' ' + units)
-
-        #slit2
+#
+        #slit2 - height
         file.opendata('/entry/instrument/aperture2/s2t/value')
         s2t = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -110,12 +111,14 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture2/s2b/value')
         s2b = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s2b = float(s2b)
         
         _s2h = _s2t - _s2b
         self.slit2h.setText(str(_s2h) + ' ' + units)
 
+        # width
+        
         file.opendata('/entry/instrument/aperture2/s2r/value')
         s2r = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -124,13 +127,13 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture2/s2l/value')
         s2l = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s2l = float(s2l)
         
         _s2w = _s2r - _s2l
-        self.slit2h.setText(str(_s2w) + ' ' + units)
+        self.slit2w.setText(str(_s2w) + ' ' + units)
 
-        #slit3
+        #slit3 - height
         file.opendata('/entry/instrument/aperture3/s3t/value')
         s3t = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -139,12 +142,13 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture3/s3b/value')
         s3b = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s3b = float(s3b)
         
         _s3h = _s3t - _s3b
         self.slit3h.setText(str(_s3h) + ' ' + units)
 
+        # width
         file.opendata('/entry/instrument/aperture3/s3r/value')
         s3r = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -153,13 +157,13 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture3/s3l/value')
         s3l = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s3l = float(s3l)
         
         _s3w = _s3r - _s3l
-        self.slit3h.setText(str(_s3w) + ' ' + units)
+        self.slit3w.setText(str(_s3w) + ' ' + units)
 
-        #slit4
+        #slit4 - height
         file.opendata('/entry/instrument/aperture4/s4t/value')
         s4t = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -168,12 +172,13 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture4/s4b/value')
         s4b = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s4b = float(s4b)
         
         _s4h = _s4t - _s4b
         self.slit4h.setText(str(_s4h) + ' ' + units)
 
+        # width
         file.opendata('/entry/instrument/aperture4/s4r/value')
         s4r = str(file.getdata())
         units = file.getattr('units',10,'char')
@@ -182,11 +187,11 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
         file.opendata('/entry/instrument/aperture4/s4l/value')
         s4l = str(file.getdata())
-        file.closedata
+        file.closedata()
         _s4l = float(s4l)
         
         _s4w = _s4r - _s4l
-        self.slit4h.setText(str(_s4w) + ' ' + units)
+        self.slit4w.setText(str(_s4w) + ' ' + units)
 
 #       
 #        #theta
