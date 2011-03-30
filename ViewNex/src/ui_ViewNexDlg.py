@@ -19,7 +19,7 @@ class Ui_ViewNexDlg(object):
         self.groupBox.setGeometry(QtCore.QRect(10, 10, 601, 172))
         self.groupBox.setObjectName("groupBox")
         self.browseButton = QtGui.QPushButton(self.groupBox)
-        self.browseButton.setGeometry(QtCore.QRect(20, 120, 111, 29))
+        self.browseButton.setGeometry(QtCore.QRect(20, 120, 565, 29))
         self.browseButton.setObjectName("browseButton")
         self.textLabel6_11 = QtGui.QLabel(self.groupBox)
         self.textLabel6_11.setGeometry(QtCore.QRect(11, 106, 88, 17))
@@ -55,9 +55,10 @@ class Ui_ViewNexDlg(object):
         self.instrumentInfo.addItem("")
         self.instrumentInfo.addItem("")
         self.instrumentInfo.addItem("")
-        self.browseInfo = QtGui.QLineEdit(self.groupBox)
-        self.browseInfo.setGeometry(QtCore.QRect(140, 120, 441, 25))
-        self.browseInfo.setObjectName("browseInfo")
+        self.instrumentInfo.addItem("")
+#        self.browseInfo = QtGui.QLineEdit(self.groupBox)
+#        self.browseInfo.setGeometry(QtCore.QRect(140, 120, 441, 25))
+#        self.browseInfo.setObjectName("browseInfo")
         self.searchButton = QtGui.QPushButton(self.groupBox)
         self.searchButton.setGeometry(QtCore.QRect(500, 30, 80, 29))
         self.searchButton.setObjectName("searchButton")
@@ -222,7 +223,9 @@ class Ui_ViewNexDlg(object):
         self.fullfilenameInfo.setObjectName("fullfilenameInfo")
 
         self.retranslateUi(ViewNexDlg)
-        QtCore.QMetaObject.connectSlotsByName(ViewNexDlg)
+#        QtCore.QMetaObject.connectSlotsByName(ViewNexDlg)
+        self.connect(self.browseButton, QtCore.SIGNAL("clicked()"), self.on_browseButton_clicked)
+        self.connect(self.searchButton, QtCore.SIGNAL("clicked()"), self.on_searchButton_clicked)
 
     def retranslateUi(self, ViewNexDlg):
         ViewNexDlg.setWindowTitle(QtGui.QApplication.translate("ViewNexDlg", "Form1", None, QtGui.QApplication.UnicodeUTF8))

@@ -24,6 +24,9 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         return self.apply
     
     def on_searchButton_clicked(self):
+        
+        QApplication.setOverrideCursor(Qt.WaitCursor)
+        
         #get instrument selected
         self.instrument = self.instrumentInfo.currentText()
         #get run number defined
@@ -36,6 +39,8 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         _file = os.path.expanduser(result[0])
         if os.path.exists(_file):
             self.retrieve_metadata(_file)
+
+        QApplication.restoreOverrideCursor()
 
     def retrieve_metadata(self,filename):
         
