@@ -101,7 +101,7 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         
         _s1w = _s1r - _s1l
         self.slit1w.setText(str(_s1w) + ' ' + units)
-#
+
         #slit2 - height
         file.opendata('/entry/instrument/aperture2/s2t/value')
         s2t = str(file.getdata())
@@ -193,18 +193,46 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         _s4w = _s4r - _s4l
         self.slit4w.setText(str(_s4w) + ' ' + units)
 
-#       
-#        #theta
-#        file.opendata('/instrument/bank1/Theta/readback')
-#        theta = str(file.getdata())
-#        file.closedata()
-#        self.tthetainfo.setText(theta)
+        #ttheta
+        file.opendata('/entry/instrument/bank1/TwoTheta/value')
+        ttheta = str(file.getdata())
+        units = file.getattr('units',10,'char')
+        file.closedata()
+        self.tthetainfo.setText(ttheta + ' ' + units)
+
+        #tthd
+        file.opendata('/entry/instrument/bank1/tthd/value')
+        tthd = str(file.getdata())
+        units = file.getattr('units',10,'char')
+        file.closedata()
+        self.tthetainfo.setText(tthd + ' ' + units)
+
+        #ths
+        file.opendata('/entry/sample/ths/value')
+        ths = str(file.getdata()) 
+        units = file.getattr('units',10,'char')
+        file.closedata()
+        self.thsinfo.setText(ths + ' ' +units)
+
+        #thi
+        file.opendata('/entry/instrument/aperture1/thi/value')
+        thi = str(file.getdata()) 
+        units = file.getattr('units',10,'char')
+        file.closedata()
+        self.thiinfo.setText(thi + ' ' +units)
+
+        #fullfilenameinfo
+        self.fullfilenameinfo.setText(str(file))
+
+        #browseinfo
+        self.browseinfo.setText(str(file_path))
+ 
 
         
 
         
         
-        #do the same for all the other ones
+        #do the same for all the other one
         
         #WORK TO DO HERE
         
@@ -218,6 +246,7 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         for file in oFiles:
             self.retrieve_metadata(file)
             return
+
         
 if __name__ == "__main__":
     import sys
