@@ -229,7 +229,7 @@ class Ui_ViewNexDlg(object):
         self.connect(self.runInfo, QtCore.SIGNAL("returnPressed()"), self.on_searchButton_clicked)
 
     def retranslateUi(self, ViewNexDlg):
-        ViewNexDlg.setWindowTitle(QtGui.QApplication.translate("ViewNexDlg", "Form1", None, QtGui.QApplication.UnicodeUTF8))
+        ViewNexDlg.setWindowTitle(QtGui.QApplication.translate("ViewNexDlg", "NeXus Viewer", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("ViewNexDlg", "Input", None, QtGui.QApplication.UnicodeUTF8))
         self.browseButton.setText(QtGui.QApplication.translate("ViewNexDlg", "Browse ...", None, QtGui.QApplication.UnicodeUTF8))
         self.runnumberLabel.setText(QtGui.QApplication.translate("ViewNexDlg", "<b>Run Number</b>", None, QtGui.QApplication.UnicodeUTF8))
