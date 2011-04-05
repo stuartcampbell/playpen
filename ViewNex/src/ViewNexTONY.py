@@ -44,6 +44,8 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
 
     def retrieve_metadata(self,filename):
         
+        QApplication.setOverrideCursor(Qt.WaitCursor)
+         
         file=nxs.open(str(filename),'r')
         entry = 'entry'
         if (self.instrument == 'REF_M'):
@@ -224,18 +226,15 @@ class ViewNexDlg(QDialog, ui_ViewNexDlg.Ui_ViewNexDlg):
         units = file.getattr('units',10,'char')
         file.closedata()
         self.thiinfo.setText(thi + ' ' +units)
-        
-        #do the same for all the other one
-        
-        #WORK TO DO HERE
-        
-        
+                
         file.close()
+
+        QApplication.restoreOverrideCursor()
 
     def on_browseButton_clicked(self):
         file_path = os.path.expanduser("~/")
         oFiles = QtGui.QFileDialog.getOpenFileNames(self, "Select a NeXus file",
-                                            file_path, "NeXus files (*.nxs)")
+                                            file_path, "NeXus files (*.nxs)")        
         for file in oFiles:
             
             #fullfilenameinfo
