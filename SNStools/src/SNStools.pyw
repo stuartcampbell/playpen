@@ -519,6 +519,10 @@ class MainForm(QtGui.QDialog):
                         exeName = '/SNS/software/idltools/beta/miniREFreduction_v15_beta',
                         description='Beta version of mini REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
+        parent = self.createItem(ancestor, "SOS",
+                                 exeName='/SNS/software/idltools/SOS',
+                                 imageName='SOS',
+                                 description='Beta version of SOS (Sns Off Specular)')
 
         ##developer
 #        ancestor = self.createItem(self.treeWidget, 'Developer only !',
