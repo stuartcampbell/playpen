@@ -27,5 +27,6 @@
 <file alias="NeedHelp.gif">SNStools_images/NeedHelp.gif</file>
 <file alias="BatchTeleportation.gif">SNStools_images/BatchTeleportation.gif</file>
 <file alias="REFscaleOFF.gif">SNStools_images/REFscaleOFF.gif</file>
+<file alias="SOS.gif">SNStools_images/SOS.gif</file>
 </qresource>
 </RCC>
