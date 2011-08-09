@@ -61,18 +61,18 @@ class MainForm(QtGui.QDialog):
         QtCore.QTimer.singleShot(0, self.initialLoad)
 
     def launch_help(self):
-        QtGui.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+#        QtGui.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         os.system('/SNS/software/idltools/NeedHelp &')
-        time.sleep(3)
-        QtGui.QApplication.restoreOverrideCursor()
+#        time.sleep(3)
+#        QtGui.QApplication.restoreOverrideCursor()
 
     def launch_application(self):
-        QtGui.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+#        QtGui.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         item = self.treeWidget.selectedItems()
         appli = self.itemDict[item[0]]
         os.system(self.exe[appli] + ' &')
-        time.sleep(3)
-        QtGui.QApplication.restoreOverrideCursor()
+#        time.sleep(3)
+#        QtGui.QApplication.restoreOverrideCursor()
 
     def tree_select_event(self):
         item = self.treeWidget.selectedItems()
@@ -520,10 +520,20 @@ class MainForm(QtGui.QDialog):
                         description='Beta version of mini REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
         parent = self.createItem(ancestor, "SOS",
-                                 exeName='/SNS/software/idltools/SOS',
+#                                 exeName='/SNS/software/idltools/SOS',
                                  imageName='SOS',
                                  description='Beta version of SOS (Sns Off Specular)')
-
+        self.createItem(parent, "Version 1.0.3",
+                        imageName = 'SOS',
+                        exeName = '/SNS/software/idltools/beta/SOS',
+                        description='Beta version 1.0.3 of SOS<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+        self.createItem(parent, 'Version 1.0.5',
+                        imageName = 'SOS',
+                        exeName = '/SNS/software/idltools/SOS',
+                        description='Beta version 1.0.5 of SOS<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+ 
         ##developer
 #        ancestor = self.createItem(self.treeWidget, 'Developer only !',
 #                                       description = 'If you are not a developer, my advise would be to stay away from this branch  ;-) !')
