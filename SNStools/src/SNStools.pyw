@@ -528,10 +528,10 @@ class MainForm(QtGui.QDialog):
                         exeName = '/SNS/software/idltools/beta/SOS_beta',
                         description='Beta version 1.0.3 of SOS<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
-        self.createItem(parent, 'Version 1.2.0',
+        self.createItem(parent, 'Version 1.2',
                         imageName = 'SOS',
                         exeName = '/SNS/software/idltools/SOS',
-                        description='Beta version 1.2.0 of SOS<br>' + 
+                        description='Beta version 1.2 of SOS<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
  
         ##developer
