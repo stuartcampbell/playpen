@@ -12,3 +12,7 @@ install:
 	cp *.py /SNS/software/idltools/pyqt/SNStools/
 	cp SNStools_images/*.gif /SNS/software/idltools/pyqt/SNStools/images/
 	cp *.pyw /SNS/software/idltools/pyqt/SNStools/
+	cp qrc_resources.py /SNS/software5/idltools/pyqt/SNStools/
+	cp *.py /SNS/software5/idltools/pyqt/SNStools/
+	cp SNStools_images/*.gif /SNS/software5/idltools/pyqt/SNStools/images/
+	cp *.pyw /SNS/software5/idltools/pyqt/SNStools/
