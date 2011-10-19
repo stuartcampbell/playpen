@@ -491,20 +491,37 @@ class MainForm(QtGui.QDialog):
                                  description='Beta version of the REFoffSpec<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>' + 
                                  '<br><br>This beta version is currently for the REF_M team')       
-        parent = self.createItem(ancestor, "REFreduction 1.3 beta version",
+        parent = self.createItem(ancestor, "REFreduction 1.3.x",
                                  imageName = 'REFreduction',
-                                 description='Beta version of REFreduction<br>' + 
+                                 description='Various versions of REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
-        self.createItem(parent, "High resolution version 1.3 beta",
+        child = self.createItem(parent, "REFreduction 1.3.65beta",
+                                imageName = 'REFreduction',
+                                description='Beta version # 1.3.65beta of REFreduction')
+        self.createItem(child, "High resolution version 1.3.65 beta",
                         imageName = 'REFreduction1_3',
-                        exeName = '/SNS/software/idltools/beta/REFreduction_v13_beta',
+                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.65beta/myREFreduction',
                         description='Beta version of REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
-        self.createItem(parent, 'Low resolution version 1.3 beta',
+        self.createItem(child, 'Low resolution version 1.3.65 beta',
                         imageName = 'miniREFreduction1_3',
-                        exeName = '/SNS/software/idltools/beta/miniREFreduction_v13_beta',
+                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.65beta/myMiniREFreduction',
                         description='Beta version of mini REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
+        child = self.createItem(parent, "REFreduction 1.3.66beta",
+                                imageName = 'REFreduction',
+                                description='Beta version # 1.3.65beta of REFreduction')
+        self.createItem(child, "High resolution version 1.3.66 beta",
+                        imageName = 'REFreduction1_3',
+                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.66/myREFreduction',
+                        description='Beta version of REFreduction<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+        self.createItem(child, 'Low resolution version 1.3.65 beta',
+                        imageName = 'miniREFreduction1_3',
+                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.66/myMiniREFreduction',
+                        description='Beta version of mini REFreduction<br>' + 
+                                 '<br><font color=red>This is only for beta tester as it may crash</font>')
+
         parent = self.createItem(ancestor, "REFreduction 1.5 beta version",
                                  imageName = 'REFreduction',
                                  description='Beta version of REFreduction<br>' + 
