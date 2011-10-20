@@ -508,17 +508,17 @@ class MainForm(QtGui.QDialog):
                         exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.65beta/myMiniREFreduction',
                         description='Beta version of mini REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
-        child = self.createItem(parent, "REFreduction 1.3.66beta",
+        child = self.createItem(parent, "REFreduction 1.3.58beta",
                                 imageName = 'REFreduction',
-                                description='Beta version # 1.3.65beta of REFreduction')
-        self.createItem(child, "High resolution version 1.3.66 beta",
+                                description='Beta version # 1.3.60beta of REFreduction')
+        self.createItem(child, "High resolution version 1.3.58 beta",
                         imageName = 'REFreduction1_3',
-                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.66/myREFreduction',
+                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.58/myREFreduction',
                         description='Beta version of REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
-        self.createItem(child, 'Low resolution version 1.3.65 beta',
+        self.createItem(child, 'Low resolution version 1.3.58 beta',
                         imageName = 'miniREFreduction1_3',
-                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.66/myMiniREFreduction',
+                        exeName = '/SNS/users/j35/SVN/IdlGui/tags/REFreduction/1.3.58/myMiniREFreduction',
                         description='Beta version of mini REFreduction<br>' + 
                                  '<br><font color=red>This is only for beta tester as it may crash</font>')
 
